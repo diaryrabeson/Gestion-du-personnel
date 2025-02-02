@@ -44,7 +44,6 @@ class ServiceController extends Controller
         Service::create($request->all());
 
         return redirect()->route('services.index')->with('success', 'Service created successfully.');
-   
     }
 
     /**
