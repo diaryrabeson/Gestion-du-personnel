@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplementaireController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
@@ -117,7 +118,7 @@ Route::controller(TypeCongerController::class)->group(function () {
     Route::get('/TypeConger/create', 'create')->name('TypeConger.create');
     Route::post('/TypeConger', 'store')->name('TypeConger.store');
     Route::get('TypeConger/{id_typeConge}/edit', 'edit')->name('TypeConger.edit');
-Route::put('/TypeConger/{id_typeConge}', [TypeCongerController::class, 'update'])->name('TypeConger.update');
+    Route::put('/TypeConger/{id_typeConge}', [TypeCongerController::class, 'update'])->name('TypeConger.update');
 
     Route::delete('TypeConger/{id_typeConge}', 'destroy')->name('TypeConger.destroy');
 });
@@ -138,3 +139,19 @@ Route::controller(CongerController::class)->group(function () {
 Route::get('/presence', [PresenceController::class, 'index'])->name('presence.index');
 Route::post('/presence', [PresenceController::class, 'pointer'])->name('presence.pointer');
 Route::get('/presence/list', [PresenceController::class, 'list'])->name('presence.list');
+
+
+
+
+Route::controller(SupplementaireController::class)->group(function () {
+    Route::get('/supplementaires/create', 'create')->name('supplementaires.create');
+    Route::get('/supplementaires', 'index')->name('supplementaires.index');
+    Route::post('/supplementaires', 'store')->name('supplementaire.store');
+    Route::get('supplementaires/{id_supplementaire}/edit', 'edit')->name('supplementaire.edit');
+    Route::put('/supplementaires/{id_supplementaire}', [SupplementaireController::class, 'update'])->name('supplementaire.update');
+
+    Route::delete('supplementaires/{id_supplementaire}', 'destroy')->name('supplementaire.destroy');
+    // Route::get('/Conger/pending', [CongerController::class, 'pending'])->name('Conger.pending');
+    // Route::patch('/Conger/{id}/valider', [CongerController::class, 'valider'])->name('Conger.valider');
+    // Route::patch('/Conger/{id}/refuser', [CongerController::class, 'refuser'])->name('Conger.refuser');
+});
