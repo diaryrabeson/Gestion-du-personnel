@@ -125,6 +125,12 @@
                 Pointage
             </a>
         </li>
+
+        <li>
+            <a href="{{ route('supplementaires.index') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                Heure Supplementaire
+            </a>
+        </li>
        
     </ul>
 </div>
