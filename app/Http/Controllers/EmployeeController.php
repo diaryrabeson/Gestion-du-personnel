@@ -53,6 +53,7 @@ class EmployeeController extends Controller
     
 public function store(Request $request)
 {
+
     // Validation des données
     $validatedData = $request->validate([
         'NomEmp' => 'required|string|max:255',
@@ -65,11 +66,12 @@ public function store(Request $request)
         'DateD_embauche' => 'nullable|date',
         'Id_service' => 'required|exists:tb_service,id_service',
         'SoldeConger' => 'nullable|numeric|min:0',
+        'Genre' => 'required|in:Masculin,Féminin',
         'SalaireDeBase' => 'required|numeric|min:0',
     ], [
         'DatedeNaissance.before' => 'L\'employé doit être né avant l\'année 2000.',
     ]);
-
+   
     // Vérifier si l'email existe déjà
     $existingEmail = Employer::where('mail', $validatedData['mail'])->first();
     if ($existingEmail) {
@@ -141,7 +143,7 @@ public function store(Request $request)
      */
     public function update(Request $request, $id_Employe)
 {
-   
+ 
     // Récupérer l'employé par son ID
     $employee = Employer::findOrFail($id_Employe);
  
@@ -150,9 +152,7 @@ public function store(Request $request)
         'NomEmp' => 'required|string|max:255',
         'Prenom' => 'required|string|max:255',
         'Adresse' => 'nullable|string|max:255',
-      'mail' => 'required|email|unique:employers,mail,' . $employee->Id_Employe . ',Id_Employe',
-
-
+        'mail' => 'required|email|unique:employers,mail,' . $employee->Id_Employe . ',Id_Employe',
         'Telephone' => 'nullable|string|max:20',
         'Photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'DatedeNaissance' => 'nullable|date',
@@ -160,6 +160,7 @@ public function store(Request $request)
         'Id_service' => 'required|exists:tb_service,id_service',
         'Service' => 'nullable|string',
         'SoldeConger' => 'nullable|numeric|min:0',
+        'Genre' => 'required|in:Masculin,Féminin',
         'SalaireDeBase' => 'required|numeric|min:0',
     ]);
 

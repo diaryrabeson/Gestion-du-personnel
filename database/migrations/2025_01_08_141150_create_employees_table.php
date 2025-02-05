@@ -26,6 +26,7 @@ return new class extends Migration
     $table->unsignedBigInteger('Id_service'); // bigint unsigned pour correspondre à `id_service`
     $table->string('Service')->nullable();
     $table->integer('SoldeConger');
+    $table->string('Genre')->nullable;
     $table->decimal('SalaireDeBase', 10, 2);
     $table->timestamps();
 

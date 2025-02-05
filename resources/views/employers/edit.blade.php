@@ -125,6 +125,16 @@
                                 <label for="DatedeNaissance" class="form-label">Date de Naissance</label>
                                 <input type="date" name="DatedeNaissance" id="DatedeNaissance" class="form-control" value="{{ old('DatedeNaissance', $employee->DatedeNaissance) }}">
                             </div>
+                            
+                            <div>
+                                <label for="genre">Genre</label>
+                                <select name="Genre" id="genre" class="form-control">
+                                    <option value="Masculin" {{ old('Genre') == 'Masculin' ? 'selected' : '' }}>Masculin</option>
+                                    <option value="Féminin" {{ old('Genre') == 'Féminin' ? 'selected' : '' }}>Féminin</option>
+                                </select>
+                            </div>
+                            
+
 
                             <!-- Champ Date d'Embauche -->
                             <div class="form-group">

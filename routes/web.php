@@ -155,3 +155,7 @@ Route::controller(SupplementaireController::class)->group(function () {
     // Route::patch('/Conger/{id}/valider', [CongerController::class, 'valider'])->name('Conger.valider');
     // Route::patch('/Conger/{id}/refuser', [CongerController::class, 'refuser'])->name('Conger.refuser');
 });
+
+
+//cecie est pour l'affichage de conger valider dans un calendrier
+Route::get('/conges-valides', [CongerController::class, 'getCongesValides']);
