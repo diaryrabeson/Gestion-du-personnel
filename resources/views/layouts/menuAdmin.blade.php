@@ -31,8 +31,8 @@
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
-        background-color: rgb(70, 66, 66); /* Couleur de fond primaire */
-        background-image: url('{{ asset('img/technologie4.jpg') }}'); /* Dégradé sur fond d'image */
+        /* background-color: rgb(70, 66, 66); Couleur de fond primaire */
+        /* background-image: url('{{ asset('img/technologie4.jpg') }}'); Dégradé sur fond d'image */
         background-size: cover;
         background-position: center;
         color: white;

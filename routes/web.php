@@ -159,3 +159,6 @@ Route::controller(SupplementaireController::class)->group(function () {
 
 //cecie est pour l'affichage de conger valider dans un calendrier
 Route::get('/conges-valides', [CongerController::class, 'getCongesValides']);
+
+// Route::get('layouts/navigation', [EmployeeController::class, 'showDashboard'])->name('dashboard');
+Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
