@@ -74,7 +74,8 @@ class SupplementaireController extends Controller
     public function edit($id)
     {
         //
-        $employes = Employe::all();
+        $employes = Employer::all();
+        $supplementaire = Supplementaire::findOrFail($id);
         return view('supplementaires.edit', compact('supplementaire', 'employes'));
     }
 
@@ -86,22 +87,36 @@ class SupplementaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        $request->validate([
-            'DateSys' => 'required|date',
-            'CoutParHeure' => 'required|numeric',
-            'DebutDeSuppl' => 'required',
-            'FinDeSuppl' => 'required',
-            'nb_total_heures' =>'required',
-            'cout_total' => "required",
-            'Id_Employe' => 'required|exists:employes,Id_Employe',
-        ]);
+{
+    // Validation des données
+    $request->validate([
+        'DateSys' => 'required|date',
+        'CoutParHeure' => 'required|numeric',
+        'DebutDeSuppl' => 'required',
+        'FinDeSuppl' => 'required',
+        'nb_total_heures' => 'required|numeric',
+        'cout_total' => 'required|numeric',
+        'Id_Employe' => 'required|exists:employers,Id_Employe',
+    ]);
 
-        $supplementaire->update($request->all());
+    // Récupérer l'heure supplémentaire existante
+    $supplementaire = Supplementaire::findOrFail($id);
 
-        return redirect()->route('supplementaires.index')->with('success', 'Heure supplémentaire mise à jour');
-    }
+    // Mise à jour des données
+    $supplementaire->update([
+        'DateSys' => $request->DateSys,
+        'CoutParHeure' => $request->CoutParHeure,
+        'DebutDeSuppl' => $request->DebutDeSuppl,
+        'FinDeSuppl' => $request->FinDeSuppl,
+        'nb_total_heures' => $request->nb_total_heures,
+        'cout_total' => $request->cout_total,
+        'Id_Employe' => $request->Id_Employe,
+    ]);
+
+    // Redirection avec message de succès
+    return redirect()->route('supplementaires.index')->with('success', 'Heure supplémentaire mise à jour avec succès.');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -110,7 +125,14 @@ class SupplementaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
+{
+    // Récupérer l'employé par son ID
+    $supplementaire = Supplementaire::findOrFail($id);
+
+    // Supprimer l'employé
+    $supplementaire->delete();
+
+    // Redirection avec un message de succès
+    return redirect()->route('supplementaires.index')->with('success', 'Employé supprimé avec succès.');
+}
 }
