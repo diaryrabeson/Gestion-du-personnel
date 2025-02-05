@@ -30,6 +30,7 @@ class Employer extends Model
         'Id_service',
         'Service',
         'SoldeConger',
+        'Genre',
         'SalaireDeBase',
     ];
 

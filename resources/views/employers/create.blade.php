@@ -52,11 +52,20 @@
                             required>
                     </div>
                     
+                    <div  class="mb-4">
+                        <label for="Genre">Genre</label>
+                        <select name="Genre" id="Genre" class="form-control">
+                            <option value="Masculin" {{ old('Genre') == 'Masculin' ? 'selected' : '' }}>Masculin</option>
+                            <option value="Féminin" {{ old('Genre') == 'Féminin' ? 'selected' : '' }}>Féminin</option>
+                        </select>
+                    </div>
+                    
+
                     <div class="mb-4">
                         <label for="DateD_embauche" class="block text-sm font-medium text-gray-700">Date d'Embauche</label>
                         <input type="date" name="DateD_embauche" id="DateD_embauche" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
-
+                 
                     <div class="mb-4">
                         <label for="Id_service" class="block text-sm font-medium text-gray-700">Service</label>
                         <select name="Id_service" id="Id_service" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">

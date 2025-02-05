@@ -113,4 +113,26 @@ public function refuser($id)
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé refusée avec succès.');
 }
 
+
+ public function getCongesValides()
+    {
+        $conges = conger::where('status', 'Approuvé') // Filtrer les congés validés
+            ->join('employers', 'conger.Id_Employe', '=', 'employers.Id_Employe')
+            ->select('conger.Date_debut', 'conger.Date_Fin', 'employers.NomEmp', 'employers.Prenom')
+            ->get();
+
+        $events = [];
+
+        foreach ($conges as $conge) {
+            $events[] = [
+                'title' => $conge->NomEmp . ' ' . $conge->Prenom,
+                'start' => $conge->Date_debut,
+                'end' => date('Y-m-d', strtotime($conge->Date_Fin . ' +1 day')), // Ajouter 1 jour pour inclure la fin
+                'color' => '#f44336', // Rouge pour les congés validés
+                'textColor' => '#ffffff'
+            ];
+        }
+
+        return response()->json($events);
+    }
 }
