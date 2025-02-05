@@ -12,3 +12,6 @@ class Service extends Model
     protected $primaryKey = 'id_service';
     protected $fillable = ['nomService', 'Description'];
 }
+
+
+// teste pour le merge

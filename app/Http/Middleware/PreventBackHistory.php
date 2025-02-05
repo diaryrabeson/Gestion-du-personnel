@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use App\Http\Controllers\CongerController;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmployeeController;
