@@ -207,6 +207,11 @@ public function showDashboard()
     return view('admin.dashboard', compact('totalEmployes'));
 }
 
+public function showStatus()
+{
+    $user = Auth::User();
+    return view ('layouts.navigation', compact('user'));
+}
 
 
 

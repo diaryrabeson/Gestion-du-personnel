@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TypeCongerController;  
 use App\Http\Controllers\CongerController;
 use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------- 
@@ -162,3 +163,5 @@ Route::get('/conges-valides', [CongerController::class, 'getCongesValides']);
 
 // Route::get('layouts/navigation', [EmployeeController::class, 'showDashboard'])->name('dashboard');
 Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
+
+Route::post('/update-status', [AuthenticatedSessionController::class, 'updateStatus'])->name('update.status');

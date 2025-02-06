@@ -21,6 +21,24 @@
                         <button class="backf inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                 <!-- Affichage de l'image de l'employé -->
 
+                                @if (auth()->check())
+                                @php
+                                    $user = auth()->user();
+                                @endphp
+                                <div>
+                                    <span>Bonjour, {{ $user->name }} !</span>
+                                    @if ($user->status === 'online')
+                                        <span class="text-green-500">🟢 En ligne</span>
+                                    @elseif ($user->status === 'offline')
+                                        <span class="text-gray-500">⚫ Hors ligne</span>
+                                    @elseif ($user->status === 'busy')
+                                        <span class="text-red-500">🔴 Occupé</span>
+                                    @elseif ($user->status === 'away')
+                                        <span class="text-yellow-500">🟡 Absent</span>
+                                    @endif
+                                </div>
+                            @endif
+                            
                             
 
                             <div>{{ Auth::user()->name }}</div>
@@ -117,5 +135,28 @@
             // Recharger la page complètement
             window.location.reload();
         }
+    });
+</script>
+
+<script>
+    function updateUserStatus(status) {
+        fetch("{{ route('update.status') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+            },
+            body: JSON.stringify({ status: status }),
+        });
+    }
+
+    // Appelle la mise à jour toutes les 5 minutes pour rafraîchir le statut
+    setInterval(() => {
+        updateUserStatus("online");
+    }, 300000); // 5 minutes
+
+    // Détecter lorsque l'utilisateur quitte la page
+    window.addEventListener("beforeunload", () => {
+        updateUserStatus("offline");
     });
 </script>
