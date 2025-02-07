@@ -117,14 +117,14 @@ public function store(Request $request)
         return redirect('/dashboard');
     }
 
-     public function updateStatus(Request $request)
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user->status = $request->status;
-            $user->save();
-        }
-
-        return response()->json(['message' => 'Status updated successfully']);
+    public function updateStatus(Request $request)
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+        $user->status = $request->status;
+        $user->save();
     }
+
+    return response()->json(['message' => 'Status updated successfully']);
+}
 }

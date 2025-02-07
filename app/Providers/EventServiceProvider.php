@@ -8,7 +8,10 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Observers\UserObserver; 
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Listeners\UpdateUserStatus;  
+use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\Events\Logout;       
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+       Login::class => [
+        [UpdateUserStatus::class, 'handleLogin'], // Mise à jour après connexion
+    ],
+    Logout::class => [
+        [UpdateUserStatus::class, 'handleLogout'], // Mise à jour après déconnexion
+    ],
+
     ];
 
     /**
@@ -28,24 +38,6 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-    User::observe(UserObserver::class);
-
-    //    parent::boot();
-
-    // Event::listen(Login::class, function ($event) {
-    //     $user = $event->user;
-    //     $user->update(['status' => 'online']);
-    // });
-
-    // Event::listen(Logout::class, function ($event) {
-    //     $user = $event->user;
-    //     if ($user) {
-    //         $user->update(['status' => 'offline']);
-    //     }
-    // });
-    }
 
     /**
      * Determine if events and listeners should be automatically discovered.

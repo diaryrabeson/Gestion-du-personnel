@@ -138,7 +138,7 @@
     });
 </script>
 
-<script>
+{{-- <script>
     function updateUserStatus(status) {
         fetch("{{ route('update.status') }}", {
             method: "POST",
@@ -147,16 +147,20 @@
                 "X-CSRF-TOKEN": "{{ csrf_token() }}",
             },
             body: JSON.stringify({ status: status }),
-        });
+        }).catch(error => console.error("Erreur mise à jour statut :", error));
     }
 
-    // Appelle la mise à jour toutes les 5 minutes pour rafraîchir le statut
+    // Forcer la mise à jour immédiate après la connexion
+    updateUserStatus("online");
+
+    // Rafraîchir le statut toutes les 2 secondes
     setInterval(() => {
         updateUserStatus("online");
-    }, 300000); // 5 minutes
+    }, 2000);
 
-    // Détecter lorsque l'utilisateur quitte la page
+    // Détecter quand l'utilisateur ferme la page (déconnexion)
     window.addEventListener("beforeunload", () => {
         updateUserStatus("offline");
     });
-</script>
+</script> --}}
+
