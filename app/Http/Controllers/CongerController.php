@@ -135,4 +135,13 @@ public function refuser($id)
 
         return response()->json($events);
     }
+
+  public function showDashboards()
+{
+    // Récupérer le nombre de congés en attente
+    $congesEnAttente = Conger::where('status', 'en attente')->count();
+
+    // Passer la variable à la vue du dashboard
+     return view('admin.dashboard', compact('congesEnAttente'));
+}
 }

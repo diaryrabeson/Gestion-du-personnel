@@ -165,3 +165,5 @@ Route::get('/conges-valides', [CongerController::class, 'getCongesValides']);
 Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
 
 Route::post('/update-status', [AuthenticatedSessionController::class, 'updateStatus'])->name('update.status');
+
+

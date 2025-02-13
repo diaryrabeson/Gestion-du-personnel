@@ -23,14 +23,6 @@ class Authenticate extends Middleware
         }
     }
 
-    // public function handle(Request $request, Closure $next, ...$guards)
-    // {
-    //     if (Auth::check()) {
-    //         // Forcer la mise à jour en base
-    //         Auth::user()->update(['status' => 'online']);
-    //     }
-
-    //     return parent::handle($request, $next, ...$guards);
-    // }
+    
 }
 
