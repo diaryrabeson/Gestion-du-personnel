@@ -45,7 +45,7 @@
                         @csrf
                         <div>
                             <label for="Id_Employe">Employé :</label>
-                            <select name="Id_Employe" id="Id_Employe" required>
+                            <select name="Id_Employe" class="custom-select" id="Id_Employe" required>
                                 <option value="" disabled selected>-- Sélectionnez un employé --</option>
                                 @foreach($employes as $employe)
                                     <option value="{{ $employe->Id_Employe }}" {{ old('Id_Employe') == $employe->Id_Employe ? 'selected' : '' }}>
@@ -57,7 +57,7 @@
 
                         <div>
                             <label for="Etat">État :</label>
-                            <select name="Etat" id="Etat" required>
+                            <select name="Etat" id="Etat" class="custom-select" required>
                                 <option value="Présent" {{ old('Etat') == 'Présent' ? 'selected' : '' }}>Présent</option>
                                 <option value="Absent" {{ old('Etat') == 'Absent' ? 'selected' : '' }}>Absent</option>
                             </select>
@@ -65,16 +65,17 @@
 
                         <div>
                             <label for="DateSys">Date :</label>
-                            <input type="date" name="DateSys" id="DateSys" value="{{ old('DateSys') }}" required>
+                            <input type="date" class="custom-select" name="DateSys" id="DateSys" value="{{ old('DateSys') }}" required>
                         </div>
 
                         <div>
                             <label for="motif">Motif (si Absent) :</label>
-                            <textarea name="motif" id="motif">{{ old('motif') }}</textarea>
+                            <textarea name="motif" class="custom-select" id="motif">{{ old('motif') }}</textarea>
                         </div>
                     
-                                        
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 mt-4">Pointer</button>
+                        <div class="contents">                
+                        <button type="submit" class="button">Pointer</button>
+                        </div>
                     </form>
 
                 </div>
@@ -142,4 +143,110 @@
     }
 }
 
+/* Style du label */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Style du select */
+.custom-select {
+    width: 100%;
+    max-width: 60em;  /* Ajuste la largeur */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #8aaed3;  /* Bordure bleue */
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Effet au survol */
+.custom-select:hover {
+    border-color: #0056b3;
+}
+
+/* Effet au focus */
+.custom-select:focus {
+    outline: none;
+    border-color: #87e27b;  /* Change la couleur au focus */
+    box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+}
+
+/* Style des options */
+.custom-select option {
+    font-size: 16px;
+    background: white;
+    color: #333;
+}
+
+/* Désactive l'option par défaut */
+.custom-select option:first-child {
+    color: gray;
+}
+
+
+
+/*css pour le button*/
+/* From Uiverse.io by nikk7007 */ 
+.button {
+ --color: #00A97F;
+ padding: 0.8em 1.7em;
+ background-color: transparent;
+ border-radius: .3em;
+ position: relative;
+ overflow: hidden;
+ cursor: pointer;
+ transition: .5s;
+ font-weight: 400;
+ font-size: 17px;
+ border: 1px solid;
+ font-family: inherit;
+ text-transform: uppercase;
+ color: var(--color);
+ z-index: 1;
+}
+
+.button::before, .button::after {
+ content: '';
+ display: block;
+ width: 50px;
+ height: 50px;
+ transform: translate(-50%, -50%);
+ position: absolute;
+ border-radius: 50%;
+ z-index: -1;
+ background-color: var(--color);
+ transition: 1s ease;
+}
+
+.button::before {
+ top: -1em;
+ left: -1em;
+}
+
+.button::after {
+ left: calc(100% + 1em);
+ top: calc(100% + 1em);
+}
+
+.button:hover::before, .button:hover::after {
+ height: 410px;
+ width: 410px;
+}
+
+.button:hover {
+ color: rgb(10, 25, 30);
+}
+
+.button:active {
+ filter: brightness(.8);
+}
+.contents{
+    margin: 1em 0em 0 2em;
+}
 </style>

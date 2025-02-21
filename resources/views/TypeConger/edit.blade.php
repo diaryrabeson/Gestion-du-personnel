@@ -26,9 +26,9 @@
                         </div>
 
                         <!-- Bouton de mise à jour -->
-                        <div>
+                        <div class="contents">
                             <button type="submit" 
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                class="button">
                                 Mettre à jour
                             </button>
                         </div>
@@ -38,3 +38,66 @@
         </div>
     </div>
 </x-app-layout>
+
+<style>
+
+    .contents{
+        margin: 1em 0 1em 0;
+        }
+        /* From Uiverse.io by nikk7007 */ 
+    .button {
+    height: 2em;
+     --color: #5c71e6;
+     padding: 0 1.7em;
+     background-color: transparent;
+     border-radius: .3em;
+     position: relative;
+     overflow: hidden;
+     cursor: pointer;
+     transition: .5s;
+     font-weight: 400;
+     font-size: 17px;
+     border: 1px solid;
+     font-family: inherit;
+     text-transform: uppercase;
+     color: var(--color);
+     z-index: 1;
+    }
+    
+    .button::before, .button::after {
+     content: '';
+     display: block;
+     width: 50px;
+     height: 50px;
+     transform: translate(-50%, -50%);
+     position: absolute;
+     border-radius: 50%;
+     z-index: -1;
+     background-color: var(--color);
+     transition: 1s ease;
+    }
+    
+    .button::before {
+     top: -1em;
+     left: -1em;
+    }
+    
+    .button::after {
+     left: calc(100% + 1em);
+     top: calc(100% + 1em);
+    }
+    
+    .button:hover::before, .button:hover::after {
+     height: 410px;
+     width: 410px;
+    }
+    
+    .button:hover {
+     color: rgb(10, 25, 30);
+    }
+    
+    .button:active {
+     filter: brightness(.8);
+    }
+    
+    </style>

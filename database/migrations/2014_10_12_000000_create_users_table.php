@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('role')->default('client'); // Default role is 'client'
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('status')->default('offline');
             $table->rememberToken();
             $table->timestamps();
         });

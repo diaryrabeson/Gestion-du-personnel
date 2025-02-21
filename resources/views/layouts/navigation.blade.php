@@ -6,9 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     @if (Auth::user()->role === 'admin')
-                        <a href="{{ route('admin.dashboard') }}">Tableau de bord Admin</a>
+                        <a href="{{ route('admin.dashboard') }}"><img class="logoRandev" src="{{ asset('img/logo.png') }}" alt="Description de l'image">                        </a>
                     @elseif (Auth::user()->role === 'client')
-                        <a href="{{ route('client.dashboard') }}">Tableau de bord employé</a>
+                        <a href="{{ route('client.dashboard') }}"><img class="logoRandev" src="{{ asset('img/logo.png') }}" alt="Description de l'image">      </a>
                     @endif
                 </div>
                 <!-- Navigation Links -->
@@ -19,6 +19,28 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="backf inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <!-- Affichage de l'image de l'employé -->
+
+                                @if (auth()->check())
+                                @php
+                                    $user = auth()->user();
+                                @endphp
+                                <div>
+                                    <span>Bonjour, {{ $user->name }} !</span>
+                                    @if ($user->status === 'online')
+                                        <span class="text-green-500">🟢 En ligne</span>
+                                    @elseif ($user->status === 'offline')
+                                        <span class="text-gray-500">⚫ Hors ligne</span>
+                                    @elseif ($user->status === 'busy')
+                                        <span class="text-red-500">🔴 Occupé</span>
+                                    @elseif ($user->status === 'away')
+                                        <span class="text-yellow-500">🟡 Absent</span>
+                                    @endif
+                                </div>
+                            @endif
+                            
+                            
+
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -93,6 +115,10 @@
     background-color: #4b505a;
     
 }
+.logoRandev{
+    width: 15em;
+    height: auto;
+}
 </style>
 
 <!-- Inclure le menu selon le rôle de l'utilisateur -->
@@ -111,3 +137,30 @@
         }
     });
 </script>
+
+{{-- <script>
+    function updateUserStatus(status) {
+        fetch("{{ route('update.status') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+            },
+            body: JSON.stringify({ status: status }),
+        }).catch(error => console.error("Erreur mise à jour statut :", error));
+    }
+
+    // Forcer la mise à jour immédiate après la connexion
+    updateUserStatus("online");
+
+    // Rafraîchir le statut toutes les 2 secondes
+    setInterval(() => {
+        updateUserStatus("online");
+    }, 2000);
+
+    // Détecter quand l'utilisateur ferme la page (déconnexion)
+    window.addEventListener("beforeunload", () => {
+        updateUserStatus("offline");
+    });
+</script> --}}
+

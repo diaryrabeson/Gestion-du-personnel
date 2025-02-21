@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\employer;
+
 
 class AuthController extends Controller
 {
@@ -16,5 +18,7 @@ class AuthController extends Controller
 
         return view('auth.login'); // Si l'utilisateur n'est pas connecté, affiche le formulaire de connexion
     }
+
+   
 }
 

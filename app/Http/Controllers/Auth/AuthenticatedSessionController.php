@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -80,13 +81,50 @@ public function store(Request $request)
      * Redirect the user based on their role after login.
      */
     protected function authenticated(Request $request, $user)
-    {
-        if ($user->role === 'admin') {
-            return redirect('/admin/dashboard');
-        } elseif ($user->role === 'client') {
-            return redirect('/client/dashboard');
-        }
+{
+     // 1. Mettre à jour le statut de l'utilisateur dans la base de données
+        $user->status = 'online'; 
+        
+        dd($user); // Mettez à jour le statut à 'online'
+        $user->save();  // Sauvegarder les modifications dans la base de données
 
-        return redirect('/'); // Fallback if no role matches
+        // 2. Mettre à jour également le statut dans la session
+        session(['user_status' => $user->status]);
+
+        // 3. Sauvegarder explicitement la session
+        session()->save();
+    // Vérification du rôle et redirection en fonction de celui-ci
+    if ($user->role === 'admin') {
+        return redirect('/admin/dashboard');
+    } elseif ($user->role === 'client') {
+        return redirect('/client/dashboard');
     }
+
+    return redirect('/'); // Redirection par défaut si aucun rôle ne correspond
+}
+
+
+ public function authenticatedAndUpdateStatus(Request $request, $user)
+    {
+        // 1. Mettre à jour le statut dans la base de données
+        $user->status = 'online';
+        $user->save();
+
+        // 2. Définir le statut dans la session
+        session(['user_status' => 'online']);
+
+        // 3. Redirection vers le tableau de bord
+        return redirect('/dashboard');
+    }
+
+    public function updateStatus(Request $request)
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+        $user->status = $request->status;
+        $user->save();
+    }
+
+    return response()->json(['message' => 'Status updated successfully']);
+}
 }
