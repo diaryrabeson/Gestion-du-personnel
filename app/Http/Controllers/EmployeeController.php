@@ -199,4 +199,20 @@ public function store(Request $request)
     return redirect()->route('employers.index')->with('success', 'Employé supprimé avec succès.');
 }
 
+
+public function showDashboard()
+{
+    $totalEmployes = Employer::count(); // Récupérer le nombre total des employés
+
+    return view('admin.dashboard', compact('totalEmployes'));
+}
+
+public function showStatus()
+{
+    $user = Auth::User();
+    return view ('layouts.navigation', compact('user'));
+}
+
+
+
 }

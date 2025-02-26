@@ -19,7 +19,7 @@
                         <table class="min-w-full table-auto border-collapse border border-gray-300">
                             <thead class="bg-gray-200 dark:bg-gray-700">
                                 <tr>
-                                    <th class="border px-4 py-2">#</th>
+                                 
                                     <th class="border px-4 py-2">Employé</th>
                                     <th class="border px-4 py-2">Type de Congé</th>
                                     <th class="border px-4 py-2">Date Début</th>
@@ -31,7 +31,7 @@
                             <tbody>
                                 @foreach ($congesEnAttente as $conge)
                                     <tr class="text-center">
-                                        <td class="border px-4 py-2">{{ $conge->id_Conge }}</td>
+                                        
                                         <td class="border px-4 py-2">
                                             {{ $conge->employers->NomEmp ?? 'Inconnu' }} 
                                             {{ $conge->employers->Prenom ?? '' }}
@@ -44,14 +44,14 @@
                                             <form action="{{ route('Conger.valider', $conge->id_Conge) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition">
+                                                <button type="submit" class="btnGreen">
                                                     Approuver
                                                 </button>
                                             </form>
                                             <form action="{{ route('Conger.refuser', $conge->id_Conge) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">
+                                                <button type="submit" class="btnred">
                                                     Rejeter
                                                 </button>
                                             </form>
@@ -72,3 +72,105 @@
         </div>
     </div>
 </x-app-layout>
+
+<style>
+    /* From Uiverse.io by cssbuttons-io */ 
+.btnGreen {
+  position: relative;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: black;
+  background-color: rgb(73, 173, 64);
+}
+
+.btnGreen:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btnGreen:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btnGreen::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btnGreen::after {
+  background-color: #67af64;
+}
+
+.btnGreen:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+
+.btnred {
+  position: relative;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: black;
+  background-color:hsl(0, 65%, 56%);
+}
+
+.btnred:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btnred:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btnred::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btnred::after {
+  background-color: hsl(0, 65%, 56%);
+}
+
+.btnred:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+</style>
