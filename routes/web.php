@@ -12,6 +12,7 @@ use App\Http\Controllers\TypeCongerController;
 use App\Http\Controllers\CongerController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\FicheDePayeController;
 
 /*
 |--------------------------------------------------------------------------- 
@@ -167,3 +168,10 @@ Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->nam
 Route::post('/update-status', [AuthenticatedSessionController::class, 'updateStatus'])->name('update.status');
 
 
+//ceci est pour l'affichage de fiche de paye
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ficheDePaye', [FicheDePayeController::class, 'index'])->name('ficheDePaye.index');
+    Route::get('/ficheDePaye/create', [FicheDePayeController::class, 'create'])->name('ficheDePaye.create');
+    Route::post('/ficheDePaye/store', [FicheDePayeController::class, 'store'])->name('ficheDePaye.store');
+    Route::get('/ficheDePaye/{id}', [FicheDePayeController::class, 'show'])->name('ficheDePaye.show');
+});

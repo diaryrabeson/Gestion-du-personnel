@@ -19,8 +19,7 @@ return new class extends Migration
         $table->date('Date_debut');
         $table->date('Date_Fin');
         $table->unsignedBigInteger('Id_Employe');
-       $table->enum('status', ['En attente', 'Approuvé', 'Rejeté'])->default('En attente');
-
+        $table->enum('status', ['En attente', 'Approuvé', 'Rejeté'])->default('En attente');
         $table->integer('jours_ouvrables')->nullable();
         $table->text('commentaire')->nullable();
         $table->timestamps();

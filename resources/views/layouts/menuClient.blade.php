@@ -107,8 +107,8 @@
             </li>
     
             <li>
-                <a href="" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    TypeConger
+                <a href="{{ route('ficheDePaye.index') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    Fiche de paye   
                 </a>
             </li>
            
