@@ -2,6 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -30,7 +32,7 @@
         <!-- Page Heading -->
         @if (isset($header))
             <header class="backf bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 contenTitle">
                     {{ $header }}
                 </div>
             </header>
@@ -41,10 +43,10 @@
 .contenn{
     max-width: 85%;
     margin-left: 13em;
-    padding-top: 8em
+    padding-top: 2em
 }
 .backf{
-    background-color: #a8b0c2;
+    background-color: #ffff;
 }
 
 .fix{
@@ -59,6 +61,10 @@
     max-width: 100%;
     margin-left: 0em;
 }
+}
+
+.contenTitle{
+    display: none;
 }
 </style>
         <!-- Page Content -->

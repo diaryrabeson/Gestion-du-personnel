@@ -31,7 +31,7 @@
 </html>
 <style>
    .backf{
-    background-color: #a8b0c2;
+    background-color: rgb(30 39 100);
 }
 
 .mylogo{

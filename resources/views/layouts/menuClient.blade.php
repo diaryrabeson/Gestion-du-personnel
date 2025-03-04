@@ -96,9 +96,10 @@
     <div class=" menu navig fixed top-24 left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
         <ul class="liens space-y-4">
          <li>
-                <a href="" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Profile employer
-                </a>
+            <a href="{{ route('ProfileEmployer.profile') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                Profile employer
+            </a>
+            
             </li>
             <li>
                 <a href="{{ route('Conger.create') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">

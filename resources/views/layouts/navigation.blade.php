@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }" class="backf relative   bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="backf max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class=" flex justify-between h-16">
+        <div class=" flex shad justify-between h-16">
             <div class=" flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center logorDev">
                     @if (Auth::user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}"><img class="logoRandev" src="{{ asset('img/logo.png') }}" alt="Description de l'image">                        </a>
                     @elseif (Auth::user()->role === 'client')
@@ -60,7 +60,7 @@
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Se deconnecter') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -110,15 +110,30 @@
 .navig {
     margin-top: 5em;
 }
-
+.shad{
+    box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
+}
 .backf{
-    background-color: #4b505a;
+    background-color: rgb(30 39 100);
+    margin-right: 2em;
+    padding: 0;
+    color:#8a95a0;
+    width: 103% ;
     
+}
+.logorDev{
+    width: 15.2em;
+    left: 0px;
+    height: 100%;
+    background: #1a2035!important;
+    position: absolute;
 }
 .logoRandev{
     width: 15em;
     height: auto;
 }
+
+
 </style>
 
 <!-- Inclure le menu selon le rôle de l'utilisateur -->
