@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplementaireController;
 use App\Http\Controllers\AdminController;
@@ -14,7 +14,7 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FicheDePayeController;
 use App\Http\Controllers\ProfileEmployerController;
-
+use App\Http\Controllers\AdminDashboardController;
 /*
 |--------------------------------------------------------------------------- 
 | Web Routes 
@@ -108,11 +108,10 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::get('/employers', 'index')->name('employers.index');
     Route::get('/employers/create', 'create')->name('employers.create');
     Route::post('/employers', 'store')->name('employers.store');
-    Route::get('employers/{id_Employe}/edit', 'edit')->name('employers.edit');
-   Route::put('/employers/{id_Employe}', [EmployeeController::class, 'update'])->name('employers.update');
-
-    Route::delete('employers/{id_Employe}', 'destroy')->name('employers.destroy');
-    
+    Route::get('/employers/{id_Employe}/edit', 'edit')->name('employers.edit');
+    Route::put('/employers/{id_Employe}', 'update')->name('employers.update');
+    Route::get('/employers/search', 'search')->name('employers.search'); // Correction du chemin
+    Route::delete('/employers/{id_Employe}', 'destroy')->name('employers.destroy');
 });
 
 //ceci est le route pour type conger
@@ -186,3 +185,5 @@ Route::middleware(['auth'])->get('/ProfileEmployer/profile', [ProfileEmployerCon
 Route::get('/admin/dashboard', [SupplementaireController::class, 'countSupplementaires'])->name('admin.dashboard');
 Route::get('/admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
 
+
+// Route::get('/admin/dashboard', [StatistiqueController::class, 'getPresenceAbsenceParMois'])->name('admin.dashboard');
