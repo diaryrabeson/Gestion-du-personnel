@@ -1,5 +1,8 @@
 <!-- resources/views/layouts/menu.blade.php -->
 <style>
+    .men{
+        padding-top: 11px;
+    }
 .fonts{
     line-height: 1.5em;
     font-size: 24px;    
@@ -34,8 +37,8 @@
 }
     .navig {
         display: inline-block;
-        background-color: rgb(83, 80, 80);
-        margin-top: 4.6em;
+        background-color: #1a2035!important;
+        margin-top: -.2em;
         /* padding: 12px 24px; */
         text-align: center;
         font-size: 16px;
@@ -157,6 +160,15 @@
             </a>
         </li>
     </div>    
+
+    <div class="d_flex men">
+        <i class="fa-solid fa-right-from-bracket men fonts"></i>
+        <li>
+            <a href="{{ route('logout') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                Se deconnecter
+            </a>
+        </li>
+    </div>
     </ul>
 </div>
 

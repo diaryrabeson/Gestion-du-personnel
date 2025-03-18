@@ -12,6 +12,8 @@ use App\Http\Controllers\TypeCongerController;
 use App\Http\Controllers\CongerController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\FicheDePayeController;
+use App\Http\Controllers\ProfileEmployerController;
 
 /*
 |--------------------------------------------------------------------------- 
@@ -110,6 +112,7 @@ Route::controller(EmployeeController::class)->group(function () {
    Route::put('/employers/{id_Employe}', [EmployeeController::class, 'update'])->name('employers.update');
 
     Route::delete('employers/{id_Employe}', 'destroy')->name('employers.destroy');
+    
 });
 
 //ceci est le route pour type conger
@@ -151,6 +154,8 @@ Route::controller(SupplementaireController::class)->group(function () {
     Route::get('supplementaires/{id_supplementaire}/edit', 'edit')->name('supplementaire.edit');
     Route::put('/supplementaires/{id_supplementaire}', [SupplementaireController::class, 'update'])->name('supplementaire.update');
 
+
+
     Route::delete('supplementaires/{id_supplementaire}', 'destroy')->name('supplementaire.destroy');
     // Route::get('/Conger/pending', [CongerController::class, 'pending'])->name('Conger.pending');
     // Route::patch('/Conger/{id}/valider', [CongerController::class, 'valider'])->name('Conger.valider');
@@ -166,4 +171,18 @@ Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->nam
 
 Route::post('/update-status', [AuthenticatedSessionController::class, 'updateStatus'])->name('update.status');
 
+
+//ceci est pour l'affichage de fiche de paye
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ficheDePaye', [FicheDePayeController::class, 'index'])->name('ficheDePaye.index');
+    Route::get('/ficheDePaye/create', [FicheDePayeController::class, 'create'])->name('ficheDePaye.create');
+    Route::post('/ficheDePaye/store', [FicheDePayeController::class, 'store'])->name('ficheDePaye.store');
+    Route::get('/ficheDePaye/{id}', [FicheDePayeController::class, 'show'])->name('ficheDePaye.show');
+});
+
+
+Route::middleware(['auth'])->get('/ProfileEmployer/profile', [ProfileEmployerController::class, 'show'])->name('ProfileEmployer.profile');
+
+Route::get('/admin/dashboard', [SupplementaireController::class, 'countSupplementaires'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
 

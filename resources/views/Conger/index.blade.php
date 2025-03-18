@@ -5,5 +5,5 @@
         </h2>
     </x-slot>
             <p>demande reussi</p>
-
+            
 </x-app-layout>
