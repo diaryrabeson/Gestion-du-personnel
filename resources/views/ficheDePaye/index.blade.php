@@ -6,9 +6,10 @@
     </x-slot>
 
     <!-- Formulaire de recherche -->
-    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg conteneur shadow-md mb-6">
         <form method="GET" action="{{ route('ficheDePaye.index') }}" class="flex flex-col md:flex-row md:items-center gap-4">
-            <div class="flex flex-col">
+           <div class="contents" >
+            <div class="">
                 <label for="mois" class="text-gray-700 dark:text-gray-300 font-semibold">Mois :</label>
                 <select name="mois" id="mois" class="form-control p-2 border rounded">
                     @for ($m = 1; $m <= 12; $m++)
@@ -19,7 +20,7 @@
                 </select>
             </div>
 
-            <div class="flex flex-col">
+            <div class="">
                 <label for="annee" class="text-gray-700 dark:text-gray-300 font-semibold">Année :</label>
                 <select name="annee" id="annee" class="form-control p-2 border rounded">
                     @for ($y = date('Y') - 5; $y <= date('Y'); $y++)
@@ -31,10 +32,12 @@
             </div>
 
             <div>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700">
+                <button type="submit" class="button2">
                     Rechercher
                 </button>
             </div>
+        </div>
+            
         </form>
     </div>
 
@@ -42,7 +45,7 @@
     @if ($ficheDePaye)
         <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
             <div class="flex items-center space-x-4">
-                <img src="{{ asset('storage/' . $ficheDePaye['photo']) }}" class="w-20 h-20 rounded-full" alt="Photo de {{ $ficheDePaye['nom'] }}">
+                <img src="{{ asset('storage/' . $ficheDePaye['Photo']) }}" class="w-20 h-20 rounded-full" alt="Photo de {{ $ficheDePaye['nom'] }}">
                 <div>
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">{{ $ficheDePaye['nom'] }} {{ $ficheDePaye['prenom'] }}</h3>
                     <p class="text-gray-600 dark:text-gray-300">Service : {{ $ficheDePaye['service'] }}</p>
@@ -69,3 +72,88 @@
         <p class="text-center text-gray-600 dark:text-gray-300 mt-4">Aucune fiche de paie trouvée pour cette période.</p>
     @endif
 </x-app-layout>
+<style>
+    .contents{
+        display: flex;
+        width: 41em;
+        justify-content: space-between;
+    }
+
+    .conteneur{
+        margin-top: 3em;
+        margin-left: 3em;
+    }
+    .border{
+        width: 12em;
+    }
+    /* From Uiverse.io by shah1345 */ 
+.button2 {
+margin-top: -.2em;
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #090909;
+  padding: 0.7em 1.7em;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.button2:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+
+.button2:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.25);
+  top: 100%;
+  width: 140%;
+  height: 180%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.45);
+  top: 180%;
+  width: 160%;
+  height: 190%;
+  background-color: #009087;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:hover {
+  color: #ffffff;
+  border: 1px solid #009087;
+}
+
+.button2:hover:before {
+  top: -35%;
+  background-color: #009087;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button2:hover:after {
+  top: -45%;
+  background-color: #009087;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+</style>

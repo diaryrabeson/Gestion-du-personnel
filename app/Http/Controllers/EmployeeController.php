@@ -8,7 +8,8 @@ use App\Models\Service;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Supplementaire;
-
+use Carbon\Carbon;
+use App\Models\Presence;
 
 
 class EmployeeController extends Controller
@@ -18,13 +19,22 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function index()
+   public function index(Request $request)
 {
-    // Récupérer les employés avec pagination
-    $employees = Employer::paginate(10); // 10 éléments par page
+    $query = $request->input('query');
 
-    // Retourner la vue avec les données paginées
-    return view('employers.index', compact('employees'));
+    // Vérifier si l'utilisateur a entré quelque chose
+    if ($query) {
+        $employeers = Employer::where('NomEmp', 'LIKE', "%$query%")
+                    ->orWhere('Prenom', 'LIKE', "%$query%")
+                    ->get();
+    } else {
+        $employeers = Employer::all();
+    }
+ // Récupérer les employés avec pagination
+    $employees = Employer::paginate(10); // 10 éléments par page
+    //recuperer les service
+    return view('employers.index', compact('employeers','employees'));
 }
 
 
@@ -203,25 +213,61 @@ public function store(Request $request)
 
 public function showDashboard()
 {
-    $totalEmployes = Employer::count(); // Récupérer le nombre total des employés
-    $totalSupplem = Supplementaire::count(); 
- // Récupérer le nombre d'employés par service
-        $data = Employer::selectRaw('id_service, COUNT(*) as total')
-                        ->groupBy('id_service')
-                        ->get();
+    // Récupération des statistiques globales
+    $totalSerices   = Service::count();
+    $totalEmployes = Employer::count();
+    $totalSupplem = Supplementaire::count();
 
-        // Transformer les données pour le graphique
-        $labels = [];
-        $totals = [];
+    // Récupération du nombre d'employés par service
+    $data = Employer::selectRaw('id_service, COUNT(*) as total')
+                    ->groupBy('id_service')
+                    ->get();
 
-        foreach ($data as $item) {
-            $service = Service::find($item->id_service);
-            if ($service) {
-                $labels[] = $service->nomService;
-                $totals[] = $item->total;
-            }
+    // Préparer les données pour le graphique de répartition par service
+    $labels = [];
+    $totals = [];
+
+    foreach ($data as $item) {
+        $service = Service::find($item->id_service);
+        if ($service) {
+            $labels[] = $service->nomService;
+            $totals[] = $item->total;
         }
-    return view('admin.dashboard', compact('totalEmployes','totalSupplem','labels', 'totals'));
+    }
+
+    // Récupérer les 6 derniers mois pour le graphique de présence/absence
+    $moisLabels = [];
+    for ($i = 5; $i >= 0; $i--) {
+        $moisLabels[] = Carbon::now()->subMonths($i)->format('Y-m');
+    }
+
+    // Initialisation des tableaux de données
+    $presencesData = [];
+    $absencesData = [];
+
+    foreach ($moisLabels as $mois) {
+        // Nombre de présences pour le mois
+        $presences = Presence::where('Etat', 'Présent')
+            ->whereYear('DateSys', substr($mois, 0, 4))
+            ->whereMonth('DateSys', substr($mois, 5, 2))
+            ->count();
+
+        // Nombre d'absences pour le mois
+        $absences = Presence::where('Etat', 'Absent')
+            ->whereYear('DateSys', substr($mois, 0, 4))
+            ->whereMonth('DateSys', substr($mois, 5, 2))
+            ->count();
+
+        // Ajouter les valeurs aux tableaux
+        $presencesData[] = $presences;
+        $absencesData[] = $absences;
+    }
+
+    // Passer toutes les données à la vue
+    return view('admin.dashboard', compact(
+        'totalEmployes', 'totalSupplem', 'totalSerices', 
+        'labels', 'totals', 'moisLabels', 'presencesData', 'absencesData'
+    ));
 }
 
 public function showStatus()
@@ -254,4 +300,23 @@ public function repartitionParService()
     }
 
 
+
+public function search(Request $request)
+{
+   $query = $request->input('query');
+
+    // Vérifier si l'utilisateur a entré quelque chose
+    if ($query) {
+        $employeers = Employer::where('NomEmp', 'LIKE', "%$query%")
+                    ->orWhere('Prenom', 'LIKE', "%$query%")
+                    ->get();
+    } else {
+        $employeers = Employer::all();
+    }
+    
+ $employees = Employer::paginate(10); // 10 éléments par page
+ return view('employers.index', compact('employeers','employees'));
+    
+}
+ 
 }
