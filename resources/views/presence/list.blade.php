@@ -31,6 +31,7 @@
         th {
             background-color: #f4f4f4;
         }
+      
     </style>
 
     <div class="py-12">
@@ -71,6 +72,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-4">
+                        {{ $presences->links() }}
+
+                    </div>
                 </div>
             </div>
         </div>

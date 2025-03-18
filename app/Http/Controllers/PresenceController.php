@@ -11,10 +11,11 @@ class PresenceController extends Controller
     // Afficher la page de pointage
     public function index()
     {
+       
         $employes = Employer::all(); // Liste des employés
         return view('presence.index', compact('employes'));
     }
-
+    
     // Enregistrer une présence
     public function pointer(Request $request)
     {  
@@ -47,7 +48,10 @@ class PresenceController extends Controller
     // Consulter les présences
     public function list()
     {
-        $presences = presence::with('employe')->orderBy('DateSys', 'desc')->get();
+      $presences = Presence::with('employe')->orderBy('DateSys', 'desc')->paginate(8);
+
         return view('presence.list', compact('presences'));
     }
+
+    
 }

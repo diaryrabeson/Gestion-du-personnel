@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplementaireController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -187,3 +188,16 @@ Route::get('/admin/dashboard', [EmployeeController::class, 'showDashboard'])->na
 
 
 // Route::get('/admin/dashboard', [StatistiqueController::class, 'getPresenceAbsenceParMois'])->name('admin.dashboard');
+// Page du chat
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat', [MessageController::class, 'index'])->name('Messages.index');
+  Route::post('/send-message', [MessageController::class, 'sendMessage'])->name('sendMessage');
+  Route::get('/utilisateurs', [MessageController::class, 'showUsers'])->name('Messages.Listing');
+  Route::get('/messages/{userId}', [MessageController::class, 'showMessages'])->name('Messages.index');
+Route::post('/messages/send', [MessageController::class, 'sendMessage'])->name('sendMessage');
+Route::get('/messages/get/{destinataire_id}', [MessageController::class, 'getMessages'])->name('getMessages');
+
+
+});

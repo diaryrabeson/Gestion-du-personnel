@@ -100,16 +100,16 @@
                         <div class="ContStatAbsence"> <canvas id="presenceChart" class="StatAbsence"></canvas></div>
                     </div>
                 </div>
-                <div class="Contcalendar">
-                    <div class="titreStatis">
-                        <h2>Taux d'absence et présence par service</h2>
-                    </div>
-                <div id="calendar"></div>
-            </div>  
+                 
             </div>
 
 
-
+<div class="Contcalendar">
+                    <div class="titreStatis2">
+                        <h2>Taux d'absence et présence par service</h2>
+                    </div>
+                <div id="calendar"></div>
+            </div> 
 
 
         </div>
@@ -155,6 +155,15 @@
         margin-bottom: 1em;
         border-bottom: 4px chocolate solid;
         font-weight: bold;
+        /* margin-top: 4em; */
+    }
+    .titreStatis2 {
+        font-family: PoppinsExtraLight;
+        text-align: center;
+        margin-bottom: 1em;
+        border-bottom: 4px chocolate solid;
+        font-weight: bold;
+        margin-top: 4em;
     }
 
     .fontss {

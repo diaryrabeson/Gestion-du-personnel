@@ -169,6 +169,15 @@
             </a>
         </li>
     </div>
+
+    <div class="d_flex men">
+        <i class="fa-solid fa-right-from-bracket men fonts"></i>
+        <li>
+            <a href="{{ route('Messages.Listing') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                Message
+            </a>
+        </li>
+    </div>
     </ul>
 </div>
 

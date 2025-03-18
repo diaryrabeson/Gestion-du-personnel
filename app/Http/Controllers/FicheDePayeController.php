@@ -61,7 +61,7 @@ class FicheDePayeController extends Controller
     $ficheDePaye = [
         'nom' => $employe->NomEmp,
         'prenom' => $employe->Prenom,
-        'photo' => $employe->photo,
+          'Photo' => $employe->Photo,
         'email' => $employe->mail,
         'service' => $employe->Service,
         'salaire_base' => $salaire_base,
