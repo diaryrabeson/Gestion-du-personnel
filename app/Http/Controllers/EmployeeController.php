@@ -7,6 +7,7 @@ use App\Models\Employer;
 use App\Models\Service;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Supplementaire;
 
 
 
@@ -203,8 +204,24 @@ public function store(Request $request)
 public function showDashboard()
 {
     $totalEmployes = Employer::count(); // Récupérer le nombre total des employés
+    $totalSupplem = Supplementaire::count(); 
+ // Récupérer le nombre d'employés par service
+        $data = Employer::selectRaw('id_service, COUNT(*) as total')
+                        ->groupBy('id_service')
+                        ->get();
 
-    return view('admin.dashboard', compact('totalEmployes'));
+        // Transformer les données pour le graphique
+        $labels = [];
+        $totals = [];
+
+        foreach ($data as $item) {
+            $service = Service::find($item->id_service);
+            if ($service) {
+                $labels[] = $service->nomService;
+                $totals[] = $item->total;
+            }
+        }
+    return view('admin.dashboard', compact('totalEmployes','totalSupplem','labels', 'totals'));
 }
 
 public function showStatus()
@@ -213,6 +230,28 @@ public function showStatus()
     return view ('layouts.navigation', compact('user'));
 }
 
+//ceci est pour l'affichage des service dans un cercle
+public function repartitionParService()
+    {
+        // Récupérer le nombre d'employés par service
+        $data = Employer::selectRaw('id_service, COUNT(*) as total')
+                        ->groupBy('id_service')
+                        ->get();
+
+        // Transformer les données pour le graphique
+        $labels = [];
+        $totals = [];
+
+        foreach ($data as $item) {
+            $service = Service::find($item->id_service);
+            if ($service) {
+                $labels[] = $service->nomService;
+                $totals[] = $item->total;
+            }
+        }
+
+        return view('admin.dashboard', compact('labels', 'totals'));
+    }
 
 
 }

@@ -135,4 +135,6 @@ class SupplementaireController extends Controller
     // Redirection avec un message de succès
     return redirect()->route('supplementaires.index')->with('success', 'Employé supprimé avec succès.');
 }
+
+  
 }
