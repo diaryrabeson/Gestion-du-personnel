@@ -147,6 +147,7 @@ Route::get('/presence/list', [PresenceController::class, 'list'])->name('presenc
 
 
 
+
 Route::controller(SupplementaireController::class)->group(function () {
     Route::get('/supplementaires/create', 'create')->name('supplementaires.create');
     Route::get('/supplementaires', 'index')->name('supplementaires.index');
@@ -178,6 +179,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ficheDePaye/create', [FicheDePayeController::class, 'create'])->name('ficheDePaye.create');
     Route::post('/ficheDePaye/store', [FicheDePayeController::class, 'store'])->name('ficheDePaye.store');
     Route::get('/ficheDePaye/{id}', [FicheDePayeController::class, 'show'])->name('ficheDePaye.show');
+   Route::get('/fiche-de-paye/pdf', [FicheDePayeController::class, 'genererPDF'])->name('fiche-pdf');
+
 });
 
 
@@ -201,3 +204,12 @@ Route::get('/messages/get/{destinataire_id}', [MessageController::class, 'getMes
 
 
 });
+
+
+Route::get('/client/dashboard', [EmployeeController::class, 'ShowSoldConge'])
+    ->name('client.dashboard')
+    ->middleware('auth'); 
+
+// Route::get('/client/dashboard', [CongerController::class, 'showCalendar'])->name('client.dashboard');
+    // Route::get('/client/dashboard', [PresenceController::class, 'showDashboard'])
+    // ->name('client.dashboard');

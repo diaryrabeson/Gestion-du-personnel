@@ -53,5 +53,20 @@ class PresenceController extends Controller
         return view('presence.list', compact('presences'));
     }
 
+    //affichage dans le tableau de bord
+   
+    // Récupérer le nombre de présences pendant le mois en cours
+    // public function showDashboard()
+    // {
+    //     $currentMonth = date('m');
+    //     $currentYear = date('Y');
+
+    //     $monthlyPresenceCount = Presence::whereYear('DateSys', $currentYear)
+    //                                     ->whereMonth('DateSys', $currentMonth)
+    //                                     ->count();
+
+    //     return view('client.dashboard', compact('monthlyPresenceCount'));
+    // }
+
     
 }

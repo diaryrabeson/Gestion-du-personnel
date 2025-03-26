@@ -31,7 +31,7 @@
                                         @endif
                                     </td>
                                     <td class="border border-gray-300 p-2">
-                                        <a href="{{ route('Messages.index', $userLists->id) }}" class="bg-blue-500 text-white px-3 py-1 rounded">
+                                        <a href="{{ route('Messages.index', $userLists->id) }}" class="bg-blue-500 text-black px-3 py-1 rounded">
                                             Envoyer un message
                                         </a>
                                     </td>

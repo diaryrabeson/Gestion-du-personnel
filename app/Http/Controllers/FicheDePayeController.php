@@ -7,6 +7,7 @@ use App\Models\FicheDePaye;
 use App\Models\Employer;
 use App\Models\Presence;
 use App\Models\Supplementaire;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class FicheDePayeController extends Controller
@@ -84,4 +85,71 @@ class FicheDePayeController extends Controller
         $fiche = FicheDePaye::with('Id_Employe')->findOrFail($id);
         return view('ficheDePaye.show', compact('fiche'));
     }
+
+public function genererPDF(Request $request)
+{
+    // Récupérer l'utilisateur connecté
+    $user = Auth::user();
+    $employe = Employer::where('mail', $user->email)->first();
+
+    if (!$employe) {
+        return redirect()->back()->with('error', "Aucune fiche de paie trouvée.");
+    }
+
+    // Récupérer le mois et l'année (avec valeurs par défaut)
+    $mois = $request->input('mois', date('m'));
+    $annee = $request->input('annee', date('Y'));
+
+    // Recalculer toutes les données comme dans `index()`
+    $total_presence = Presence::where('Id_Employe', $employe->Id_Employe)
+        ->where('Etat', 'Présent')
+        ->whereMonth('DateSys', $mois)
+        ->whereYear('DateSys', $annee)
+        ->count();
+
+    $total_absences = Presence::where('Id_Employe', $employe->Id_Employe)
+        ->where('Etat', 'Absent')
+        ->whereMonth('DateSys', $mois)
+        ->whereYear('DateSys', $annee)
+        ->count();
+
+    $total_heures_supp = Supplementaire::where('Id_Employe', $employe->Id_Employe)
+        ->whereMonth('DateSys', $mois)
+        ->whereYear('DateSys', $annee)
+        ->sum('nb_total_heures');
+
+    $cout_total_heures_supp = Supplementaire::where('Id_Employe', $employe->Id_Employe)
+        ->whereMonth('DateSys', $mois)
+        ->whereYear('DateSys', $annee)
+        ->sum('CoutParHeure');
+
+    $salaire_base = $employe->SalaireDeBase;
+    $prime = 0;
+    $salaire_total = $salaire_base + $cout_total_heures_supp + $prime;
+
+    $ficheDePaye = [
+        'nom' => $employe->NomEmp,
+        'prenom' => $employe->Prenom,
+        'Photo' => $employe->Photo,
+        'email' => $employe->mail,
+        'service' => $employe->Service,
+        'salaire_base' => $salaire_base,
+        'telephone' => $employe->Telephone,
+        'adresse' => $employe->Adresse,
+        'total_presence' => $total_presence,
+        'total_absences' => $total_absences,
+        'total_heures_supp' => $total_heures_supp,
+        'cout_total_heures_supp' => $cout_total_heures_supp,
+        'prime' => $prime,
+        'salaire_total' => $salaire_total,
+        'mois' => $mois,
+        'annee' => $annee,
+    ];
+
+    // Générer le PDF avec une vue dédiée
+    $pdf = Pdf::loadView('ficheDePaye.fichedepaie', compact('ficheDePaye'));
+
+    return $pdf->download('fiche_de_paie.pdf');
+}
+ 
 }

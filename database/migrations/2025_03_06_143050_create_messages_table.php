@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('expediteur_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('destinataire_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->text('contenu');
+             $table->string('file')->nullable(); 
             $table->timestamps();
         });
     }

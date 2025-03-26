@@ -106,7 +106,7 @@
 
 <div class="Contcalendar">
                     <div class="titreStatis2">
-                        <h2>Taux d'absence et présence par service</h2>
+                        <h2>Affichage des congées en cours</h2>
                     </div>
                 <div id="calendar"></div>
             </div> 
