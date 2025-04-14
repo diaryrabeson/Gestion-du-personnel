@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Conger;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+            // Partager le nombre de congés en attente avec toutes les vues
+    View::composer('layouts.menuAdmin', function ($view) {
+        $congesEnAttente = Conger::where('status', 'en attente')->count();
+        $view->with('congesEnAttente', $congesEnAttente);
+    });
+
        View::share('user', Auth::user());
     }
 }

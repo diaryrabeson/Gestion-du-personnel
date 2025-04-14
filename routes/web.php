@@ -91,8 +91,6 @@ Route::middleware('guest')->group(function () {
 });
 
 
-// Route::resource('services', ServiceController::class); // Cette ligne définit toutes les routes pour le CRUD de services
-// Route::get('/services', [ServiceController::class, 'index'])->name('service.index'); // Route pour l'affichage des services
 Route::resource('services', ServiceController::class);
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
@@ -137,6 +135,7 @@ Route::controller(CongerController::class)->group(function () {
     Route::get('/Conger/pending', [CongerController::class, 'pending'])->name('Conger.pending');
     Route::patch('/Conger/{id}/valider', [CongerController::class, 'valider'])->name('Conger.valider');
     Route::patch('/Conger/{id}/refuser', [CongerController::class, 'refuser'])->name('Conger.refuser');
+    
 });
 
 
@@ -158,14 +157,14 @@ Route::controller(SupplementaireController::class)->group(function () {
 
 
     Route::delete('supplementaires/{id_supplementaire}', 'destroy')->name('supplementaire.destroy');
-    // Route::get('/Conger/pending', [CongerController::class, 'pending'])->name('Conger.pending');
-    // Route::patch('/Conger/{id}/valider', [CongerController::class, 'valider'])->name('Conger.valider');
-    // Route::patch('/Conger/{id}/refuser', [CongerController::class, 'refuser'])->name('Conger.refuser');
+   
 });
 
 
 //cecie est pour l'affichage de conger valider dans un calendrier
 Route::get('/conges-valides', [CongerController::class, 'getCongesValides']);
+
+
 
 // Route::get('layouts/navigation', [EmployeeController::class, 'showDashboard'])->name('dashboard');
 Route::get('admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
@@ -190,8 +189,7 @@ Route::get('/admin/dashboard', [SupplementaireController::class, 'countSupplemen
 Route::get('/admin/dashboard', [EmployeeController::class, 'showDashboard'])->name('admin.dashboard');
 
 
-// Route::get('/admin/dashboard', [StatistiqueController::class, 'getPresenceAbsenceParMois'])->name('admin.dashboard');
-// Page du chat
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -210,6 +208,6 @@ Route::get('/client/dashboard', [EmployeeController::class, 'ShowSoldConge'])
     ->name('client.dashboard')
     ->middleware('auth'); 
 
-// Route::get('/client/dashboard', [CongerController::class, 'showCalendar'])->name('client.dashboard');
-    // Route::get('/client/dashboard', [PresenceController::class, 'showDashboard'])
-    // ->name('client.dashboard');
+
+Route::get('/admin/notifications', [CongerController::class, 'showNotis'])->name('admin.notifications');
+

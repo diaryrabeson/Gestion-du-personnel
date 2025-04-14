@@ -158,6 +158,16 @@
             </li>
         </div>
 
+        <div class="d_flex men">
+            <i class="fa-solid fa-right-from-bracket men fonts"></i>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="men logouts">Déconnexion</button>
+                </form>
+                
+            </li>
+        </div>
     </ul>
 </div>
 

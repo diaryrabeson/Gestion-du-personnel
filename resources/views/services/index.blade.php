@@ -50,13 +50,13 @@
                                 <div>
                                     <!-- Edit button with service ID -->
                                     <a href="{{ route('services.edit', ['id_service' => $service->id_service]) }}" class="bg-yellow-300 text-black px-3 py-1 rounded mr-2">
-                                    Edit</a>
+                                    Modifier</a>
                                     <!-- Delete form for each service -->
                                     <form action="{{ route('services.destroy', ['id_service' => $service->id_service]) }}" method="POST" style="display:inline;">
                                     @csrf
                                      @method('DELETE')
                                     <button type="submit" class="bg-red-300 text-black px-3 py-1 rounded">
-                                    Delete
+                                    Supprimer
                                     </button>
 </form>
                                 </div>
