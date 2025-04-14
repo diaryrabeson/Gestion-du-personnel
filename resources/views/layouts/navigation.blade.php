@@ -18,7 +18,7 @@
             <div class=" hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="backf inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="backf wid inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                 <!-- Affichage de l'image de l'employé -->
 
                                 @if (auth()->check())
@@ -112,6 +112,7 @@
 }
 .shad{
     box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
+    z-index: 999;
 }
 .backf{
     background-color: rgb(30 39 100);
@@ -119,12 +120,13 @@
     padding: 0;
     color:#8a95a0;
     width: 103% ;
+    z-index: 999;
     
 }
 .logorDev{
     width: 15.2em;
     left: 0px;
-    height: 100%;
+    height: 101%;
     background: #1a2035!important;
     position: absolute;
 }
@@ -132,7 +134,9 @@
     width: 15em;
     height: auto;
 }
-
+.wid{
+    width: 22em !important;
+}
 
 </style>
 

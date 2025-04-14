@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Employer;
 use App\Models\Service;
@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Supplementaire;
 use Carbon\Carbon;
 use App\Models\Presence;
+use App\Models\Conger;
 
 
 class EmployeeController extends Controller
@@ -317,6 +318,64 @@ public function search(Request $request)
  $employees = Employer::paginate(10); // 10 éléments par page
  return view('employers.index', compact('employeers','employees'));
     
+}
+ 
+public function ShowSoldConge()
+{
+    // Récupérer l'utilisateur connecté
+    $user = Auth::user();
+
+    // Vérifier si l'utilisateur est un employé
+    $employe = \App\Models\Employer::where('mail', $user->email)->first();
+
+    if (!$employe) {
+        abort(404, "Employé non trouvé");
+    }
+
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    // Récupérer le nombre total de jours travaillés ce mois
+    $monthlyPresenceCount = Presence::whereYear('DateSys', $currentYear)
+                                    ->whereMonth('DateSys', $currentMonth)
+                                    ->where('Id_Employe', $employe->Id_Employe) // Filtrer par l'employé connecté
+                                    ->count();
+
+    // Récupérer les informations de l'employé
+    $employers = [
+        'nom' => $employe->NomEmp,
+        'prenom' => $employe->Prenom,
+        'Photo' => $employe->Photo,
+        'email' => $employe->mail,
+        'service' => $employe->Service,
+        'SoldeConger' => $employe->SoldeConger,
+        'DateDeNaissance' => $employe->DatedeNaissance,
+        'Genre' => $employe->Genre,
+        'telephone' => $employe->Telephone,
+        'adresse' => $employe->Adresse,
+        'SalaireDeBase' => $employe->SalaireDeBase,
+        'DateD_embauche' => $employe->DateD_embauche,
+    ];
+
+    // Récupérer uniquement les congés validés de l'employé connecté
+    $conges = conger::where('status', 'Approuvé') // Filtrer les congés validés
+                    ->where('Id_Employe', $employe->Id_Employe) // Filtrer par employé connecté
+                    ->select('Date_debut', 'Date_Fin')
+                    ->get();
+
+    // Transformer les données pour FullCalendar
+    $events = [];
+    foreach ($conges as $conge) {
+        $events[] = [
+            'title' => "Congé",
+            'start' => $conge->Date_debut,
+            'end' => date('Y-m-d', strtotime($conge->Date_Fin . ' +1 day')), // Inclure la date de fin
+            'color' => '#28a745', // Vert pour les congés validés
+            'textColor' => '#ffffff'
+        ];
+    }
+
+    return view('client.dashboard', compact('employers', 'monthlyPresenceCount', 'events'));
 }
  
 }

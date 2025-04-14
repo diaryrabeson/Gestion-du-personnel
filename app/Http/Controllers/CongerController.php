@@ -97,13 +97,30 @@ class CongerController extends Controller
 }
 
 
-public function valider($id)
+public function valider(Request $request, $id)
 {
     $conge = Conger::findOrFail($id);
+
+   
+    // Récupérer l'employé concerné
+    $employe = Employer::findOrFail($conge->Id_Employe);
+
+  
+    // Diminuer le solde congé de l'employé
+  
+    $jours_ouvrables = $conge->jours_ouvrables;
+    $solde_conge = $employe->SoldeConger;
+
+    $somme = $solde_conge - $jours_ouvrables;
+  
+    $employe->update(['SoldeConger' => $somme]);
+    // Valider le congé
     $conge->update(['status' => 'Approuvé']);
 
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé approuvée avec succès.');
 }
+
+
 
 public function refuser($id)
 {
@@ -128,7 +145,7 @@ public function refuser($id)
                 'title' => $conge->NomEmp . ' ' . $conge->Prenom,
                 'start' => $conge->Date_debut,
                 'end' => date('Y-m-d', strtotime($conge->Date_Fin . ' +1 day')), // Ajouter 1 jour pour inclure la fin
-                'color' => '#f44336', // Rouge pour les congés validés
+                'color' => '#28a745', // vert pour les congés validés
                 'textColor' => '#ffffff'
             ];
         }
@@ -136,12 +153,47 @@ public function refuser($id)
         return response()->json($events);
     }
 
-  public function showDashboards()
+ public function showNotis()
 {
-    // Récupérer le nombre de congés en attente
     $congesEnAttente = Conger::where('status', 'en attente')->count();
 
-    // Passer la variable à la vue du dashboard
-     return view('admin.dashboard', compact('congesEnAttente'));
+    if (request()->ajax()) {
+        return response()->json(['congesEnAttente' => $congesEnAttente]);
+    }
+
+    return view('layouts.menuAdmin', compact('congesEnAttente'));
 }
+
+
+
+//calendrier dans le tableau de bord client
+// public function showCalendar()
+// {
+//     // Récupérer l'utilisateur connecté
+//     $user = Auth::user();
+
+//     // Vérifier si l'utilisateur existe et récupérer l'employé correspondant
+//     $employe = Employer::where('mail', $user->email)->first();
+
+//     if (!$employe) {
+//         return redirect()->back()->with('error', 'Employé non trouvé.');
+//     }
+
+//     // Récupérer les congés validés de l'employé
+//     $conges = Conger::where('Id_Employe', $employe->id)
+//                     ->where('status', 'validé')
+//                     ->get(['Date_debut', 'Date_Fin']);
+
+//     // Transformer les données pour FullCalendar
+//     $events = $conges->map(function ($conge) {
+//         return [
+//             'title' => 'Congé',
+//             'start' => $conge->Date_debut,
+//             'end'   => $conge->Date_Fin,
+//             'color' => '#28a745', // Vert pour indiquer un congé validé
+//         ];
+//     });
+
+//     return view('client.dashboard', compact('events'));
+// }
 }

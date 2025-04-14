@@ -144,13 +144,13 @@
             <li>
                 <a href="{{ route('ficheDePaye.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Fiche de paye
+                    Fiche de paie
                 </a>
             </li>
         </div>
 
         <div class="d_flex men">
-            <i class="fa-solid fa-right-from-bracket men fonts"></i>
+            <i class="fa-solid fa-message men fonts"></i>
             <li>
                 <a href="{{ route('Messages.Listing') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
                     Message
@@ -158,6 +158,16 @@
             </li>
         </div>
 
+        <div class="d_flex men">
+            <i class="fa-solid fa-right-from-bracket men fonts"></i>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="men logouts">Déconnexion</button>
+                </form>
+                
+            </li>
+        </div>
     </ul>
 </div>
 

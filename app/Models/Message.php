@@ -13,6 +13,7 @@ class Message extends Model
         'expediteur_id',
         'destinataire_id',
         'contenu',
+        'file'
     ];
 
     // Relation avec l'expéditeur
