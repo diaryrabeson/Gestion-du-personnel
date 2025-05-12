@@ -109,9 +109,10 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::post('/employers', 'store')->name('employers.store');
     Route::get('/employers/{id_Employe}/edit', 'edit')->name('employers.edit');
     Route::put('/employers/{id_Employe}', 'update')->name('employers.update');
-    Route::get('/employers/search', 'search')->name('employers.search'); // Correction du chemin
+    Route::get('/employers/search', 'search')->name('employers.search');
     Route::delete('/employers/{id_Employe}', 'destroy')->name('employers.destroy');
 });
+
 
 //ceci est le route pour type conger
 

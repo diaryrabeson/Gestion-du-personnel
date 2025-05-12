@@ -13,35 +13,41 @@
                 </div>
                 <!-- Navigation Links -->
             </div>
-
+            <div id="loadingOverlay"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                   background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
+           <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
+           height: 13em;position: relative;
+          ">
+       </div>
             <!-- Settings Dropdown -->
-            <div class=" hidden sm:flex sm:items-center sm:ml-6">
+            <div class=" hidden sm:flex sm:items-center sm:ml-6" style="">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="backf wid inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                 <!-- Affichage de l'image de l'employé -->
-
+                             
                                 @if (auth()->check())
                                 @php
                                     $user = auth()->user();
                                 @endphp
-                                <div>
-                                    <span>Bonjour, {{ $user->name }} !</span>
+                                <div class="UsersStatus">
+                                    {{-- <span>Bonjour, {{ $user->name }} !</span> --}}
                                     @if ($user->status === 'online')
-                                        <span class="text-green-500">🟢 En ligne</span>
+                                        <span class="text-green-500">🟢 </span>
                                     @elseif ($user->status === 'offline')
-                                        <span class="text-gray-500">⚫ Hors ligne</span>
+                                        <span class="text-gray-500">⚫</span>
                                     @elseif ($user->status === 'busy')
-                                        <span class="text-red-500">🔴 Occupé</span>
+                                        <span class="text-red-500">🔴 </span>
                                     @elseif ($user->status === 'away')
-                                        <span class="text-yellow-500">🟡 Absent</span>
+                                        <span class="text-yellow-500">🟡 </span>
                                     @endif
                                 </div>
                             @endif
                             
-                            
+                            <div>{{ Auth::user()->name }} </div>
 
-                            <div>{{ Auth::user()->name }}</div>
+                     
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -121,12 +127,14 @@
     color:#8a95a0;
     width: 103% ;
     z-index: 999;
+    /* position: relative;
+    left: 14em; */
     
 }
 .logorDev{
-    width: 15.2em;
+    width: 17.5%;
     left: 0px;
-    height: 101%;
+    height: 103%;
     background: #1a2035!important;
     position: absolute;
 }
@@ -135,7 +143,10 @@
     height: auto;
 }
 .wid{
-    width: 22em !important;
+    width: 15em !important;
+}
+.UsersStatus{
+    
 }
 
 </style>
@@ -153,6 +164,28 @@
         if (event.persisted) {
             // Recharger la page complètement
             window.location.reload();
+        }
+    });
+
+    
+    //ceci est le code pour une lien de Chargement
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.logorDev a');
+        const overlay = document.getElementById('loadingOverlay');
+
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Montre le loader juste après le clic (et avant la redirection)
+                overlay.style.display = 'flex';
+            });
+        });
+
+        // Pour les boutons de formulaire comme "Déconnexion"
+        const logoutBtn = document.querySelector('form button[type="submit"]');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                overlay.style.display = 'flex';
+            });
         }
     });
 </script>

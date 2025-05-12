@@ -30,8 +30,9 @@
                                             <span class="text-gray-500 font-semibold">⚪ Hors ligne</span>
                                         @endif
                                     </td>
-                                    <td class="border border-gray-300 p-2">
-                                        <a href="{{ route('Messages.index', $userLists->id) }}" class="bg-blue-500 text-black px-3 py-1 rounded">
+                                    <td class="border border-gray-300 p-2 text-center">
+                                        <a href="{{ route('Messages.index', $userLists->id) }}" class="">
+                                            <i class="fas fa-envelope mr-2"></i>
                                             Envoyer un message
                                         </a>
                                     </td>

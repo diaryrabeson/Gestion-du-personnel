@@ -3,6 +3,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4 conteneur" :status="session('status')" />
 
+    <div id="loadingOverlay"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+           background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
+   <img src="{{ asset('img/Loading.gif') }}" alt="Chargement..." style="height: 13em;">
+</div>
+
     <form method="POST" action="{{ route('login') }}" class="contains">
         @csrf
 
@@ -34,14 +40,22 @@
             </label>
         </div>
 
+        <div style="position: relative;">
+            <x-primary-button id="loginBtn" class="connect" type="submit">
+                <span id="btnText">Se connecter</span>
+                <img src="{{ asset('img/Loading.gif') }}" id=""
+                     alt="Chargement..."
+                     style="display: none; width: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            </x-primary-button>
+        </div>
 
 
-        <div class="">
+        {{-- <div class="">
 
             <x-primary-button class="connect">
                 {{ __('Se connecter') }}
             </x-primary-button>
-        </div>
+        </div> --}}
         <div class="d-flex">
             <div class="registers">
                 @if (Route::has('register'))
@@ -61,6 +75,36 @@
 
     </form>
 </x-guest-layout>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // vérifie que c’est bien le bon formulaire
+        const spinner = document.getElementById('spinner');
+
+        form.addEventListener('submit', function () {
+            spinner.style.display = 'inline-block'; // Affiche juste l'animation
+        });
+    });
+    
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const btnText = document.getElementById('btnText');
+       
+        const overlay = document.getElementById('loadingOverlay');
+
+        form.addEventListener('submit', function () {
+            // Affiche le spinner dans le bouton
+           
+
+            // Rend le texte du bouton légèrement transparent (optionnel)
+            btnText.style.opacity = '0.6';
+
+            // Affiche l’overlay avec le gif plein écran
+            overlay.style.display = 'flex';
+        });
+    });
+</script>
 
 <style>
     /* .registers a{
@@ -74,10 +118,11 @@
         display: flex;
         justify-content: space-between;
         margin-top: 2em;
-     
+
 
     }
-    .d-flex a{
+
+    .d-flex a {
         text-decoration: none;
         color: rgb(41, 41, 66);
         font-weight: 600;
