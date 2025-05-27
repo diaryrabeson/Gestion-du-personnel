@@ -62,7 +62,7 @@
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, box-shadow 0.3s;
-            width: 18%;
+            width: 19vw;
             height: 100%;
         }
 

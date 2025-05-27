@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg conten">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg conten" style="width: 104%">
                 <div class="p-6 text-gray-900 dark:text-gray-100" style="background: #9d999c1f;">
                     <div class="CardDash">
                         <p>TABLEAU DE BORD DU EMPLOYER </p>
@@ -16,7 +16,7 @@
 
                     <div class="flex cards">
                         @if($employers)
-                                    <div class="card">
+                                    <div class="card" style="width: 100%">
                                         <div class="card-body">
                                             <div class="flex">
 
@@ -131,7 +131,7 @@
 
     .CardDash {
         background-color: #1a2035 !important;
-        width: 60em;
+        width: 100%;
         /* border-radius: 1em; */
         height: 5em;
         text-align: center;
@@ -216,7 +216,7 @@
 }
 
 .cards{
-    margin-left: -11px
+    /* margin-left: -11px */
 }
 .fc-daygrid-event {
     font-size: 12px !important; /* Réduit la taille du texte des événements */
@@ -225,6 +225,12 @@
 /* .fc-daygrid-day .fc-day .fc-day-mon .fc-day-past .fc-day-other{
     height: 4em !important;
 } */
+
+@media screen and (max-width: 760px){
+    .CardDash p{
+        font-size: 1.5em
+    }
+}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>

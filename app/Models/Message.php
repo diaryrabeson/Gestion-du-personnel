@@ -16,6 +16,11 @@ class Message extends Model
         'file'
     ];
 
+    protected $casts = [
+    'is_read' => 'boolean',
+];
+
+
     // Relation avec l'expéditeur
     public function expediteur()
     {

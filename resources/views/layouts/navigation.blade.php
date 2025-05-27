@@ -132,7 +132,7 @@
     
 }
 .logorDev{
-    width: 17.5%;
+    width: 19vw;
     left: 0px;
     height: 103%;
     background: #1a2035!important;
