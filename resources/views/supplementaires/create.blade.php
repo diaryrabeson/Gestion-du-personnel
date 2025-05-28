@@ -36,7 +36,7 @@
 
                     <form action="{{ route('supplementaire.store') }}" method="POST">
                         @csrf
-                        <div class="mb-4">
+                        <div class="mb-4" style="width: 100%;">
                             <label for="Id_Employe" class="block">Employé :</label>
                             <select name="Id_Employe" id="Id_Employe" class="w-full p-2 border rounded" required>
                                 <option value="" disabled selected>-- Sélectionnez un employé --</option>
@@ -47,7 +47,7 @@
                             @endforeach
                             </select>
                         </div>
-
+                        <div class="flex justify-between">
                         <div class="mb-4">
                             <label for="DateSys" class="block">Date :</label>
                             <input type="date" name="DateSys" id="DateSys" class="w-full p-2 border rounded" required>
@@ -57,7 +57,8 @@
                             <label for="CoutParHeure" class="block">Coût par Heure :</label>
                             <input type="number" step="0.01" name="CoutParHeure" id="CoutParHeure" class="w-full p-2 border rounded" required>
                         </div>
-
+                    </div>
+                    <div class="flex justify-between">
                         <div class="mb-4">
                             <label for="DebutDeSuppl" class="block">Début :</label>
                             <input type="time" name="DebutDeSuppl" id="DebutDeSuppl" class="w-full p-2 border rounded" required>
@@ -67,7 +68,8 @@
                             <label for="FinDeSuppl" class="block">Fin :</label>
                             <input type="time" name="FinDeSuppl" id="FinDeSuppl" class="w-full p-2 border rounded" required>
                         </div>
-
+                    </div>
+                    <div class="flex justify-between">
                         <div class="mb-4">
                             <label>Nombre total d'heures :</label>
                             <input type="text" name="nb_total_heures" id="nb_total_heures" class="w-full p-2 border rounded bg-gray-200" readonly>
@@ -77,11 +79,13 @@
                             <label>Coût total :</label>
                             <input type="text" id="cout_total" name="cout_total" class="w-full p-2 border rounded bg-gray-200" readonly>
                         </div>
-                       
+                    </div>
 
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <div class="contents">   
+                              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded button">
                             Enregistrer
                         </button>
+                    </div>
                     </form>
 
                 </div>
@@ -154,4 +158,61 @@
             transform: translateY(0);
         }
     }
+
+    .button {
+ --color: #00A97F;
+ padding: 0.8em 1.7em;
+ background-color: transparent;
+ border-radius: .3em;
+ position: relative;
+ overflow: hidden;
+ cursor: pointer;
+ transition: .5s;
+ font-weight: 400;
+ font-size: 17px;
+ border: 1px solid;
+ font-family: inherit;
+ text-transform: uppercase;
+ color: var(--color);
+ z-index: 1;
+}
+
+.button::before, .button::after {
+ content: '';
+ display: block;
+ width: 50px;
+ height: 50px;
+ transform: translate(-50%, -50%);
+ position: absolute;
+ border-radius: 50%;
+ z-index: -1;
+ background-color: var(--color);
+ transition: 1s ease;
+}
+
+.button::before {
+ top: -1em;
+ left: -1em;
+}
+
+.button::after {
+ left: calc(100% + 1em);
+ top: calc(100% + 1em);
+}
+
+.button:hover::before, .button:hover::after {
+ height: 410px;
+ width: 410px;
+}
+
+.button:hover {
+ color: rgb(10, 25, 30);
+}
+
+.button:active {
+ filter: brightness(.8);
+}
+.mb-4{
+    width: 48%;
+}
 </style>

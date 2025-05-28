@@ -12,6 +12,7 @@
             padding: 1.5em;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom: 1.5em;
+            margin-top: 2em;
         }
 
         .form-label {
@@ -61,7 +62,17 @@
 
         .img-preview {
             margin-bottom: 1em;
+            position: absolute;
+            top: 5em;
+            left: 71em;
         }
+        .d-flex{
+        display: flex;
+        justify-content: space-between
+    }
+    .form-group{
+        width: 48%
+    }
     </style>
 
     <div class="py-12">
@@ -77,6 +88,7 @@
 
                         <div class="form-section">
                             <!-- Champ Nom -->
+                        <div class="d-flex">
                             <div class="form-group">
                                 <label for="NomEmp" class="form-label">Nom</label>
                                 <input type="text" name="NomEmp" id="NomEmp" class="form-control" value="{{ old('NomEmp', $employee->NomEmp) }}" required>
@@ -87,7 +99,9 @@
                                 <label for="Prenom" class="form-label">Prénom</label>
                                 <input type="text" name="Prenom" id="Prenom" class="form-control" value="{{ old('Prenom', $employee->Prenom) }}" required>
                             </div>
+                        </div>
 
+                        <div class="d-flex">
                             <!-- Champ Adresse -->
                             <div class="form-group">
                                 <label for="Adresse" class="form-label">Adresse</label>
@@ -99,7 +113,9 @@
                                 <label for="mail" class="form-label">Email</label>
                                 <input type="email" name="mail" id="mail" class="form-control" value="{{ old('mail', $employee->mail) }}" required>
                             </div>
-
+                        </div>    
+                        
+                        <div class="d-flex">
                             <!-- Champ Téléphone -->
                             <div class="form-group">
                                 <label for="Telephone" class="form-label">Téléphone</label>
@@ -119,7 +135,9 @@
                                 
                                 <input type="file" name="Photo" id="Photo" class="form-control">
                             </div>
+                        </div>
 
+                        <div class="d-flex">
                             <!-- Champ Date de Naissance -->
                             <div class="form-group">
                                 <label for="DatedeNaissance" class="form-label">Date de Naissance</label>
@@ -134,7 +152,8 @@
                                 </select>
                             </div>
                             
-
+                        </div>
+                        <div class="d-flex">
 
                             <!-- Champ Date d'Embauche -->
                             <div class="form-group">
@@ -154,7 +173,8 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                        </div>
+                        <div class="d-flex">
                             <!-- Champ Solde Congé -->
                             <div class="form-group">
                                 <label for="SoldeConger" class="form-label">Solde Congé</label>
@@ -166,7 +186,7 @@
                                 <label for="SalaireDeBase" class="form-label">Salaire de Base</label>
                                 <input type="number" name="SalaireDeBase" id="SalaireDeBase" class="form-control" value="{{ old('SalaireDeBase', $employee->SalaireDeBase) }}" step="0.01" min="0" required>
                             </div>
-
+                        </div>
                             <!-- Boutons de soumission -->
                             <div class="flex justify-between">
                                 <button type="submit" class="btn-submit">Mettre à jour</button>

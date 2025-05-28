@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div style="width: 67em" class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div style="width: 105%" class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="CardDash">
                     <p>TABLEAU DE BORD POUR L'ADMIN </p>
 
@@ -93,7 +93,7 @@
 
                         </div>
                     </div>
-                    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md" style="width: 50%">
                         <div class="titreStatis">
                             <h2>Taux d'absence et présence par service</h2>
                         </div>
@@ -135,7 +135,7 @@
         font-style: normal;
     }
     .Contcalendar{
-        width: 67em;
+        width: 77%;
     z-index: -9999;
     position: absolute;
     }
@@ -144,8 +144,8 @@
         background: white;
         display: block;
         box-sizing: border-box;
-        height: auto;
-        width: 37em;
+        height: auto !important;
+        width: 100% !important;
         border-radius: 10px !important;
     }
 
@@ -353,11 +353,11 @@
     }
 
     .statis {
-        gap: 2em;
+        /* gap: 2em; */
         display: flex;
         justify-content: space-between;
         height: auto;
-        width: 20em;
+        width: 100%;
     }
 </style>
 

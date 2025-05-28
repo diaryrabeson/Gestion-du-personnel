@@ -61,7 +61,7 @@ class CongerController extends Controller
     ]);
 
         // Redirection après la création
-        return redirect()->route('Conger.index')->with('success', 'Demande de congé créée avec succès.');
+        return redirect()->route('client.dashboard')->with('success', 'Demande de congé créée avec succès.');
     }
 
     /**
