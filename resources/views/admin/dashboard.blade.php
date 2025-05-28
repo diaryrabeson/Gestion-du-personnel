@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div style="width: 67em" class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="CardDash">
-                    <p>TABLEAU DE BORD ADMIN </p>
+                    <p>TABLEAU DE BORD POUR L'ADMIN </p>
 
                 </div>
 
@@ -214,7 +214,7 @@
     }
 
     .CardDash p {
-        font-family: 'TitreDAshboard';
+        /* font-family: 'TitreDAshboard'; */
         /* color: #0a0a0a; */
         font-size: 2em;
         color: white
