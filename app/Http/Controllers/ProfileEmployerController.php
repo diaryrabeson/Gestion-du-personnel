@@ -13,7 +13,7 @@ class ProfileEmployerController extends Controller
 
         // Vérifier si l'utilisateur est un employé (ajuste selon ta structure)
         $employe = \App\Models\Employer::where('mail', $user->email)->first();
-
+        $service = $employe->Id_service;
         if (!$employe) {
             abort(404, "Employé non trouvé");
         }
@@ -22,7 +22,8 @@ class ProfileEmployerController extends Controller
         'prenom' => $employe->Prenom,
         'Photo' => $employe->Photo,
         'email' => $employe->mail,
-        'service' => $employe->Service,
+       'service' => $employe->service ? $employe->service->nomService : null, 
+       'descService'=> $employe->service ? $employe->service->Description : null,
         'SoldeConger' => $employe ->SoldeConger,
         'DateDeNaissance' => $employe ->DatedeNaissance,
         'Genre' => $employe ->Genre,

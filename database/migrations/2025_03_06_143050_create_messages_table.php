@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->foreignId('destinataire_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->text('contenu');
              $table->string('file')->nullable(); 
+             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

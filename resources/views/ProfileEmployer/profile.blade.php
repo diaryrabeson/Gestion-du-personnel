@@ -10,7 +10,7 @@
             <img src="{{ asset('storage/' . $Profile['Photo']) }}" class="w-20 h-20 rounded-full" alt="Photo de {{ $Profile['nom'] }}">
             <div class="contents">
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-white">{{ $Profile['nom'] }} {{ $Profile['prenom'] }}</h3>
-               <div class="flex"><h4>Service :</h4>  <p class="text-gray-600 dark:text-gray-300">{{ $Profile['service'] }}</p></div> 
+               <div class="flex"><h4>Fonction :</h4>  <p class="text-gray-600 dark:text-gray-300">{{ $Profile['service'] }} {{ $Profile['descService'] }} </p></div> 
                 <div class="flex"><h4>Email :</h4><p class="text-gray-600 dark:text-gray-300"> {{ $Profile['email'] }}</p></div>
                 <div class="flex"><h4>Téléphone : </h4> <p class="text-gray-600 dark:text-gray-300">{{ $Profile['telephone'] }}</p></div>
                 <div class="flex"><h4>Adresse :</h4><p class="text-gray-600 dark:text-gray-300"> {{ $Profile['adresse'] }}</p></div>

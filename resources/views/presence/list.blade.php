@@ -40,7 +40,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex1">
                         <div>
-                            <h3 class="text-xl">Liste des Présences</h3>
+                            <h3 class="text-xl">Liste des Présences et des absences</h3>
                         </div>
 
                         <!-- Button to add a new attendance record -->

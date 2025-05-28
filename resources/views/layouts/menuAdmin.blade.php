@@ -62,7 +62,7 @@
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, box-shadow 0.3s;
-            width: 18%;
+            width: 19vw;
             height: 100%;
         }
 
@@ -134,6 +134,13 @@
         &#9776; <!-- Symbole hamburger -->
     </button>
 </div>
+<div id="loadingOverlay"
+     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
+    <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
+    height: 13em;position: relative;
+   ">
+</div>
 
 <!-- Menu Vertical à gauche -->
 <div
@@ -162,7 +169,7 @@
             <li>
                 <a href="{{ route('services.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Service
+                    Fonction
                 </a>
             </li>
         </div>
@@ -172,7 +179,7 @@
             <li>
                 <a href="{{ route('TypeConger.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    TypeConger
+                    Type Conger
                 </a>
             </li>
         </div>
@@ -258,4 +265,28 @@
 
     // Rafraîchir toutes les 5 secondes
     setInterval(fetchCongesEnAttente, 3000);
+
+
+
+
+    //ceci est le code pour une lien de Chargement
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.menu a');
+        const overlay = document.getElementById('loadingOverlay');
+
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Montre le loader juste après le clic (et avant la redirection)
+                overlay.style.display = 'flex';
+            });
+        });
+
+        // Pour les boutons de formulaire comme "Déconnexion"
+        const logoutBtn = document.querySelector('form button[type="submit"]');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                overlay.style.display = 'flex';
+            });
+        }
+    });
 </script>

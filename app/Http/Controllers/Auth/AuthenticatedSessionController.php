@@ -58,7 +58,7 @@ public function store(Request $request)
     }
 
     return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
+        'email' => 'Vos identifiants ne correspondent pas à nos enregistrements.',
     ]);
 }
 

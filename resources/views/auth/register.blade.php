@@ -4,7 +4,7 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nom')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('Nom')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -55,12 +55,29 @@
                 {{ __('Déjà inscri') }}
             </a>
 
-            <x-primary-button class="ml-4">
+            {{-- <x-primary-button class="ml-4">
                 {{ __('Inscrire') }}
+            </x-primary-button> --}}
+
+            <x-primary-button id="registerBtn" class="ml-4">
+                <span id="registerText">Inscrire</span>
+                <img src="{{ asset('img/Loading.gif') }}" id="registerSpinner" alt="Chargement..."
+                     style="display: none; width: auto; margin-left: -21em; position: absolute; margin-top: -29em;">
             </x-primary-button>
+            
         </div>
     </form>
 </x-guest-layout>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // adapte si tu as plusieurs formulaires
+        const registerSpinner = document.getElementById('registerSpinner');
+
+        form.addEventListener('submit', function () {
+            registerSpinner.style.display = 'inline-block'; // Affiche le loader à droite du bouton
+        });
+    });
+</script>
 
 
 <style>

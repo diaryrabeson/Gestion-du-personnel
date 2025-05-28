@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Conger;
+use App\Models\Service;
 class Employer extends Model
 {
     use HasFactory;
@@ -40,5 +41,8 @@ public function conges()
 {
     return $this->hasMany(Conger::class, 'Id_Employe', 'id_Employe');
 }
-
+public function service()
+{
+    return $this->belongsTo(\App\Models\Service::class, 'Id_service', 'Id_service');
+}
 }
