@@ -20,6 +20,41 @@
            height: 13em;position: relative;
           ">
        </div>
+       <div class="relative">
+        @php
+            use Illuminate\Support\Facades\Auth;
+            use App\Models\Notification;
+    
+            $unreadCount = Notification::where('user_id', Auth::id())
+                                       ->where('is_read', false)
+                                       ->count();
+        @endphp
+    
+        <a href="{{ route('notifications.index') }}" class="relative flex items-center text-gray-700 hover:text-gray-900">
+            <!-- Icône cloche avec badge -->
+            <div class="relative flex" style="left:30em; top:1em">
+                <div class="notifIcon">
+              <span><i class="fas fa-bell text-xl"></i></span>
+                </div>
+               
+                
+                <div class="NotifCount">
+                      <!-- Badge de notification -->
+                @if($unreadCount > 0)
+                    <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2
+                             inline-flex items-center justify-center px-2 py-1
+                             text-xs font-bold text-white bg-red-600 rounded-full shadow-md">
+                        {{ $unreadCount }}
+                    </span>
+                @endif
+            </div>
+              
+                
+            </div>
+        </a>
+    </div>
+    
+    
             <!-- Settings Dropdown -->
             <div class=" hidden sm:flex sm:items-center sm:ml-6" style="">
                 <x-dropdown align="right" width="48">
@@ -119,6 +154,16 @@
 .shad{
     box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
     z-index: 999;
+}
+.NotifCount{
+    left: .6em;
+    /* background: red; */
+    border-radius: 2em;
+    position: absolute;
+    width: 1.3em;
+    text-align: center;
+    height: 1.4em;
+    top: -.5em;
 }
 .backf{
     background-color: rgb(30 39 100);

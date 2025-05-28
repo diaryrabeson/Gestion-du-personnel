@@ -45,4 +45,9 @@ public function service()
 {
     return $this->belongsTo(\App\Models\Service::class, 'Id_service', 'Id_service');
 }
+public function user()
+{
+    return $this->belongsTo(User::class, 'id_user');
+}
+
 }

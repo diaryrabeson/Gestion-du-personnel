@@ -8,6 +8,9 @@ use App\Models\Employer;
 use App\Models\JoursFeries;
 use App\Models\Conger;
 use Carbon\Carbon;
+use App\Models\Notification; 
+use App\Models\User; 
+
 
 
 class CongerController extends Controller
@@ -101,34 +104,65 @@ public function valider(Request $request, $id)
 {
     $conge = Conger::findOrFail($id);
 
-   
     // Récupérer l'employé concerné
     $employe = Employer::findOrFail($conge->Id_Employe);
 
-  
-    // Diminuer le solde congé de l'employé
-  
+    // Diminuer le solde de congé de l'employé
     $jours_ouvrables = $conge->jours_ouvrables;
     $solde_conge = $employe->SoldeConger;
-
     $somme = $solde_conge - $jours_ouvrables;
-  
+
     $employe->update(['SoldeConger' => $somme]);
+
     // Valider le congé
     $conge->update(['status' => 'Approuvé']);
 
+    // Récupérer l'utilisateur via l'email de l'employé
+    $user = User::where('email', $employe->mail)->first();
+
+    // Créer une notification si l'utilisateur est trouvé
+   if ($user) {
+    try {
+        Notification::create([
+            'user_id' => $user->id,
+            'message' => 'Votre demande de congé a été approuvée.',
+            'is_read' => false,
+        ]);
+    } catch (\Exception $e) {
+        dd('Erreur création notification : ', $e->getMessage());
+    }
+} else {
+    dd('Aucun utilisateur trouvé pour l\'email : ' . $employe->mail);
+}
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé approuvée avec succès.');
 }
-
-
 
 public function refuser($id)
 {
     $conge = Conger::findOrFail($id);
+
+    // Refuser le congé
     $conge->update(['status' => 'Rejeté']);
+
+    // Récupérer l'employé concerné
+    $employe = Employer::findOrFail($conge->Id_Employe);
+
+    // Récupérer l'utilisateur via l'email de l'employé
+    $user = User::where('email', $employe->email)->first();
+
+    // Créer une notification si l'utilisateur est trouvé
+    if ($user) {
+        Notification::create([
+            'user_id' => $user->id,
+            'message' => 'Votre demande de congé a été refusée.',
+            'is_read' => false,
+        ]);
+    }
 
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé refusée avec succès.');
 }
+
+
 
 
  public function getCongesValides()
@@ -163,6 +197,7 @@ public function refuser($id)
 
     return view('layouts.menuAdmin', compact('congesEnAttente'));
 }
+
 
 
 

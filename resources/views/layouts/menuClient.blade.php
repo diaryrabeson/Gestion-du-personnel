@@ -122,6 +122,7 @@
    ">
 </div>
 <!-- Menu Vertical à gauche -->
+
 <div
     class=" menu navig fixed top-24 left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
     <ul class="liens space-y-4">
@@ -134,7 +135,8 @@
                 </a>
             </li>
         </div>
-
+       
+        
         <div class="d_flex men">
             <i class="fa-solid fa-address-card men fonts"></i>
             <li>

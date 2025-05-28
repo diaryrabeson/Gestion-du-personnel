@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FicheDePayeController;
 use App\Http\Controllers\ProfileEmployerController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------- 
 | Web Routes 
@@ -211,4 +212,6 @@ Route::get('/client/dashboard', [EmployeeController::class, 'ShowSoldConge'])
 
 
 Route::get('/admin/notifications', [CongerController::class, 'showNotis'])->name('admin.notifications');
+
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
