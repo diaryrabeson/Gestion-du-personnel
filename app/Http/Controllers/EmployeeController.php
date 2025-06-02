@@ -7,6 +7,7 @@ use App\Models\Employer;
 use App\Models\Service;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Supplementaire;
 use Carbon\Carbon;
 use App\Models\Presence;
@@ -83,7 +84,28 @@ public function store(Request $request)
     ], [
         'DatedeNaissance.before' => 'L\'employé doit être né avant l\'année 2000.',
     ]);
-   
+    // $validator = Validator::make(
+    //     $request->all(),
+    //     [
+    //     'NomEmp' => 'required|string|max:255',
+    //     'Prenom' => 'required|string|max:255',
+    //     'Adresse' => 'nullable|string|max:255',
+    //     'mail' => 'required|email|unique:employers,mail',
+    //     'Telephone' => 'nullable|string|max:20',
+    //     'Photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     'DatedeNaissance' => 'required|date|before:2005-01-01',
+    //     'DateD_embauche' => 'nullable|date',
+    //     'Id_service' => 'required|exists:tb_service,id_service',
+    //     'SoldeConger' => 'nullable|numeric|min:0',
+    //     'Genre' => 'required|in:Masculin,Féminin',
+    //     'SalaireDeBase' => 'required|numeric|min:0',      
+    //     ],
+    //     [
+    //         'NomEmp.required' => 'Le nom est obligatoire.',
+    //         'DatedeNaissance.before' => 'L\'employé doit être né avant l\'année 2000.',
+    //     ]
+    // );
+//    dd($validator->errors());
     // Vérifier si l'email existe déjà
     $existingEmail = Employer::where('mail', $validatedData['mail'])->first();
     if ($existingEmail) {
@@ -175,7 +197,7 @@ public function store(Request $request)
         'Genre' => 'required|in:Masculin,Féminin',
         'SalaireDeBase' => 'required|numeric|min:0',
     ]);
-
+    
     // Vérifier si un fichier photo a été envoyé
     if ($request->hasFile('Photo')) {
         // Supprimer l'ancienne photo si elle existe

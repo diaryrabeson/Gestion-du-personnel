@@ -179,7 +179,7 @@
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
                                 {{-- <th class="border px-4 py-2">ID</th> --}}
-                                <th class="border px-4 py-2">Type de Congé</th>
+                                <th class="border px-4 py-2">Types de Congés</th>
                                 <th class="border px-4 py-2">Actions</th>
                             </tr>
                         </thead>

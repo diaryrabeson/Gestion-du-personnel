@@ -83,6 +83,10 @@
             display: block;
             /* Affiche le menu par défaut sur les écrans plus larges */
         }
+        .mobile-menu {
+            margin-left: 0;
+        }
+
     }
 
     @media screen and (max-width: 768px) {
@@ -92,50 +96,81 @@
             color: black;
             font-size: 2em;
             position: absolute;
-
+            top: -2.2em;
             left: 90vw;
 
         }
 
+        .mobile-menu {
+            margin-left: 0 !important;
+        }
+
         .menu.active {
-            height: 100px;
+            /* height: 100px; */
             /* Hauteur maximale lorsque le menu est actif (ajustez selon votre contenu) */
         }
 
         .menu {
-            display: none;
+            display: flex;
             width: 100%;
+            height: auto;
             overflow: hidden;
             /* Masquez le débordement */
             transition: max-height 0.3s ease;
             /* Animation fluide */
             text-justify: center;
+            position: absolute;
+            justify-content: center;
+
         }
 
-       
+        .d_flex {
+            display: flex;
+            justify-content: center
+        }
+
+        .navig {
+            display: inline-block;
+            background-color: #1a2035c7 !important;
+            backdrop-filter: blur(7px);
+            margin-top: -.2em;
+            /* padding: 12px 24px; */
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            /* background-color: rgb(70, 66, 66); Couleur de fond primaire */
+            /* background-image: url('{{ asset('img/technologie4.jpg') }}'); Dégradé sur fond d'image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            margin-left: -100%
+        }
 
     }
-     div.notific {
-            position: absolute ;
-            top: 2.2em ;
-            left: 12em ;
-            background: #9595ff ;
-            width: 2em ;
-            border-radius: 1em;
-        }
+
+    div.notific {
+        position: absolute;
+        top: 2.2em;
+        left: 12em;
+        background: #9595ff;
+        width: 2em;
+        border-radius: 1em;
+    }
 </style>
 
 
 
 
 <!-- Bouton Hamburger -->
-<div class="fixed top-5 left-5 z-20">
+<div class="fixed menuHamburger top-5 left-5 z-20">
     <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
         &#9776; <!-- Symbole hamburger -->
     </button>
 </div>
-<div id="loadingOverlay"
-     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+<div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
     <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
     height: 13em;position: relative;
@@ -160,7 +195,7 @@
             <li>
                 <a href="{{ route('employers.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Employer
+                    Employés
                 </a>
             </li>
         </div>
@@ -179,7 +214,7 @@
             <li>
                 <a href="{{ route('TypeConger.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Type Conger
+                    Type Congé
                 </a>
             </li>
         </div>
@@ -198,7 +233,7 @@
             <li>
                 <a href="{{ route('supplementaires.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Heure Supplementaire
+                    Heures Supplementaires
                 </a>
             </li>
         </div>
@@ -207,7 +242,7 @@
             <li>
                 <a href="{{ route('Messages.Listing') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Message
+                    Messages
                 </a>
             </li>
         </div>
@@ -225,10 +260,11 @@
 
         <div class="notific">
             @if($congesEnAttente > 0)
-                    {{-- <span>Congés en attente : {{ $congesEnAttente }}</span> --}}
-                    <span id="congesNotification" class="hidden bg-red-500 text-white text-xs font-bold rounded-full px-2"></span>
+                {{-- <span>Congés en attente : {{ $congesEnAttente }}</span> --}}
+                <span id="congesNotification"
+                    class="hidden bg-red-500 text-white text-xs font-bold rounded-full px-2"></span>
             @endif
-           
+
         </div>
     </ul>
 </div>
@@ -238,6 +274,15 @@
         const menu = document.querySelector('.menu');
         menu.classList.toggle('active'); // Ajoute ou enlève la classe active
     });
+
+
+//pour le menu
+    const menuHamburger = document.querySelector(".menuHamburger")
+    const links = document.querySelector(".navig")
+
+    menuHamburger.addEventListener('click', () => {
+        links.classList.toggle('mobile-menu')
+    })
 </script>
 
 
@@ -249,7 +294,7 @@
             url: "{{ route('admin.notifications') }}",
             type: "GET",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 let badge = $("#congesNotification");
                 if (response.congesEnAttente > 0) {
                     badge.text(response.congesEnAttente).removeClass("hidden");

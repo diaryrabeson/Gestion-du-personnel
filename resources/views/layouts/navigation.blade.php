@@ -171,7 +171,7 @@
     padding: 0;
     color:#8a95a0;
     width: 103% ;
-    z-index: 999;
+    /* z-index: 999; */
     /* position: relative;
     left: 14em; */
     

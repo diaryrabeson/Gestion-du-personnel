@@ -26,7 +26,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="name-client">{{$totalEmployes }}
+                                <p class="name-client"><span class="text-xl">{{$totalEmployes }}</span>
                                     <span>Employés enregistré
                                     </span>
                                 </p>
@@ -243,9 +243,9 @@
         transition: all 0.3s ease;
     }
 
-    .card-client:hover {
+    /* .card-client:hover {
         transform: translateY(-10px);
-    }
+    } */
 
     .user-picture {
         overflow: hidden;

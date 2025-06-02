@@ -17,7 +17,7 @@
             transition: background-color 0.3s ease;
             border-radius: 10px;
             height: 73%;
-            width: 13em;
+            width: 100%;
         }
 
         .men:hover {
@@ -73,24 +73,54 @@
             color: black;
             font-size: 2em;
             position: absolute;
-
+            top: -2.2em;
             left: 90vw;
 
         }
+        .mobile-menu {
+            margin-left: 0 !important;
+        }
 
         .menu.active {
-            height: 100px;
+            display: flex
+            /* height: 100px; */
             /* Hauteur maximale lorsque le menu est actif (ajustez selon votre contenu) */
         }
 
         .menu {
-            display: none;
+            display: flex;
             width: 100%;
+            height: auto;
             overflow: hidden;
             /* Masquez le débordement */
             transition: max-height 0.3s ease;
             /* Animation fluide */
             text-justify: center;
+            position: absolute;
+            justify-content: center;
+        }
+        .d_flex {
+            display: flex;
+            justify-content: center
+        }
+        .navig {
+            display: inline-block;
+            background-color: #1a2035c7 !important;
+            backdrop-filter: blur(7px);
+            margin-top: 4.5em;
+            /* padding: 12px 24px; */
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            /* background-color: rgb(70, 66, 66); Couleur de fond primaire */
+            /* background-image: url('{{ asset('img/technologie4.jpg') }}'); Dégradé sur fond d'image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            margin-left: -100%
         }
     }
 
@@ -109,7 +139,7 @@
 
 
 <!-- Bouton Hamburger -->
-<div class="fixed top-5 left-5 z-20">
+<div class="fixed menuHamburger top-5 left-5 z-20">
     <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
         &#9776; <!-- Symbole hamburger -->
     </button>
@@ -208,4 +238,13 @@
             });
         }
     });
+
+
+    //pour le menu
+    const menuHamburger = document.querySelector(".menuHamburger")
+    const links = document.querySelector(".navig")
+
+    menuHamburger.addEventListener('click', () => {
+        links.classList.toggle('mobile-menu')
+    })
 </script>
