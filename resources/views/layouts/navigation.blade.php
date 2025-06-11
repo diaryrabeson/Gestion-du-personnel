@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="backf relative   bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="backf max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class=" flex shad justify-between h-16">
+        <div class=" flex shad w-full justify-between h-16">
             <div class=" flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center logorDev">
@@ -13,13 +13,14 @@
                 </div>
                 <!-- Navigation Links -->
             </div>
-            <div id="loadingOverlay"
+            <div id="loadingOverlay" class="z-999"
             style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                   background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
+                   background-color: rgba(0, 0, 0, 0.3); z-index: 9999 !important; justify-content: center; align-items: center;">
            <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
            height: 13em;position: relative;
           ">
        </div>
+       
        <div class="relative">
         @php
             use Illuminate\Support\Facades\Auth;
@@ -149,7 +150,7 @@
 
 <style>
 .navig {
-    margin-top: 5em;
+    /* margin-top: 5em; */
 }
 .shad{
     box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
@@ -196,12 +197,12 @@
 
 </style>
 
-<!-- Inclure le menu selon le rôle de l'utilisateur -->
+{{-- <!-- Inclure le menu selon le rôle de l'utilisateur -->
 @if (Auth::user()->role === 'admin')
     @include('layouts.menuAdmin')
 @elseif (Auth::user()->role === 'client')
     @include('layouts.menuClient')
-@endif
+@endif --}}
 
 <script>
     // Empêche les retours en arrière dus au cache
@@ -233,31 +234,11 @@
             });
         }
     });
+
+
+   
 </script>
 
-{{-- <script>
-    function updateUserStatus(status) {
-        fetch("{{ route('update.status') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-            },
-            body: JSON.stringify({ status: status }),
-        }).catch(error => console.error("Erreur mise à jour statut :", error));
-    }
 
-    // Forcer la mise à jour immédiate après la connexion
-    updateUserStatus("online");
 
-    // Rafraîchir le statut toutes les 2 secondes
-    setInterval(() => {
-        updateUserStatus("online");
-    }, 2000);
-
-    // Détecter quand l'utilisateur ferme la page (déconnexion)
-    window.addEventListener("beforeunload", () => {
-        updateUserStatus("offline");
-    });
-</script> --}}
 

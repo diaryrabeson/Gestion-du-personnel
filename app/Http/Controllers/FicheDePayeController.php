@@ -51,7 +51,7 @@ class FicheDePayeController extends Controller
     $cout_total_heures_supp = Supplementaire::where('Id_Employe', $employe->Id_Employe)
         ->whereMonth('DateSys', $mois)
         ->whereYear('DateSys', $annee)
-        ->sum('CoutParHeure');
+        ->sum('cout_total');
 
     // 🔹 Calcul du salaire total
     $salaire_base = $employe->SalaireDeBase;
@@ -121,7 +121,7 @@ public function genererPDF(Request $request)
     $cout_total_heures_supp = Supplementaire::where('Id_Employe', $employe->Id_Employe)
         ->whereMonth('DateSys', $mois)
         ->whereYear('DateSys', $annee)
-        ->sum('CoutParHeure');
+        ->sum('cout_total');
 
     $salaire_base = $employe->SalaireDeBase;
     $prime = 0;

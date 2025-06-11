@@ -32,7 +32,7 @@
 
         .navig {
             display: inline-block;
-            margin-top: 4.6em;
+           
             padding: 12px 24px;
             position: inherit;
             top: -.6em;
@@ -144,13 +144,7 @@
         &#9776; <!-- Symbole hamburger -->
     </button>
 </div>
-<div id="loadingOverlay"
-     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
-    <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
-    height: 13em;position: relative;
-   ">
-</div>
+
 <!-- Menu Vertical à gauche -->
 
 <div
@@ -218,17 +212,7 @@
 
 
     
-    //ceci est le code pour une lien de Chargement
-    document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.men a');
-        const overlay = document.getElementById('loadingOverlay');
-
-        links.forEach(link => {
-            link.addEventListener('click', function (e) {
-                // Montre le loader juste après le clic (et avant la redirection)
-                overlay.style.display = 'flex';
-            });
-        });
+    
 
         // Pour les boutons de formulaire comme "Déconnexion"
         const logoutBtn = document.querySelector('form button[type="submit"]');

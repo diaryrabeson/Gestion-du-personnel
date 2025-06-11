@@ -10,10 +10,7 @@
 
     }
 
-    .menu {
-        display: none;
-        /* Masqué par défaut sur mobile */
-    }
+    
 
     .menu.active {
         display: block;
@@ -49,7 +46,7 @@
         .navig {
             display: inline-block;
             background-color: #1a2035 !important;
-            margin-top: -.2em;
+            /* margin-top: -.2em; */
             /* padding: 12px 24px; */
             text-align: center;
             font-size: 16px;
@@ -64,6 +61,7 @@
             transition: background 0.3s, box-shadow 0.3s;
             width: 19vw;
             height: 100%;
+            transition: all 0.5s ease;
         }
 
         .logouts {
@@ -133,7 +131,7 @@
             display: inline-block;
             background-color: #1a2035c7 !important;
             backdrop-filter: blur(7px);
-            margin-top: -.2em;
+            /* margin-top: -.2em; */
             /* padding: 12px 24px; */
             text-align: center;
             font-size: 16px;
@@ -159,100 +157,98 @@
         width: 2em;
         border-radius: 1em;
     }
+   
 </style>
 
 
 
 
 <!-- Bouton Hamburger -->
-<div class="fixed menuHamburger top-5 left-5 z-20">
-    <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
-        &#9776; <!-- Symbole hamburger -->
-    </button>
-</div>
-<div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); z-index: 9999; justify-content: center; align-items: center;">
-    <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
-    height: 13em;position: relative;
-   ">
-</div>
+
 
 <!-- Menu Vertical à gauche -->
-<div
-    class=" menu navig fixed top-24 left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
-    <ul class="liens space-y-4">
-        <div class="d_flex men">
-            <i class="fa-solid fa-address-card men fonts"></i>
-            <li>
+<div class=" menu navig fixed  left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700  w-60 h-full">
+    <ul class="liens ">
+        <div class="fixed menuHamburger top-5 left-5 z-20">
+            <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
+                &#9776; <!-- Symbole hamburger -->
+            </button>
+        </div>
+       
+
+
+        <div class="d_flex w-full ">
+           
+            <li class="w-full text-left">
                 <a href="{{ route('Conger.pending') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Validation Congée
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700" >
+                     <i class="fa-solid fa-address-card men fonts"></i>Validation Congée
                 </a>
             </li>
         </div>
-        <div class="d_flex men">
-            <i class="fa-solid fa-circle-user men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+           
+            <li class="w-full text-left">
                 <a href="{{ route('employers.index') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Employés
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-circle-user men fonts"></i>  Employés
                 </a>
             </li>
         </div>
-        <div class="d_flex men">
-            <i class="fa-solid fa-gear men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+            
+            <li class="w-full text-left">
                 <a href="{{ route('services.index') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Fonction
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-gear men fonts"></i>Fonction
                 </a>
             </li>
         </div>
 
-        <div class="d_flex men">
-            <i class="fa-regular fa-file-lines men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+          
+            <li class="w-full text-left">
                 <a href="{{ route('TypeConger.index') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Type Congé
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-regular fa-file-lines men fonts"></i>Type Congé
                 </a>
             </li>
         </div>
-        <div class="d_flex men">
-            <i class="fa-solid fa-pen-nib men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+          
+            <li class="w-full text-left">
                 <a href="{{ route('presence.list') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Pointage
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-pen-nib men fonts"></i>Pointage
                 </a>
             </li>
         </div>
 
-        <div class="d_flex men">
-            <i class="fa-solid fa-calendar-week men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+           
+            <li class="w-full text-left">
                 <a href="{{ route('supplementaires.index') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Heures Supplementaires
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-calendar-week men fonts"></i>Heures Supplementaires
                 </a>
             </li>
         </div>
-        <div class="d_flex men">
-            <i class="fa-solid fa-message men fonts"></i>
-            <li>
+        <div class="d_flex w-full">
+         
+            <li class="w-full text-left">
                 <a href="{{ route('Messages.Listing') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Messages
+                    class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-message men fonts"></i>Messages
                 </a>
             </li>
         </div>
-
-        <div class="d_flex men">
-            <i class="fa-solid fa-right-from-bracket men fonts"></i>
-            <li>
+       
+        <div class="d_flex w-full">
+            
+            <li class="w-full text-left">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="men logouts">Déconnexion</button>
+                    <button type="submit" class="men w-full text-left"><i class="fa-solid fa-right-from-bracket men fonts"></i>Déconnexion</button>
                 </form>
 
             </li>
@@ -262,10 +258,12 @@
             @if($congesEnAttente > 0)
                 {{-- <span>Congés en attente : {{ $congesEnAttente }}</span> --}}
                 <span id="congesNotification"
-                    class="hidden bg-red-500 text-white text-xs font-bold rounded-full px-2"></span>
+                    class="hidden  text-white text-xs font-bold rounded-full px-2"></span>
             @endif
 
         </div>
+      
+ 
     </ul>
 </div>
 
@@ -282,6 +280,10 @@
 
     menuHamburger.addEventListener('click', () => {
         links.classList.toggle('mobile-menu')
+    })
+
+
+    
     })
 </script>
 
@@ -314,18 +316,7 @@
 
 
 
-    //ceci est le code pour une lien de Chargement
-    document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.menu a');
-        const overlay = document.getElementById('loadingOverlay');
-
-        links.forEach(link => {
-            link.addEventListener('click', function (e) {
-                // Montre le loader juste après le clic (et avant la redirection)
-                overlay.style.display = 'flex';
-            });
-        });
-
+    
         // Pour les boutons de formulaire comme "Déconnexion"
         const logoutBtn = document.querySelector('form button[type="submit"]');
         if (logoutBtn) {

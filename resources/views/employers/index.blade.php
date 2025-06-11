@@ -273,7 +273,7 @@
                     </div>
 
                     <!-- Liste des employés -->
-                    <table class="min-w-full bg-white border border-gray-300" style="margin-left:5em">
+                    <table class="min-w-full bg-white border border-gray-300" >
                         <thead>
                             <tr class="bg-gray-200">
                                 <th class="border px-4 py-2">Nom</th>

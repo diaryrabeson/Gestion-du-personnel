@@ -39,9 +39,9 @@
  <!-- Champ de message -->
                         <input type="text" id="contenu" name="contenu" class="form-control" placeholder="Écrire un message..." required>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="file">
-                            <label class="custom-file-label" for="file" data-browse=" ">
-                                <i class="fas fa-upload"></i> 
+                            <input type="file" class="custom-file-input cursor-pointer" id="file" name="file">
+                            <label class="custom-file-label cursor-pointer" for="file" data-browse=" ">
+                                <i class="fa-solid fa-paperclip cursor-pointer"></i>
                             </label>
                         </div>
                         {{-- <input type="file" id="file" name="file" class="form-control-file ml-2" > --}}
@@ -231,15 +231,17 @@ document.addEventListener('DOMContentLoaded', function () {
     cursor: pointer;
     }
     .custom-file{
-        cursor: pointer;
-        position: absolute;
-    background-color: #b9b4b4;
+    cursor: pointer;
+    position: absolute;
+    /* background-color: #ffffff; */
     height: 3em;
     width: 3.2em;
     text-align: center;
     padding-top: 12px;
-    border-radius: 3em;
-    margin: .4em;
+    /* border-radius: 3em; */
+    /* margin: .4em; */
+    font-size: 1.2em;
+    margin-top: .2em;
     }
     .custom-file-input{
         display: none;

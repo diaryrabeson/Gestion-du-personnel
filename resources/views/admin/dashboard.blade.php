@@ -7,14 +7,14 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div style="width: 105%" class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="CardDash">
+            <div class="w-full dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="CardDash w-full">
                     <p>TABLEAU DE BORD POUR L'ADMIN </p>
 
                 </div>
 
 
-                <div class="d-flex">
+                <div class="flex justify-between">
 
                     <div class="card-client">
                         <a href="{{ route('employers.index') }}">
@@ -204,18 +204,14 @@
     }
 
     .CardDash {
-        background-color: #1a2035!important;
-        width: 67em;
+        background-color: #1a2035!important;    
         height: 5em;
         text-align: center;
         line-height: 5em;
-        /* background: rgb(147 126 235); */
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     }
 
     .CardDash p {
-        /* font-family: 'TitreDAshboard'; */
-        /* color: #0a0a0a; */
         font-size: 2em;
         color: white
     }

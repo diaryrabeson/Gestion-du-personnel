@@ -139,7 +139,41 @@
             transform: scale(0.95);
             /* Réduction de la taille au clic */
         }
+
+         /* Réduire la taille de la police des éléments de DataTables */
+    .dataTables_wrapper .dataTables_paginate,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        font-size: 4px; /* Ajuster la taille ici */
+    }
     </style>
+  <script>
+    $(document).ready(function() {
+        $('#servicesTable').DataTable({
+            // Supprimez les options pour activer la pagination et la recherche
+            language: {
+            "sProcessing": "Traitement en cours...",
+            "sSearch": "Rechercher&nbsp;:",
+            "sLengthMenu": "_MENU_  enregistrements par page",
+            "sInfo": "Affichage de l'enregistrement _START_ à _END_ sur _TOTAL_ enregistrements",
+            "sInfoEmpty": "Affichage de l'enregistrement 0 à 0 sur 0 enregistrements",
+            "sZeroRecords": "Aucun enregistrement à afficher",
+            "sInfoFiltered": "(filtré à partir de _MAX_ enregistrements au total)", // Traduction ajoutée
+            "oPaginate": {
+                "sFirst": "Premier",
+                "sPrevious": "Précédent",
+                "sNext": "Suivant",
+                "sLast": "Dernier"
+                }
+            }
+        });
+    });
+    
+   
+    </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.js"></script>
     <script>
         let serviceId;
 
@@ -174,48 +208,55 @@
                             </a>
                         </div>
                     </div>
-                    <!-- List of Services -->
-                    <ul>
+                   
+
+                <table id="servicesTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Nom du Service</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @foreach($services as $service)
-                                    <li class="flex justify-between items-center mb-2">
-                                        <span>{{ $service->nomService }} - {{ $service->Description }}</span>
-
-                                        <!-- Action Buttons for each service -->
-                                        <div>
-                                            <!-- Edit button with service ID -->
-                                            <a href="{{ route('services.edit', ['id_service' => $service->id_service]) }}"
-                                                class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color: blue">
-                                                <i class="fa-solid fa-pen-to-square"></i></a>
-
-                                            <!-- Delete form for each service -->
-                                            <form id="deleteForm"
-                                                action="{{ route('services.destroy', ['id_service' => $service->id_service]) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="bg-red-300 text-black px-3 py-1 rounded" style="color: crimson"
-                                                    onclick="openModal({{ $service->id_service }})">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-                                            </form>
-
-                                            <!-- Modale de confirmation -->
-                                            <div id="confirmationModal" class="modal">
-                                                <div class="modal-content">
-                                                    <h2>Confirmation de Suppression</h2>
-                                                    <p>Voulez-vous vraiment supprimer ce fonction ?</p>
-                                                    <button onclick="submitForm()" class="suppr">
-                                                        <i class="fa-solid fa-trash-can"></i> Supprimer
-                                                    </button>
-                                                    <button onclick="closeModal()" class="retour">
-                                                        <i class="fa-solid fa-xmark"></i> Annuler
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                            </li>
+                            <tr>
+                                <td>{{ $service->nomService }}</td>
+                                <td>{{ $service->Description }}</td>
+                                <td>
+                                    <a href="{{ route('services.edit', ['id_service' => $service->id_service]) }}"
+                                       class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color: blue">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <form id="deleteForm_{{ $service->id_service }}"
+                                          action="{{ route('services.destroy', ['id_service' => $service->id_service]) }}"
+                                          method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="bg-red-300 text-black px-3 py-1 rounded" style="color: crimson"
+                                                onclick="openModal({{ $service->id_service }})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
-                </ul>
+                    </tbody>
+                </table>
+                
+                <!-- Modale de confirmation -->
+                <div id="confirmationModal" class="modal">
+                    <div class="modal-content">
+                        <h2>Confirmation de Suppression</h2>
+                        <p>Voulez-vous vraiment supprimer ce fonction ?</p>
+                        <button onclick="submitForm()" class="suppr">
+                            <i class="fa-solid fa-trash-can"></i> Supprimer
+                        </button>
+                        <button onclick="closeModal()" class="retour">
+                            <i class="fa-solid fa-xmark"></i> Annuler
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

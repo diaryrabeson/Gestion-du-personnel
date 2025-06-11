@@ -8,11 +8,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl">Créer un nouvel Employé</h3>
+                    <h1 class="text-xl text-bold">Créer un nouvel Employé</h1>
 
                     <!-- Form to add a new employee -->
                     <form action="{{ route('employers.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="">-------Information personnel-------</div>
                         <div class="d-flex">
                             <div class="mb-4">
                                 <label for="NomEmp" class="block text-sm font-medium text-gray-700">Nom</label>
@@ -77,7 +78,7 @@
                             </select>
                         </div>
                     </div>
-
+                    <div>-------Information pour le travail-------</div>
                     <div class="d-flex">
                         <div class="mb-4">
                             <label for="DateD_embauche" class="block text-sm font-medium text-gray-700">Date
