@@ -197,32 +197,40 @@ div.dt-container div.dt-layout-row{
     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.js"></script>
     <script>
         let serviceId;
-
+    
         function openModal(id) {
             serviceId = id; 
             document.getElementById("confirmationModal").classList.add("show");
         }
-
+    
         function closeModal() {
             document.getElementById("confirmationModal").classList.remove("show");
         }
-
+    
         function submitForm() {
-            const form = document.getElementById("deleteForm");
-            form.action = `{{ route('services.destroy', '') }}/${serviceId}`;
+            const form = document.getElementById("deleteForm_" + serviceId); // Utiliser l'ID dynamique
             form.submit(); 
         }
     </script>
-     <div class="bg-white dark:bg-gray-800 top-12 overflow-hidden shadow-sm sm:rounded-lg">
+     <div class="bg-white dark:bg-gray-800  overflow-hidden shadow-sm sm:rounded-lg">
         <!-- Message de succès -->
         @if(session('success'))
-        <div class="bg-green-500 text-white p-4 rounded mb-4 relative">
+        <div class="bg-green-500 text-white top-12 p-4 rounded mb-4 relative">
             <span>{{ session('success') }}</span>
             <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
                 <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
             </button>
         </div>
     @endif
+
+    @if(session('danger'))
+    <div class="bg-red-500 text-white top-12 p-4 rounded mb-4 relative">
+        <span>{{ session('danger') }}</span>
+        <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
+            <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+        </button>
+    </div>
+@endif
     <div class="py-12">
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

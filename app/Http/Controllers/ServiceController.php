@@ -55,7 +55,7 @@ class ServiceController extends Controller
     // Création du service
     Service::create($request->all());
 
-    return redirect()->route('services.index')->with('success', 'Service créé avec succès.');
+    return redirect()->route('services.index')->with('success', 'Fonction créé avec succès.');
 }
     /**
      * Display the specified resource.
@@ -107,7 +107,7 @@ class ServiceController extends Controller
 
     if ($existsNomService && $existsDescription) {
         return redirect()->back()->withErrors([
-            'both' => 'Le service et la description sont déjà enregistrés.'
+            'both' => 'cette fonction est déjà enregistrées.'
         ]);
     }
 
@@ -115,7 +115,7 @@ class ServiceController extends Controller
     $service = Service::findOrFail($id);
     $service->update($request->all());
 
-    return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
+    return redirect()->route('services.index')->with('success', 'Fonction mis à jour avec succès.');
 }
      
 
@@ -129,6 +129,6 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('services.index')->with('danger', 'Suppression terminé.');
     }
 }
