@@ -34,18 +34,29 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-            $request->validate([
-            'nomService' => 'required|string|max:255',
-            'Description' => 'nullable|string',
+ public function store(Request $request)
+{
+    // Validation des données
+    $request->validate([
+        'nomService' => 'required|string|max:255',
+        'Description' => 'required|string|max:255',
+    ]);
+
+    // Vérification des doublons
+    $existsNomService = Service::where('nomService', $request->nomService)->exists();
+    $existsDescription = Service::where('Description', $request->Description)->exists();
+
+    if ($existsNomService && $existsDescription) {
+        return redirect()->back()->withErrors([
+            'both' => 'Ce fonction est déjà enregistrés.'
         ]);
-
-        Service::create($request->all());
-
-        return redirect()->route('services.index')->with('success', 'Service created successfully.');
     }
 
+    // Création du service
+    Service::create($request->all());
+
+    return redirect()->route('services.index')->with('success', 'Service créé avec succès.');
+}
     /**
      * Display the specified resource.
      *
@@ -77,23 +88,35 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(Request $request, $id_service)
-     {
+    public function update(Request $request, $id)
+{
+    // Validation des données
+    $request->validate([
+        'nomService' => 'required|string|max:255',
+        'Description' => 'required|string|max:255',
+    ]);
 
-      
-         // Valider les données
-         $validatedData = $request->validate([
-             'nomService' => 'required|string|max:255',
-             'Description' => 'nullable|string',
-         ]);
-     
-         // Trouver le service et mettre à jour
-         $service = Service::findOrFail($id_service);
-         $service->update($validatedData);
-     
-         // Redirection explicite vers la liste des services
-         return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
-     }
+    // Vérification des doublons, en ignorant l'enregistrement actuel
+    $existsNomService = Service::where('nomService', $request->nomService)
+        ->where('id_service', '!=', $id) // Ignorer l'enregistrement en cours
+        ->exists();
+
+    $existsDescription = Service::where('Description', $request->Description)
+        ->where('id_service', '!=', $id) // Ignorer l'enregistrement en cours
+        ->exists();
+
+    if ($existsNomService && $existsDescription) {
+        return redirect()->back()->withErrors([
+            'both' => 'Le service et la description sont déjà enregistrés.'
+        ]);
+    }
+
+    // Mise à jour du service
+    $service = Service::findOrFail($id);
+    $service->update($request->all());
+
+    return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
+}
      
 
     /**

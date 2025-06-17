@@ -4,12 +4,20 @@
             {{ __('Modifier le Service') }}
         </h2>
     </x-slot>
-
+    @if($errors->any())
+        <div class="bg-red-500 text-white p-4 rounded relative top-12 mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl">Modifier le fonction</h3>
+                    <h3 class="text-xl text-center font-bold w-50 bg-yellow-200 p-4 mb-4">Modification du fonction</h3>
 
                     <!-- Formulaire de modification -->
                     <form action="{{ route('services.update', $service->id_service) }}" method="POST">
@@ -29,11 +37,12 @@
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ $service->Description }}</textarea>
                         </div>
 
-                        <div class="flex justify-between">
-                            <button type="submit" class="Ajout">
+                        <div class="flex justify-end">
+                            <a href="http://127.0.0.1:8000/services" class="btn-cancel">Annuler</a>
+                            <button type="submit" class="Ajout ml-4">
                                 Mettre à jour
                             </button>
-                            <a href="http://127.0.0.1:8000/services" class="btn-cancel">Annuler</a>
+
                         </div>
                     </form>
                 </div>

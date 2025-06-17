@@ -105,7 +105,7 @@ Route::delete('/services/{id_service}', [ServiceController::class, 'destroy'])->
 
 // La route 'resource' génère automatiquement les routes pour les méthodes CRUD (index, create, store, etc.)
 Route::controller(EmployeeController::class)->group(function () {
-    Route::get('/employers', 'index')->name('employers.index');
+    Route::get('/liste-des-employers', 'index')->name('employers.index');
     Route::get('/employers/create', 'create')->name('employers.create');
     Route::post('/employers', 'store')->name('employers.store');
     Route::get('/employers/{id_Employe}/edit', 'edit')->name('employers.edit');

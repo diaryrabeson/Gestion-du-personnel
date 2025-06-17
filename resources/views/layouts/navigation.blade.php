@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="backf relative   bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="backf max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="backf fixed  mx-auto px-4 sm:px-6 lg:px-8">
         <div class=" flex shad w-full justify-between h-16">
             <div class=" flex">
                 <!-- Logo -->
@@ -13,13 +13,7 @@
                 </div>
                 <!-- Navigation Links -->
             </div>
-            <div id="loadingOverlay" class="z-999"
-            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                   background-color: rgba(0, 0, 0, 0.3); z-index: 9999 !important; justify-content: center; align-items: center;">
-           <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto;
-           height: 13em;position: relative;
-          ">
-       </div>
+            
        
        <div class="relative">
         @php
@@ -167,12 +161,12 @@
     top: -.5em;
 }
 .backf{
-    background-color: rgb(30 39 100);
+    background-color: #ffff;
     margin-right: 2em;
     padding: 0;
     color:#8a95a0;
     width: 103% ;
-    /* z-index: 999; */
+    z-index: 999;
     /* position: relative;
     left: 14em; */
     

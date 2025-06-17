@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="w-full dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="CardDash w-full">
                     <p>TABLEAU DE BORD POUR L'ADMIN </p>

@@ -28,7 +28,7 @@
         }
 
         .form-control:focus {
-            border-color: #4CAF50;
+            border-color: #4a5ba8;
             outline: none;
         }
 
@@ -37,7 +37,7 @@
         }
 
         .btn-submit {
-            background-color: #4CAF50;
+            background-color: #4a5ba8;
             color: white;
             padding: 0.75em 2em;
             border-radius: 8px;
@@ -45,7 +45,7 @@
         }
 
         .btn-submit:hover {
-            background-color: #45a049;
+            background-color: #4a5ba8;
         }
 
         .btn-cancel {
@@ -64,7 +64,7 @@
             margin-bottom: 1em;
             position: absolute;
             top: 5em;
-            left: 71em;
+            left: 90%;
         }
         .d-flex{
         display: flex;
@@ -73,13 +73,25 @@
     .form-group{
         width: 48%
     }
+    .titres {
+        content: '';
+        width: 38%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
     </style>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl mb-4">Modifier l'Employé : {{ $employee->NomEmp }} {{ $employee->Prenom }}</h3>
+                    <h3 class="text-xl text-center font-bold w-full bg-yellow-200 p-4 ">Modifier l'Employé : {{ $employee->NomEmp }} {{ $employee->Prenom }}</h3>
 
                     <!-- Formulaire pour modifier un employé -->
                     <form action="{{ route('employers.update', $employee->Id_Employe) }}" method="POST" enctype="multipart/form-data">
@@ -87,6 +99,20 @@
                         @method('PUT')
 
                         <div class="form-section">
+
+                            <div class="text-xl relative my-4 text-center font-bold">
+                                <div>
+                                    <h1>Information personnel</h1>
+                                </div>
+                                <div class="flex justify-between absolute w-full" style="top:45%">
+                                    <div class="titres">
+                                        <h2></h2>
+                                    </div>
+                                    <div class="titres">
+                                        <h2></h2>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Champ Nom -->
                         <div class="d-flex">
                             <div class="form-group">
@@ -153,6 +179,20 @@
                             </div>
                             
                         </div>
+
+                        <div class="text-xl relative my-4 text-center font-bold">
+                            <div>
+                                <h1>Information personnel</h1>
+                            </div>
+                            <div class="flex justify-between absolute w-full" style="top:45%">
+                                <div class="titres">
+                                    <h2></h2>
+                                </div>
+                                <div class="titres">
+                                    <h2></h2>
+                                </div>
+                            </div>
+                        </div>
                         <div class="d-flex">
 
                             <!-- Champ Date d'Embauche -->
@@ -188,9 +228,9 @@
                             </div>
                         </div>
                             <!-- Boutons de soumission -->
-                            <div class="flex justify-between">
-                                <button type="submit" class="btn-submit">Mettre à jour</button>
+                            <div class="flex justify-end">
                                 <a href="{{ route('employers.index') }}" class="btn-cancel">Annuler</a>
+                                <button type="submit" class="btn-submit ml-4">Mettre à jour</button>
                             </div>
                         </div>
                     </form>

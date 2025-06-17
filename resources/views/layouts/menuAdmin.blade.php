@@ -17,7 +17,7 @@
         /* Affiche le menu lorsqu'il est actif */
     }
 
-    @media screen and (max-width: 1580px) {
+   
         .d_flex {
             display: flex;
             flex-direction: row;
@@ -47,7 +47,7 @@
             display: inline-block;
             background-color: #1a2035 !important;
             /* margin-top: -.2em; */
-            /* padding: 12px 24px; */
+            padding: 2em 5px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
@@ -85,7 +85,7 @@
             margin-left: 0;
         }
 
-    }
+   
 
     @media screen and (max-width: 768px) {
 
@@ -132,7 +132,7 @@
             background-color: #1a2035c7 !important;
             backdrop-filter: blur(7px);
             /* margin-top: -.2em; */
-            /* padding: 12px 24px; */
+            padding: 2em 24px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;

@@ -4,36 +4,45 @@
             {{ __('Create New Service') }}
         </h2>
     </x-slot>
-
+    @if($errors->any())
+    <div class="bg-red-500 text-white p-4 rounded relative top-12 mb-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl">Créer un nouveau fonction</h3>
+                    <h3 class="text-xl text-center font-bold w-50 bg-yellow-200 p-4 mb-4">Créer un nouveau fonction</h3>
 
                     <!-- Form to add a new service -->
                     <form action="{{ route('services.store') }}" method="POST">
                         @csrf
 
                         <div class="mb-4">
-                            <label for="nomService" class="block text-sm font-medium text-gray-700">Fonction</label>
+                            <label for="nomService" class="block text-sm font-bold text-gray-700">Fonction</label>
                             <input type="text" name="nomService" id="nomService"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="Description" class="block text-sm font-medium text-gray-700">Description</label>
+                            <label for="Description" class="block text-sm font-bold text-gray-700 ">Description</label>
                             <textarea name="Description" id="Description"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm " required></textarea>
                         </div>
 
                         <div class="mb-4">
-                            <div class="flex justify-between">
-                                <button type="submit" class="Ajout">
+                            <div class="flex justify-end ">
+                                
+                                <a href="http://127.0.0.1:8000/services" class="btn-cancel">Annuler</a>
+                                <button type="submit" class="Ajout  ml-4">
                                     Ajouter
                                 </button>
-                                <a href="http://127.0.0.1:8000/services" class="btn-cancel">Annuler</a>
                             </div>
                         </div>
                     </form>

@@ -230,7 +230,7 @@ public function store(Request $request)
     $employee->delete();
 
     // Redirection avec un message de succès
-    return redirect()->route('employers.index')->with('success', 'Employé supprimé avec succès.');
+    return redirect()->route('employers.index')->with('danger', 'Employé supprimé avec succès.');
 }
 
 

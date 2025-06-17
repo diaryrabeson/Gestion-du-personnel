@@ -15,7 +15,7 @@
                         </div>
                     @endif
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-black">Demandes de Congé en Attente</h3>
+                        <h3 class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">Demandes de Congé en Attente</h3>
                     </div>
                     <!-- Inclure jQuery et DataTables -->
                  
@@ -79,7 +79,7 @@
                                 language: {
                                     "sProcessing": "Traitement en cours...",
                                     "sSearch": "Rechercher&nbsp;:",
-                                    "sLengthMenu": "Afficher_MENU_ enregistrements",
+                                    "sLengthMenu": "",
                                     "sInfo": "Affichage de l'enregistrement _START_ à _END_ sur _TOTAL_ enregistrements",
                                     "sInfoEmpty": "Affichage de l'enregistrement 0 à 0 sur 0 enregistrements",
                                     "sZeroRecords": "Aucun enregistrement à afficher",

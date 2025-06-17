@@ -5,23 +5,7 @@
         </h2>
     </x-slot>
     <style>
-        .add {
-            background-color: rgb(79, 187, 79);
-            height: 2em;
-            text-align: center;
-            padding-top: 0.2em;
-            font-weight: bold;
-            color: white;
-            border-radius: 0.5em;
-
-        }
-
-        .flex1 {
-            display: flex;
-            justify-content: space-between;
-
-        }
-
+        
         .modal {
             display: none;
             position: fixed;
@@ -134,19 +118,56 @@
             transform: scale(1.05);
             /* Légère augmentation de la taille */
         }
-
+        .beige{
+            background-color: beige;
+            border:  #e5e7eb 1px solid;
+        }
         .retour:active {
             transform: scale(0.95);
             /* Réduction de la taille au clic */
         }
-
+.bord td{
+    border: #e5e7eb 1px solid;
+}
          /* Réduire la taille de la police des éléments de DataTables */
-    .dataTables_wrapper .dataTables_paginate,
-    .dataTables_wrapper .dataTables_info,
-    .dataTables_wrapper .dataTables_length,
-    .dataTables_wrapper .dataTables_filter {
-        font-size: 4px; /* Ajuster la taille ici */
-    }
+         div.dt-container .dt-length,
+  div.dt-container .dt-search,
+  div.dt-container .dt-info,
+  div.dt-container .dt-processing,
+  div.dt-container .dt-paging {
+  font-size: .9em !important
+  }
+  table.dataTable.display > tbody > tr{
+    border: #e5e7eb 1px solid;
+  }
+  table.dataTable thead > tr > th.dt-orderable-asc, table.dataTable thead > tr > th.dt-orderable-desc,
+table.dataTable thead > tr > td.dt-orderable-asc,
+table.dataTable thead > tr > td.dt-orderable-desc{
+    border: #e5e7eb 1px solid;
+}
+
+.div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
+        float: left !important;
+        margin-bottom: 1em;
+        text-align: right
+}
+div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-start {
+display: none !important;
+}
+
+div.dt-container div.dt-layout-row div.dt-layout-cell{
+    display: block !important   
+}
+div.dt-container div.dt-layout-row{
+    display: block !important;
+    margin-bottom: 1em;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    top: -2em
+}
     </style>
   <script>
     $(document).ready(function() {
@@ -155,7 +176,7 @@
             language: {
             "sProcessing": "Traitement en cours...",
             "sSearch": "Rechercher&nbsp;:",
-            "sLengthMenu": "_MENU_  enregistrements par page",
+            "sLengthMenu": "",
             "sInfo": "Affichage de l'enregistrement _START_ à _END_ sur _TOTAL_ enregistrements",
             "sInfoEmpty": "Affichage de l'enregistrement 0 à 0 sur 0 enregistrements",
             "sZeroRecords": "Aucun enregistrement à afficher",
@@ -192,27 +213,37 @@
             form.submit(); 
         }
     </script>
+     <div class="bg-white dark:bg-gray-800 top-12 overflow-hidden shadow-sm sm:rounded-lg">
+        <!-- Message de succès -->
+        @if(session('success'))
+        <div class="bg-green-500 text-white p-4 rounded mb-4 relative">
+            <span>{{ session('success') }}</span>
+            <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
+                <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+            </button>
+        </div>
+    @endif
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex1">
-                        <div>
-                            <h3 class="text-xl">Liste des fonctions</h3>
+                    
+                        <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
+                            <h1 >Liste des fonctions</h1>
                         </div>
                         <!-- Button to add a new service -->
-                        <div class="add mb-4">
-                            <a href="{{ route('services.create') }}" class="  bg-blue-500  px-4 py-2 rounded">
-                                Ajouter une fonction
-                            </a>
-                        </div>
-                    </div>
+                       
                    
-
+                   
+                    <div class="float-right absolute z-50" style="left:90%">
+                        <a href="{{ route('services.create') }}" class="bg-blue-500  px-4 py-2 rounded">
+                            <i class="fa-solid fa-plus"></i>Ajouter 
+                        </a>
+                    </div>
                 <table id="servicesTable" class="display">
-                    <thead>
-                        <tr>
+                    <thead class="beige">
+                        <tr >
                             <th>Nom du Service</th>
                             <th>Description</th>
                             <th>Actions</th>
@@ -220,10 +251,10 @@
                     </thead>
                     <tbody>
                         @foreach($services as $service)
-                            <tr>
+                            <tr class="bord">
                                 <td>{{ $service->nomService }}</td>
                                 <td>{{ $service->Description }}</td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('services.edit', ['id_service' => $service->id_service]) }}"
                                        class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color: blue">
                                         <i class="fa-solid fa-pen-to-square"></i>

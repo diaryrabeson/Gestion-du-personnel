@@ -8,64 +8,6 @@
         </h2>
     </x-slot>
     <style>
-        /* From Uiverse.io by nikk7007 */
-        .Ajout {
-            --color: #00A97F;
-            padding: 0.8em 1.7em;
-            background-color: transparent;
-            border-radius: .3em;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: .5s;
-            font-weight: 400;
-            font-size: 14px;
-            border: 1px solid;
-            font-family: inherit;
-            text-transform: uppercase;
-            color: var(--color);
-            z-index: 1;
-        }
-
-        .Ajout::before,
-        .Ajout::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 50px;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            border-radius: 50%;
-            z-index: -1;
-            background-color: var(--color);
-            transition: 1s ease;
-        }
-
-        .Ajout::before {
-            top: -1em;
-            left: -1em;
-        }
-
-        .Ajout::after {
-            left: calc(100% + 1em);
-            top: calc(100% + 1em);
-        }
-
-        .Ajout:hover::before,
-        .Ajout:hover::after {
-            height: 410px;
-            width: 410px;
-        }
-
-        .Ajout:hover {
-            color: rgb(10, 25, 30);
-        }
-
-        .Ajout:active {
-            filter: brightness(.8);
-        }
-
-
         .add {
             color: white;
             margin-bottom: 2em;
@@ -123,7 +65,7 @@
             background-color: rgb(0, 0, 0);
             background-color: rgba(0, 0, 0, 0.4);
             transition: opacity 0.3s ease;
-            opacity: 0;
+
         }
 
         .modal-content h2 {
@@ -217,6 +159,11 @@
             /* Effets de transition */
         }
 
+        .beige {
+            background-color: beige;
+            border: #e5e7eb 1px solid;
+        }
+
         .retour:hover {
             background-color: #a8dadc;
             /* Couleur au survol */
@@ -228,54 +175,100 @@
             transform: scale(0.95);
             /* Réduction de la taille au clic */
         }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: left !important;
+            margin-bottom: 1em;
+            text-align: right
+        }
+
+        .dataTables_wrapper {
+            position: relative;
+            clear: both;
+            top: -2em
+        }
     </style>
     <script>
-        let employeeId;
+        $(document).ready(function () {
+            $('#employertables').DataTable({
+                language: {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "",
+                    "sInfo": "Affichage de l'enregistrement _START_ à _END_ sur _TOTAL_ enregistrements",
+                    "sInfoEmpty": "Affichage de l'enregistrement 0 à 0 sur 0 enregistrements",
+                    "sZeroRecords": "Aucun enregistrement à afficher",
+                    "sInfoFiltered": "(filtré à partir de _MAX_ enregistrements au total)",
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Précédent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    }
+                }
+            });
 
-        function openModal(id) {
-            employeeId = id; // Enregistrer l'identifiant de l'employé
-            document.getElementById("confirmationModal").classList.add("show");
-        }
+            // Événements pour le modal
+            let employeeId;
 
-        function closeModal() {
-            document.getElementById("confirmationModal").classList.remove("show");
-        }
+            window.openModal = function (id) {
+                employeeId = id; // Enregistrer l'identifiant de l'employé
+                document.getElementById("confirmationModal").style.display = "block"; // Afficher le modal
+            }
 
-        function submitForm() {
-            const form = document.getElementById("deleteForm");
-            // Mettre à jour l'action du formulaire avec la bonne route
-            form.action = `{{ route('employers.destroy', '') }}/${employeeId}`;
-            form.submit(); // Soumettre le formulaire
-        }
+            window.closeModal = function () {
+                document.getElementById("confirmationModal").style.display = "none"; // Fermer le modal
+            }
 
+            document.getElementById('confirmDelete').onclick = function () {
+                const form = document.getElementById("deleteForm_" + employeeId); // Sélecteur dynamique
+                form.submit(); // Soumettre le formulaire
+            };
+        });
     </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('employers.search') }}" method="GET" class="mb-4 flex">
-                <input type="text" name="query" placeholder="Rechercher un employé..."
-                    class="border px-4 py-2 w-1/3 rounded-lg inputRecherhc" value="{{ request('query') }}">
-                <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 btnrech rounded-lg">
-                    <i class="fa-solid fa-magnifying-glass rechreh"></i>
-                </button>
-            </form>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        <div class=" mx-auto sm:px-6 lg:px-8">
 
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <!-- Message de succès -->
+                @if(session('success'))
+                <div class="bg-green-500 text-white p-4 rounded mb-4 relative">
+                    <span>{{ session('success') }}</span>
+                    <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
+                        <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+                    </button>
+                </div>
+            @endif
+            @if(session('danger'))
+                <div class="bg-red-500 text-white p-4 rounded mb-4 relative">
+                    <span>{{ session('danger') }}</span>
+                    <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
+                        <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+                    </button>
+                </div>
+            @endif
+
+            
 
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl">Liste des Employés</h3>
-                        <!-- Bouton pour ajouter un nouvel employé -->
-                        <a href="{{ route('employers.create') }}" class="Ajout">
-                            Ajouter un Employé
-                        </a>
 
-
+                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
+                        <h3 class="">Liste des Employés</h3>
                     </div>
 
+
+                    <div class="float-right relative z-50">
+                        <a href="{{ route('employers.create') }}" class="bg-blue-500  px-4 py-2 rounded">
+                            <i class="fa-solid fa-plus"></i> Ajouter
+                        </a>
+                    </div>
                     <!-- Liste des employés -->
-                    <table class="min-w-full bg-white border border-gray-300" >
-                        <thead>
-                            <tr class="bg-gray-200">
+                    <table class="min-w-full bg-white border border-gray-300 -top-8" id="employertables">
+                        <thead class="beige">
+                            <tr class="beige">
                                 <th class="border px-4 py-2">Nom</th>
                                 <th class="border px-4 py-2">Prénom</th>
                                 <th class="border px-4 py-2">Téléphone</th>
@@ -300,30 +293,19 @@
                                         </a>
 
                                         <!-- Formulaire de suppression -->
-                                        <form id="deleteForm"
+                                        <form id="deleteForm_{{ $employee->Id_Employe }}"
                                             action="{{ route('employers.destroy', ['id_Employe' => $employee->Id_Employe]) }}"
                                             method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" style="color: crimson;" class="bg-red-300 text-black px-3 py-1 rounded"
+                                            <button type="button" style="color: crimson;"
+                                                class="bg-red-300 text-black px-3 py-1 rounded"
                                                 onclick="openModal({{ $employee->Id_Employe }})">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </button>
                                         </form>
 
-                                        <!-- Modale de confirmation -->
-                                        <div id="confirmationModal" class="modal">
-                                            <div class="modal-content">
-                                                <h2>Confirmation de Suppression</h2>
-                                                <p>Voulez-vous vraiment supprimer cet employé ?</p>
-                                                <button onclick="submitForm()" class="suppr">
-                                                    <i class="fa-solid fa-trash-can"></i> Supprimer
-                                                </button>
-                                                <button onclick="closeModal()" class="retour">
-                                                    <i class="fa-solid fa-xmark"></i> Annuler
-                                                </button>
-                                            </div>
-                                        </div>
+
                                     </td>
                                 </tr>
                             @empty
@@ -335,7 +317,19 @@
                             @endforelse
                         </tbody>
                     </table>
-
+                    <!-- Modale de confirmation -->
+                    <div id="confirmationModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                            <h2>Confirmation de Suppression</h2>
+                            <p>Voulez-vous vraiment supprimer cet employé ?</p>
+                            <button id="confirmDelete" class="suppr">
+                                <i class="fa-solid fa-trash-can"></i> Supprimer
+                            </button>
+                            <button onclick="closeModal()" class="retour">
+                                <i class="fa-solid fa-xmark"></i> Annuler
+                            </button>
+                        </div>
+                    </div>
 
                     <!-- Pagination (si nécessaire) -->
                     <div class="mt-4">

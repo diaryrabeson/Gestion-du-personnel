@@ -44,19 +44,19 @@
         @endif
     </div>
 
-    <div class="afficherMenu fixed ml-5em z-20">
-        <i class="fa-solid fa-right-left cursor-pointer font-bold">teste</i>
+    <div class="afficherMenu fixed  " style="z-index: 9999;">
+        <i class="fa-solid fa-bars cursor-pointer font-bold">teste</i>
     </div>
 
     <div id="loadingOverlay"
-         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background-color: rgba(0, 0, 0, 0.3); z-index: 9999; 
-                justify-content: center; align-items: center;">
+         style="" class="laodingOver"
+                >
         <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto; height: 13em;">
     </div>
 
     <div class="flex-grow bg-gray-100 dark:bg-gray-900">
         <!-- Page Content -->
+        
         <main class="contenn min-h-screen mx-auto">
             <div class="flex justify-between contenues" style="transition: all 0.5s ease;">
                 <div class="navigations relative" style="margin-top: 2em;">
@@ -76,7 +76,7 @@
 </body>
 <style>
     .afficherMenu {
-        margin-left: 18em;
+        margin-left: 20%;
        
         margin-top: 1em;
     }
@@ -132,7 +132,7 @@
     }
 
     .contenuePage {
-       
+       margin-top: 2%;
         width: 80%;
         transition: all 0.5s ease;
     }
@@ -143,6 +143,17 @@
 
     .contenues .contenuePage .py-12 .bg-white .p-6 {
         transition: all 0.5s ease;
+    }
+    .laodingOver{
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%;        
+        background-color: rgba(0, 0, 0, 0.3); 
+        z-index: 9999; 
+        justify-content: center; align-items: center;
     }
 </style>
 </html>
