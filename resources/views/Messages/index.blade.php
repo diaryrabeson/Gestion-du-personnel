@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
@@ -252,8 +252,9 @@ document.addEventListener('DOMContentLoaded', function () {
         padding: 10px;
         border-radius: 5px;
         width: 49%;
-    margin-left: 30em;
-    height: auto;
+        margin-left: 50%;
+        height: auto;
+        position:relative;
     }
     @media only screen and (max-width:768px){
         .message-mine{

@@ -227,7 +227,7 @@ div.dt-container div.dt-layout-row{
     <div class="bg-red-500 text-white top-12 p-4 rounded mb-4 relative">
         <span>{{ session('danger') }}</span>
         <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
-            <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+            <i class="fa-solid fa-times"></i> 
         </button>
     </div>
 @endif

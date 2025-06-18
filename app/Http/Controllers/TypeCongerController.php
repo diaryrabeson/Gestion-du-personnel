@@ -24,14 +24,17 @@ class TypeCongerController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'typeConge' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'typeConge' => 'required|string|max:255|unique:typeconger,typeConge', // Vérifie l'unicité
+    ], [
+        'typeConge.unique' => 'Ce type de congé est déjà enregistré.', // Message d'erreur personnalisé
+    ]);
 
-        TypeConger::create($request->all());
-        return redirect()->route('TypeConger.index')->with('success', 'Type de congé créé avec succès.');
-    }
+    TypeConger::create($request->all());
+    return redirect()->route('TypeConger.index')->with('success', 'Type de congé créé avec succès.');
+}
+
 
     public function show($id)
     {
@@ -49,7 +52,9 @@ class TypeCongerController extends Controller
 {
     // Validation des données
     $validatedData = $request->validate([
-        'typeConge' => 'required|string|max:255',
+        'typeConge' => 'required|string|max:255|unique:typeconger,typeConge,' . $id_typeConge . ',id_typeConge', // Vérifie l'unicité en ignorant l'enregistrement en cours
+    ], [
+        'typeConge.unique' => 'Ce type de congé est déjà enregistré.', // Message d'erreur personnalisé
     ]);
 
     // Rechercher le type de congé avec la clé primaire personnalisée
@@ -67,6 +72,6 @@ class TypeCongerController extends Controller
     {
         $typeConger = TypeConger::findOrFail($id);
         $typeConger->delete();
-        return redirect()->route('TypeConger.index')->with('success', 'Type de congé supprimé avec succès.');
+        return redirect()->route('TypeConger.index')->with('danger', 'Type de congé supprimé avec succès.');
     }
 }

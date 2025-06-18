@@ -118,7 +118,7 @@ Route::controller(EmployeeController::class)->group(function () {
 //ceci est le route pour type conger
 
 Route::controller(TypeCongerController::class)->group(function () {
-    Route::get('/TypeConger', 'index')->name('TypeConger.index');
+    Route::get('/listes-de-type-conger', 'index')->name('TypeConger.index');
     Route::get('/TypeConger/create', 'create')->name('TypeConger.create');
     Route::post('/TypeConger', 'store')->name('TypeConger.store');
     Route::get('TypeConger/{id_typeConge}/edit', 'edit')->name('TypeConger.edit');

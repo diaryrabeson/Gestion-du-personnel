@@ -46,27 +46,12 @@ class PresenceController extends Controller
     }
 
     // Consulter les présences
-    public function list()
-    {
-      $presences = Presence::with('employe')->orderBy('DateSys', 'desc')->paginate(8);
+   public function list()
+{
+    $presences = Presence::with('employe')->orderBy('DateSys', 'desc')->get(); // Utiliser get() au lieu de paginate()
 
-        return view('presence.list', compact('presences'));
-    }
-
-    //affichage dans le tableau de bord
-   
-    // Récupérer le nombre de présences pendant le mois en cours
-    // public function showDashboard()
-    // {
-    //     $currentMonth = date('m');
-    //     $currentYear = date('Y');
-
-    //     $monthlyPresenceCount = Presence::whereYear('DateSys', $currentYear)
-    //                                     ->whereMonth('DateSys', $currentMonth)
-    //                                     ->count();
-
-    //     return view('client.dashboard', compact('monthlyPresenceCount'));
-    // }
+    return view('presence.list', compact('presences'));
+}
 
     
 }

@@ -6,10 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl mb-4">Modifier le Type de Congé</h3>
+                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
+                        <h3 class="text-xl mb-4">Modification du types congé</h3>
+                    </div>
+                  
                     
                     <!-- Formulaire de modification -->
                     <form action="{{ route('TypeConger.update', $typeConger->id_typeConge) }}" method="POST" class="space-y-4">
@@ -18,7 +21,7 @@
                         
                         <!-- Champ Type de Congé -->
                         <div>
-                            <label for="typeConge" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label for="typeConge" class="block text-xl font-medium text-gray-700 dark:text-gray-300">
                                 Type de Congé :
                             </label>
                             <input type="text" name="typeConge" id="typeConge" value="{{ $typeConger->typeConge }}" required 
@@ -26,7 +29,8 @@
                         </div>
 
                         <!-- Bouton de mise à jour -->
-                        <div class="contents">
+                        <div class="flex justify-end">
+                            <a href="{{ route('TypeConger.index') }}" class="btn-cancel">Annuler</a>
                             <button type="submit" 
                                 class="button">
                                 Mettre à jour
@@ -40,18 +44,22 @@
 </x-app-layout>
 
 <style>
-
-    .contents{
-        margin: 1em 0 1em 0;
-        }
+  .btn-cancel {
+        background-color: #f44336;
+        color: white;
+        padding: 0.75em 2em;
+        border-radius: 8px;
+        font-weight: bold;
+    }
         /* From Uiverse.io by nikk7007 */ 
     .button {
-    height: 2em;
+    height: 3em;
      --color: #5c71e6;
      padding: 0 1.7em;
      background-color: transparent;
      border-radius: .3em;
      position: relative;
+     margin-left: 1em;
      overflow: hidden;
      cursor: pointer;
      transition: .5s;

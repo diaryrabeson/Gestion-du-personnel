@@ -6,10 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl">Faire une pointage</h3>
+                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
+                        <h3 class="text-xl">Faire une pointage</h3>
+                    </div>
+                  
                     @if ($errors->has('error'))
                         <div class="custom-alert error-alert">
                             <strong>Erreur !</strong> {{ $errors->first('error') }}
@@ -17,35 +20,11 @@
                         </div>
                     @endif
 
-                    @if (session('success'))
-                        <div class="custom-alert success-alert">
-                            <strong>Succès !</strong> {{ session('success') }}
-                            <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </div>
-                    @endif
-                    <!-- Affichage des messages d'erreur -->
-                    @if ($errors->any())
-                        <div class="bg-red-500 text-white p-3 rounded mb-4">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <!-- Affichage des messages de succès -->
-                    @if (session('success'))
-                        <div class="bg-green-500 text-white p-3 rounded mb-4">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
                     <!-- Formulaire de pointage -->
                     <form action="{{ route('presence.pointer') }}" method="POST">
                         @csrf
                         <div>
-                            <label for="Id_Employe">Employé :</label>
+                            <label for="Id_Employe"  class="text-xl">Employé :</label>
                             <select name="Id_Employe" class="custom-select" id="Id_Employe" required>
                                 <option value="" disabled selected>-- Sélectionnez un employé --</option>
                                 @foreach($employes as $employe)
@@ -57,7 +36,7 @@
                         </div>
 
                         <div>
-                            <label for="Etat">État :</label>
+                            <label for="Etat" class="text-xl">État :</label>
                             <select name="Etat" id="Etat" class="custom-select" required>
                                 <option value="Présent" {{ old('Etat') == 'Présent' ? 'selected' : '' }}>Présent</option>
                                 <option value="Absent" {{ old('Etat') == 'Absent' ? 'selected' : '' }}>Absent</option>
@@ -65,23 +44,24 @@
                         </div>
 
                         <div>
-                            <label for="DateSys">Date :</label>
+                            <label for="DateSys"  class="text-xl">Date :</label>
                             <input type="date" class="custom-select" name="DateSys" id="DateSys"
                                 value="{{ old('DateSys') }}" required>
                         </div>
 
                         <div>
-                            <label for="motif">Motif (si Absent) :</label>
+                            <label for="motif"  class="text-xl">Motif (si Absent) :</label>
                             <textarea name="motif" class="custom-select" id="motif">{{ old('motif') }}</textarea>
                         </div>
 
-                        <div class="flex justify-between">
-                            <div class="contents">
-                                <button type="submit" class="button">Pointer</button>
-                            </div>
+                        <div class="flex justify-end">
                             <div class="retour">
                                 <a href="http://127.0.0.1:8000/presence/list" class="btn-cancel">Annuler</a>
                             </div>
+                            <div class="contents">
+                                <button type="submit" class="button">Pointer</button>
+                            </div>
+                          
                         </div>
                     </form>
 
@@ -94,12 +74,12 @@
 
 <style>
     .retour{
-        margin-right: 3em
+        margin-right: 1em
     }
     .btn-cancel {
         background-color: #f44336;
         color: white;
-        padding: 0.75em 2em;
+        padding: 1em 2em;
         border-radius: 8px;
         font-weight: bold;
         display: block;
@@ -118,7 +98,7 @@
         align-items: center;
         justify-content: space-between;
         animation: fadeIn 0.5s ease-in-out;
-        width: 69em;
+        width: 72%;
     }
 
     .custom-alert strong {
@@ -127,7 +107,7 @@
 
     /* Alertes pour les erreurs */
     .error-alert {
-        background-color: #f8d7da;
+        background-color: #ff5e6b;
         /* Rouge clair */
         color: #721c24;
         /* Rouge foncé */
@@ -179,7 +159,7 @@
     /* Style du select */
     .custom-select {
         width: 100%;
-        max-width: 60em;
+       
         /* Ajuste la largeur */
         padding: 10px;
         font-size: 16px;
@@ -223,7 +203,7 @@
     /* From Uiverse.io by nikk7007 */
     .button {
         --color: #00A97F;
-        padding: 0.8em 1.7em;
+        width: 10%;
         background-color: transparent;
         border-radius: .3em;
         position: relative;
@@ -237,6 +217,7 @@
         text-transform: uppercase;
         color: var(--color);
         z-index: 1;
+        margin-top:1.5%
     }
 
     .button::before,
