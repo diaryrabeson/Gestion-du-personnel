@@ -10,7 +10,7 @@
         /* Affiche le menu lorsqu'il est actif */
     }
 
-    @media screen and (max-width: 1580px) {
+    
 
         .liens {
             /* background-color: rgba(59, 130, 246, 0.7); Bleu avec une transparence */
@@ -34,7 +34,7 @@
             display: inline-block;
            
             padding: 12px 24px;
-            position: inherit;
+          
             top: -.6em;
             text-align: center;
             font-size: 16px;
@@ -64,7 +64,7 @@
             display: block;
             /* Affiche le menu par défaut sur les écrans plus larges */
         }
-    }
+    
 
     @media screen and (max-width: 768px) {
 
@@ -148,13 +148,13 @@
 <!-- Menu Vertical à gauche -->
 
 <div
-    class=" menu navig fixed top-24 left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
-    <ul class="liens space-y-4">
-        <div class="d_flex men">
+    class=" menu navig fixed mt-12 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
+    <ul class="liens  pt-12 space-y-4">
+        <div class="flex men">
             <i class="fa-solid fa-circle-user men fonts"></i>
             <li>
                 <a href="{{ route('ProfileEmployer.profile') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white ">
                     Profile employé
                 </a>
             </li>

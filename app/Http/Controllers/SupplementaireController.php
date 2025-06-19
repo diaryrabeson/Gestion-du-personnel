@@ -14,7 +14,7 @@ class SupplementaireController extends Controller
      */
     public function index()
     {
-     $supplementaires = Supplementaire::with('Employer')->paginate(10);
+     $supplementaires = Supplementaire::with('Employer')->get();
         return view('supplementaires.index', compact('supplementaires'));
     }
 

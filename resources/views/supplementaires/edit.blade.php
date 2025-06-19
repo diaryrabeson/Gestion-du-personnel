@@ -6,10 +6,11 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
+                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 ">
+                        <h3 class="text-xl ">Modification des heures supplementaires</h3>    </div>
                     <!-- Affichage des erreurs -->
                     @if ($errors->has('error'))
                         <div class="custom-alert error-alert">
@@ -41,7 +42,7 @@
                         @method('PUT')
 
                         <div class="mb-4">
-                            <label for="Id_Employe" class="block">Employé :</label>
+                            <label for="Id_Employe" class="block font-bold text-xl mt-4">Employé :</label>
                             <select name="Id_Employe" id="Id_Employe" class="w-full p-2 border rounded" required>
                                 <option value="" disabled>-- Sélectionnez un employé --</option>
                                 @foreach($employes as $employe)
@@ -52,46 +53,55 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        <div class="mb-4">
-                            <label for="DateSys" class="block">Date :</label>
-                            <input type="date" name="DateSys" id="DateSys" class="w-full p-2 border rounded" 
-                                value="{{ old('DateSys', $supplementaire->DateSys) }}" required>
+                        <div class="flex justify-between">
+                            <div class=" w-full">
+                                <label for="DateSys" class="block font-bold text-xl ">Date :</label>
+                                <input type="date" name="DateSys" id="DateSys" class="w-full p-2 border rounded" 
+                                    value="{{ old('DateSys', $supplementaire->DateSys) }}" required>
+                            </div>
+    
+                            <div class=" w-full ml-4">
+                                <label for="CoutParHeure" class="block font-bold text-xl ">Coût par Heure :</label>
+                                <input type="number" step="0.01" name="CoutParHeure" id="CoutParHeure" class="w-full p-2 border rounded" 
+                                    value="{{ old('CoutParHeure', $supplementaire->CoutParHeure) }}" required>
+                            </div>
+                        </div>
+                       
+                        <div class="flex justify-between">
+                            <div class="mb-4 w-full">
+                                <label for="DebutDeSuppl" class="block font-bold text-xl mt-4">Début :</label>
+                                <input type="time" name="DebutDeSuppl" id="DebutDeSuppl" class="w-full p-2 border rounded" 
+                                    value="{{ old('DebutDeSuppl', $supplementaire->DebutDeSuppl) }}" required>
+                            </div>
+    
+                            <div class="mb-4 ml-4 w-full">
+                                <label for="FinDeSuppl" class="block font-bold text-xl mt-4">Fin :</label>
+                                <input type="time" name="FinDeSuppl" id="FinDeSuppl" class="w-full p-2 border rounded" 
+                                    value="{{ old('FinDeSuppl', $supplementaire->FinDeSuppl) }}" required>
+                            </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="CoutParHeure" class="block">Coût par Heure :</label>
-                            <input type="number" step="0.01" name="CoutParHeure" id="CoutParHeure" class="w-full p-2 border rounded" 
-                                value="{{ old('CoutParHeure', $supplementaire->CoutParHeure) }}" required>
-                        </div>
+                        
 
                         <div class="mb-4">
-                            <label for="DebutDeSuppl" class="block">Début :</label>
-                            <input type="time" name="DebutDeSuppl" id="DebutDeSuppl" class="w-full p-2 border rounded" 
-                                value="{{ old('DebutDeSuppl', $supplementaire->DebutDeSuppl) }}" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="FinDeSuppl" class="block">Fin :</label>
-                            <input type="time" name="FinDeSuppl" id="FinDeSuppl" class="w-full p-2 border rounded" 
-                                value="{{ old('FinDeSuppl', $supplementaire->FinDeSuppl) }}" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label>Nombre total d'heures :</label>
+                            <label class="font-bold text-xl mt-4">Nombre total d'heures :</label>
                             <input type="text" name="nb_total_heures" id="nb_total_heures" class="w-full p-2 border rounded bg-gray-200" readonly 
                                 value="{{ old('nb_total_heures', $supplementaire->nb_total_heures) }}">
                         </div>
 
                         <div class="mb-4">
-                            <label>Coût total :</label>
+                            <label class="font-bold text-xl mt-4">Coût total :</label>
                             <input type="text" id="cout_total" name="cout_total" class="w-full p-2 border rounded bg-gray-200" readonly 
                                 value="{{ old('cout_total', $supplementaire->cout_total) }}">
                         </div>
-
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <div class="flex justify-end">
+                            <a href="http://127.0.0.1:8000/supplementaires" class="bg-red-500 text-white rounded px-4 py-2 ">Annuler</a>
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded ml-4">
                             Mettre à jour
-                        </button>
+                            </button>
+                          
+                        </div>
+                       
                     </form>
 
                 </div>

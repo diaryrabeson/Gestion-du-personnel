@@ -26,10 +26,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="name-client"><span class="text-xl">{{$totalEmployes }}</span>
-                                    <span>Employés enregistré
-                                    </span>
-                                </p>
+                                <p class="name-client" >{{$totalEmployes }}</p>
+                                    <span>Employés enregistré</span>
+                                
                             </div>
                             <div class="social-media">
                             </div>
@@ -68,7 +67,7 @@
                             </div>
                             <div>
                                 <p class="name-client">{{$totalSerices  }}
-                                    <span>services enregistré
+                                    <span>Fonction enregistré
                                     </span>
                                 </p>
                             </div>
@@ -86,7 +85,7 @@
 
                     <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                         <div class="titreStatis">
-                            <h2>Employés par service</h2>
+                            <h2>Employés par fonction</h2>
                         </div>
                         <div class="d-flex">
                             <div> <canvas id="pieChart"></canvas></div>
@@ -95,7 +94,7 @@
                     </div>
                     <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md" style="width: 50%">
                         <div class="titreStatis">
-                            <h2>Taux d'absence et présence par service</h2>
+                            <h2>Taux d'absence et présence par fonction</h2>
                         </div>
                         <div class="ContStatAbsence"> <canvas id="presenceChart" class="StatAbsence"></canvas></div>
                     </div>
@@ -179,7 +178,7 @@
         width: 5rem;
         height: 5rem;
         /* border: 4px solid #7cdacc; */
-        border-radius: 999px;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -191,10 +190,10 @@
     .user-picture2 {
         overflow: hidden;
         object-fit: cover;
-        width: 7rem;
+        width: 28%;
         height: 5rem;
         /* border: 4px solid #7cdacc; */
-        border-radius: 999px;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -222,7 +221,7 @@
     }
 
     .card-client {
-        width: 17em;
+        width: 30%;
         height: 8em;
         margin: 2em;
         background: #ffffff;
@@ -249,11 +248,11 @@
         width: 5rem;
         height: 5rem;
         /* border: 4px solid #7cdacc; */
-        border-radius: 999px;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: auto;
+        margin-top: 1em;
         background: #1572e8;
         color: white;
     }
@@ -267,7 +266,7 @@
         margin: 0;
         margin-top: 20px;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 2em;
     }
 
     .name-client span {

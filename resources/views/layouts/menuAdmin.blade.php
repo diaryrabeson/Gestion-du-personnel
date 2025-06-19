@@ -182,7 +182,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('Conger.pending') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700" >
-                     <i class="fa-solid fa-address-card men fonts"></i>Validation Congée
+                     <i class="fa-solid fa-address-card men fonts mr-4"></i> <span>Validation Congée</span>
                 </a>
             </li>
         </div>
@@ -191,7 +191,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('employers.index') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-circle-user men fonts"></i>  Employés
+                    <i class="fa-solid fa-circle-user men fonts mr-4"></i><span>Employés</span>  
                 </a>
             </li>
         </div>
@@ -200,7 +200,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('services.index') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-gear men fonts"></i>Fonction
+                    <i class="fa-solid fa-gear men fonts mr-4"></i><span>Fonction</span>
                 </a>
             </li>
         </div>
@@ -210,7 +210,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('TypeConger.index') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-regular fa-file-lines men fonts"></i>Type Congé
+                    <i class="fa-regular fa-file-lines men fonts mr-4"></i><span>Type Congé</span>
                 </a>
             </li>
         </div>
@@ -219,7 +219,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('presence.list') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-pen-nib men fonts"></i>Pointage
+                    <i class="fa-solid fa-pen-nib men fonts mr-4"></i> <span>Pointage</span> 
                 </a>
             </li>
         </div>
@@ -229,7 +229,7 @@
             <li class="w-full text-left">
                 <a href="{{ route('supplementaires.index') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-calendar-week men fonts"></i>Heures Supplementaires
+                    <i class="fa-solid fa-calendar-week men fonts mr-4"></i> <span>Heures Supplementaires</span>
                 </a>
             </li>
         </div>
@@ -238,17 +238,17 @@
             <li class="w-full text-left">
                 <a href="{{ route('Messages.Listing') }}"
                     class="men w-full block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-message men fonts"></i>Messages
+                    <i class="fa-solid fa-message men fonts mr-4"></i><span>Messages</span>
                 </a>
             </li>
         </div>
        
-        <div class="d_flex w-full">
+        <div class="flex w-full ">
             
-            <li class="w-full text-left">
+            <li class="w-full text-left relative pl-4">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="men w-full text-left"><i class="fa-solid fa-right-from-bracket men fonts"></i>Déconnexion</button>
+                    <button type="submit" class="men w-full text-left"><i class="fa-solid fa-right-from-bracket men fonts mr-4"></i><span>Déconnexion</span></button>
                 </form>
 
             </li>

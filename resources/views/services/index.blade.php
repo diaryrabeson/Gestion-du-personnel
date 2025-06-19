@@ -245,8 +245,8 @@ div.dt-container div.dt-layout-row{
                    
                    
                     <div class="float-right absolute z-50" style="left:90%">
-                        <a href="{{ route('services.create') }}" class="bg-blue-500  px-4 py-2 rounded">
-                            <i class="fa-solid fa-plus"></i>Ajouter 
+                        <a href="{{ route('services.create') }}" class="bg-blue-500 text-white  px-4 py-2 rounded">
+                            <i class="fa-solid fa-plus"></i> Ajouter 
                         </a>
                     </div>
                 <table id="servicesTable" class="display">

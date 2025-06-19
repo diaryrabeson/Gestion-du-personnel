@@ -6,9 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+
+                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 ">
+                        <h3 class="text-xl ">Pointage des heures supplementaires</h3>    </div>
+
 
                     @if ($errors->has('error'))
                         <div class="custom-alert error-alert">
@@ -37,7 +41,7 @@
                     <form action="{{ route('supplementaire.store') }}" method="POST">
                         @csrf
                         <div class="mb-4" style="width: 100%;">
-                            <label for="Id_Employe" class="block">Employé :</label>
+                            <label for="Id_Employe" class="block font-bold text-xl mt-4">Employé :</label>
                             <select name="Id_Employe" id="Id_Employe" class="w-full p-2 border rounded" required>
                                 <option value="" disabled selected>-- Sélectionnez un employé --</option>
                                 @foreach($employes as $employe)
@@ -49,43 +53,49 @@
                         </div>
                         <div class="flex justify-between">
                         <div class="mb-4">
-                            <label for="DateSys" class="block">Date :</label>
+                            <label for="DateSys" class="block font-bold text-xl">Date :</label>
                             <input type="date" name="DateSys" id="DateSys" class="w-full p-2 border rounded" required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="CoutParHeure" class="block">Coût par Heure :</label>
+                            <label for="CoutParHeure" class="block font-bold text-xl">Coût par Heure :</label>
                             <input type="number" step="0.01" name="CoutParHeure" id="CoutParHeure" class="w-full p-2 border rounded" required>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div class="mb-4">
-                            <label for="DebutDeSuppl" class="block">Début :</label>
+                            <label for="DebutDeSuppl" class="block font-bold text-xl">Début :</label>
                             <input type="time" name="DebutDeSuppl" id="DebutDeSuppl" class="w-full p-2 border rounded" required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="FinDeSuppl" class="block">Fin :</label>
+                            <label for="FinDeSuppl" class="block font-bold text-xl  ">Fin :</label>
                             <input type="time" name="FinDeSuppl" id="FinDeSuppl" class="w-full p-2 border rounded" required>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div class="mb-4">
-                            <label>Nombre total d'heures :</label>
+                            <label class="font-bold text-xl">Nombre total d'heures :</label>
                             <input type="text" name="nb_total_heures" id="nb_total_heures" class="w-full p-2 border rounded bg-gray-200" readonly>
                         </div>
 
                         <div class="mb-4">
-                            <label>Coût total :</label>
+                            <label class="font-bold text-xl">Coût total :</label>
                             <input type="text" id="cout_total" name="cout_total" class="w-full p-2 border rounded bg-gray-200" readonly>
                         </div>
                     </div>
 
-                        <div class="contents">   
-                              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded button">
-                            Enregistrer
-                        </button>
+                    <div class="flex justify-end">
+                        <div class="retour">
+                        <a href="http://127.0.0.1:8000/supplementaires" class="btn-cancel">Annuler</a>
                     </div>
+                        <div class="contents">   
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded button">
+                            Pointer
+                            </button>
+                    </div>
+                </div>
+                    
                     </form>
 
                 </div>
@@ -114,6 +124,17 @@
     document.getElementById('CoutParHeure').addEventListener('input', calculateTotals);
 </script>
 <style>
+    .btn-cancel {
+        background-color: #f44336;
+        color: white;
+        padding: 1em 2em;
+        border-radius: 8px;
+        font-weight: bold;
+        display: block;
+        margin-top: 1em;
+        cursor: pointer;
+    }
+
     .custom-alert {
         padding: 15px;
         border-radius: 5px;
@@ -160,21 +181,23 @@
     }
 
     .button {
- --color: #00A97F;
- padding: 0.8em 1.7em;
- background-color: transparent;
- border-radius: .3em;
- position: relative;
- overflow: hidden;
- cursor: pointer;
- transition: .5s;
- font-weight: 400;
- font-size: 17px;
- border: 1px solid;
- font-family: inherit;
- text-transform: uppercase;
- color: var(--color);
- z-index: 1;
+        --color: #00A97F;
+        width: 10%;
+        background-color: transparent;
+        border-radius: .3em;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: .5s;
+        font-weight: 400;
+        font-size: 17px;
+        border: 1px solid;
+        font-family: inherit;
+        text-transform: uppercase;
+        color: var(--color);
+        z-index: 1;
+        margin-top:1.5%;
+        margin-left: 1em
 }
 
 .button::before, .button::after {

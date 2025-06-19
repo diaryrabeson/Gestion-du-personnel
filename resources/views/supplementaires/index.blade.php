@@ -5,62 +5,7 @@
         </h2>
     </x-slot>
     <style>
-        /* From Uiverse.io by nikk7007 */ 
-        .Ajout {
-         --color: #00A97F;
-         padding: 0.8em 1.7em;
-         background-color: transparent;
-         border-radius: .3em;
-         position: relative;
-         overflow: hidden;
-         cursor: pointer;
-         transition: .5s;
-         font-weight: 400;
-         font-size: 14px;
-         border: 1px solid;
-         font-family: inherit;
-         text-transform: uppercase;
-         color: var(--color);
-         z-index: 1;
-        }
-        
-        .Ajout::before, .Ajout::after {
-         content: '';
-         display: block;
-         width: 50px;
-         height: 50px;
-         transform: translate(-50%, -50%);
-         position: absolute;
-         border-radius: 50%;
-         z-index: -1;
-         background-color: var(--color);
-         transition: 1s ease;
-        }
-        
-        .Ajout::before {
-         top: -1em;
-         left: -1em;
-        }
-        
-        .Ajout::after {
-         left: calc(100% + 1em);
-         top: calc(100% + 1em);
-        }
-        
-        .Ajout:hover::before, .Ajout:hover::after {
-         height: 410px;
-         width: 410px;
-        }
-        
-        .Ajout:hover {
-         color: rgb(10, 25, 30);
-        }
-        
-        .Ajout:active {
-         filter: brightness(.8);
-        }
-        
-        
+   
         .add{
             color: white;
             margin-bottom : 2em;
@@ -143,92 +88,148 @@
             transform: scale(0.95);
             /* Réduction de la taille au clic */
         }
-        </style>
+        th{
+            background-color: rgb(150, 150, 147);
+            border:  #e5e7eb 1px solid;
+        }
+        td ,th{
+            border: #e5e7eb 1px solid;
+        }
+        div.dt-container .dt-search{
+            margin-bottom: 1em !important;
+            text-align: right;
+            left: 0em !important;
+            margin-top: 3% !important;
+            position: absolute !important;
+        }
+  
 
-                    <div class="py-12">
-                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        .modal-content h2 {
+            background-color: #080824;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3em
+        }
+
+        .modal-content p {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            font-size: 1.3em
+        }
+
+        .modal-content {
+            height: 23%;
+            border-radius: 1em;
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 25em;
+            text-align: center;
+            transform: translateY(-30px);
+            /* Déplacement vers le haut */
+            transition: transform 0.3s ease;
+            /* Transition de transformation */
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            /* Remettre à sa place */
+        }
+
+        .modal.show {
+            display: block;
+            /* Afficher la modale */
+            opacity: 1;
+            /* Opacité finale */
+        }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $('#TableSupplementaire').DataTable({
+                    // Supprimez les options pour activer la pagination et la recherche
+                    language: {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "",
+                    "sInfo": "Affichage de l'enregistrement _START_ à _END_ sur _TOTAL_ enregistrements",
+                    "sInfoEmpty": "Affichage de l'enregistrement 0 à 0 sur 0 enregistrements",
+                    "sZeroRecords": "Aucun enregistrement à afficher",
+                    "sInfoFiltered": "(filtré à partir de _MAX_ enregistrements au total)", // Traduction ajoutée
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Précédent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                        }
+                    }
+                });
+            });
+            
+           
+            </script>
+            <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
+            <script src="https://cdn.datatables.net/2.3.1/js/dataTables.js"></script>
+                    <div class="py-2">
+                        <div class="mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h3 class="text-xl">Liste des heures supplementaires</h3>
+                                    <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
+                                        <h3 class="text-xl">Liste des heures supplementaires</h3>    </div>
                                         <!-- Bouton pour ajouter un nouvel employé -->
-                                        <a href="{{ route('supplementaires.create') }}" class="Ajout">
-                                            Pointer une heure supplementaires
-                                        </a>
-                                        
-                                        
+                                       <div class="float-right absolute z-50" style="left:90%" > 
+                                        <a href="{{ route('supplementaires.create') }}" class=" bg-blue-500 text-white  px-4 py-2 rounded">
+                                        <i class="fa-solid fa-plus text-bold"></i>  Pointer</a>
                                     </div>
-                                    @if (session('success'))
-                                        <div class="custom-alert success-alert">
-                                            <strong>Succès !</strong> {{ session('success') }}
-                                            <span class="close-btn"
-                                                onclick="this.parentElement.style.display='none';">&times;</span>
-                                        </div>
-                                    @endif
+                                        
+                                        
+                                
+                                    @if(session('success'))
+                                    <div class="bg-green-500 text-white top-20 p-4 rounded mb-4 absolute" style="width: 73%">
+                                        <span>{{ session('success') }}</span>
+                                        <button onclick="this.parentElement.style.display='none';" class="absolute top-1 right-1 text-white">
+                                            <i class="fa-solid fa-times"></i> <!-- Assurez-vous d'inclure Font Awesome -->
+                                        </button>
+                                    </div>
+                                @endif
 
-                                    <table class="min-w-full divide-y divide-gray-200">
+                                    <table class="" id="TableSupplementaire" style="margin-top: 2%" >
                                         <thead>
                                             <tr>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Employé
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Date
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Début
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Fin
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Nombre total d'heures
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Coût total
-                                                </th>
-                                                <th
-                                                    class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                                    Actions
-                                                </th>
+                                                <th> Employé  </th>
+                                                <th> Date </th>
+                                                <th>Début  </th>
+                                                <th> Fin </th>
+                                                <th> Nombre total d'heures </th>
+                                                <th> Coût total </th>
+                                                <th> Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200">
+                                        <tbody >
                                             @foreach ($supplementaires as $heure)
                                                 <tr>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    <td>
                                                         {{ $heure->Employer->NomEmp }} {{ $heure->Employer->Prenom }}
                                                     </td>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                                    <td>
                                                         {{ $heure->DateSys }}
                                                     </td>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                                    <td>
                                                         {{ $heure->DebutDeSuppl }}
                                                     </td>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                                    <td>
                                                         {{ $heure->FinDeSuppl }}
                                                     </td>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                                    <td>
                                                         {{ $heure->nb_total_heures }}
                                                     </td>
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                                        {{ $heure->cout_total }}
+                                                    <td class="text-right">
+                                                        {{ $heure->cout_total }}Ar
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex">
+                                                    <td class=" text-sm font-medium flex justify-center">
                                                         <a href="{{ route('supplementaire.edit', $heure->id_supplementaire) }}"
-                                                            class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900" style="color: blue"> <i class="fa-solid fa-pen-to-square"></i></a>
+                                                            class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color: blue"> <i class="fa-solid fa-pen-to-square"></i></a>
                                                             <form id="deleteForm-{{ $heure->id_supplementaire }}"
                                                                 action="{{ route('supplementaire.destroy', $heure->id_supplementaire) }}"
                                                                 method="POST" class="inline">
@@ -236,7 +237,7 @@
                                                               @method('DELETE')
                                                               <button type="button"
                                                                       onclick="openModal({{ $heure->id_supplementaire }})"
-                                                                      class="text-red-600 dark:text-red-400 hover:text-red-900 ml-4"
+                                                                      class="bg-red-300 text-black px-3 py-1 rounded"
                                                                       style="color:crimson">
                                                                   <i class="fa-solid fa-trash-can"></i>
                                                               </button>
@@ -244,17 +245,18 @@
 
 
                                                         <div id="confirmationModal" class="modal" style="display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4);">
-                                                            <div class="modal-content" style="background-color: white; margin: 10% auto; padding: 20px; border: 1px solid #ccc; width: 300px; text-align: center;">
-                                                            <h2>Confirmation de Suppression</h2>
-        <p>Voulez-vous vraiment supprimer cet enregistrement ?</p>
-        <button id="confirmDelete" class="suppr" style="background-color: crimson; color: white; padding: 8px 16px; margin-top: 10px;">
-            <i class="fa-solid fa-trash-can"></i> Supprimer
-        </button>
-        <button onclick="closeModal()" class="retour" style="margin-left: 10px;">
-            <i class="fa-solid fa-xmark"></i> Annuler
-        </button>
-    </div>
-</div>
+                                                            <div class="modal-content" >
+                                                            <h2 >Demande de confirmation</h2>
+                                                            <p>Voulez-vous vraiment supprimer cet enregistrement ?</p>
+                                                            <button onclick="closeModal()" class="retour" style="margin-left: 10px;">
+                                                                <i class="fa-solid fa-xmark"></i> Annuler
+                                                               </button>
+                                                            <button id="confirmDelete" class="suppr" style="background-color: crimson; color: white; padding: 8px 16px; margin-top: 10px;">
+                                                            <i class="fa-solid fa-trash-can"></i> Supprimer
+                                                            </button>
+                                                           
+                                                            </div>
+                                                        </div>
 
                                                     </td>
                                                 </tr>
@@ -262,9 +264,7 @@
                                         </tbody>
                                     </table>
 
-                                    <div class="mt-4">
-                                        {{ $supplementaires->links() }}
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">
-                        <h3 class="text-xl mb-4">Créer un Type de Congé</h3>
+                        <h3 class="text-xl mb-4">Ajouter un Type de Congé</h3>
                     </div>
 
 

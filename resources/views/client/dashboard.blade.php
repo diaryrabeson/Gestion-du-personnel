@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg conten" style="width: 104%">
+        <div class=" mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden w-full shadow-sm sm:rounded-lg conten" >
                 <div class="p-6 text-gray-900 dark:text-gray-100" style="background: #9d999c1f;">
                     <div class="CardDash">
                         <p>TABLEAU DE BORD DE L'EMPLOYE </p>
