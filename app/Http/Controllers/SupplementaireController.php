@@ -36,23 +36,40 @@ class SupplementaireController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // dd($request);
-         $request->validate([
-            'DateSys' => 'required|date',
-            'CoutParHeure' => 'required|numeric',
-            'DebutDeSuppl' => 'required',
-            'FinDeSuppl' => 'required',
-            'nb_total_heures' =>'required',
-            'cout_total' => "required",
-            'Id_Employe' => 'required|exists:employers,Id_Employe',
-        ]);
+  public function store(Request $request)
+{
+    $request->validate([
+        'DateSys' => 'required|date',
+        'CoutParHeure' => 'required|numeric',
+        'DebutDeSuppl' => 'required',
+        'FinDeSuppl' => 'required',
+        'nb_total_heures' =>'required',
+        'cout_total' => "required",
+        'Id_Employe' => 'required|exists:employers,Id_Employe',
+    ], [
+        'DateSys.required' => 'La date est obligatoire.',
+        'CoutParHeure.required' => 'Le coût par heure est obligatoire.',
+        'DebutDeSuppl.required' => 'Le début des heures supplémentaires est obligatoire.',
+        'FinDeSuppl.required' => 'La fin des heures supplémentaires est obligatoire.',
+        'nb_total_heures.required' => 'Le nombre total d\'heures est obligatoire.',
+        'cout_total.required' => 'Le coût total est obligatoire.',
+        'Id_Employe.required' => 'L\'identifiant de l\'employé est obligatoire.',
+        'Id_Employe.exists' => 'L\'employé spécifié n\'existe pas.',
+    ]);
 
-        Supplementaire::create($request->all());
+    // Vérifier si l'employé a déjà des heures supplémentaires pour cette date
+    $existingSupplementaire = Supplementaire::where('Id_Employe', $request->Id_Employe)
+        ->whereDate('DateSys', $request->DateSys)
+        ->exists();
 
-        return redirect()->route('supplementaires.index')->with('success', 'Heure supplémentaire ajoutée avec succès'); 
+    if ($existingSupplementaire) {
+        return redirect()->back()->withErrors(['duplicate' => 'L\'employé a déjà des heures supplémentaires enregistrées pour cette date.']);
     }
+
+    Supplementaire::create($request->all());
+
+    return redirect()->route('supplementaires.index')->with('success', 'Heure supplémentaire ajoutée avec succès'); 
+}
 
     /**
      * Display the specified resource.

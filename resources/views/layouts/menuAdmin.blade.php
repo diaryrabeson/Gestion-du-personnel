@@ -151,8 +151,8 @@
 
     div.notific {
         position: absolute;
-        top: 2.2em;
-        left: 12em;
+        top: 7%;
+        left: 68%;
         background: #9595ff;
         width: 2em;
         border-radius: 1em;
@@ -256,11 +256,12 @@
 
         <div class="notific">
             @if($congesEnAttente > 0)
-                {{-- <span>Congés en attente : {{ $congesEnAttente }}</span> --}}
-                <span id="congesNotification"
-                    class="hidden  text-white text-xs font-bold rounded-full px-2"></span>
+                <span id="congesNotification" class="text-white text-xl font-bold rounded-full px-2">
+                     {{ $congesEnAttente }}
+                </span>
+            @else
+                <span id="congesNotification" class="text-gray-500"></span>
             @endif
-
         </div>
       
  

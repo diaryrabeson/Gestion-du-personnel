@@ -29,14 +29,17 @@
                     @endif
 
                     @if ($errors->any())
-                        <div class="bg-red-500 text-white p-3 rounded mb-4">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <div class="bg-red-500 text-white p-3 rounded relative" id="error-message">
+                        <button onclick="document.getElementById('error-message').style.display='none'" class="absolute top-1 right-1 text-white">
+                            &times;
+                        </button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                     <form action="{{ route('supplementaire.store') }}" method="POST">
                         @csrf
@@ -112,8 +115,14 @@
         if (debut && fin && coutParHeure) {
             let start = new Date("1970-01-01T" + debut + "Z");
             let end = new Date("1970-01-01T" + fin + "Z");
+
+            if (start > end) {
+                document.getElementById('nb_total_heures').value = '';
+                document.getElementById('cout_total').value = 'Impossible';
+                return;
+            }
+
             let totalHeures = (end - start) / 3600000;
-            
             document.getElementById('nb_total_heures').value = totalHeures.toFixed(2);
             document.getElementById('cout_total').value = (totalHeures * coutParHeure).toFixed(2);
         }

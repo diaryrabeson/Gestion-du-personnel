@@ -35,25 +35,25 @@ class CongerController extends Controller
 }
 
     public function store(Request $request)
-    {
-        // Validation des données de la requête
-        $request->validate([
-            'id_typeConge' => 'required|exists:typeconger,id_typeConge',
-            'Date_debut' => 'required|date|before_or_equal:Date_Fin',
-            'Date_Fin' => 'required|date|after_or_equal:Date_debut',
-            'id_employe' => 'required|exists:employers,Id_Employe',
-            'status' => 'nullable|string', // Permet que status soit null
-            'commentaire' => 'nullable|string', // Permet que commentaire soit null
-        ]);
+{
+    // Validation des données de la requête
+    $request->validate([
+        'id_typeConge' => 'required|exists:typeconger,id_typeConge',
+        'Date_debut' => 'required|date|before_or_equal:Date_Fin',
+        'Date_Fin' => 'required|date|after_or_equal:Date_debut',
+        'id_employe' => 'required|exists:employers,Id_Employe',
+        'status' => 'nullable|string', // Permet que status soit null
+        'commentaire' => 'nullable|string', // Permet que commentaire soit null
+    ]);
 
-        // Récupération des jours fériés depuis la base de données
-        $joursFeries = JoursFeries::pluck('date')->toArray();
+    // Récupération des jours fériés depuis la base de données
+    $joursFeries = JoursFeries::pluck('date')->toArray();
 
-        // Calcul des jours ouvrables
-        $joursOuvrables = $this->calculerJoursOuvrables($request->Date_debut, $request->Date_Fin, $joursFeries);
+    // Calcul des jours ouvrables
+    $joursOuvrables = $this->calculerJoursOuvrables($request->Date_debut, $request->Date_Fin, $joursFeries);
 
-        // Création d'un enregistrement dans la table `conger`
-      Conger::create([
+    // Création d'un enregistrement dans la table `conger`
+    $demandeConge = Conger::create([
         'id_typeConge' => $request->id_typeConge,
         'Date_debut' => $request->Date_debut,
         'Date_Fin' => $request->Date_Fin,
@@ -62,10 +62,17 @@ class CongerController extends Controller
         'jours_ouvrables' => $joursOuvrables,
         'commentaire' => $request->commentaire ?? null, // Définit null si commentaire n'est pas fourni
     ]);
+ $adminId = User::where('role', 'admin')->first()->id; // Récupération de l'ID de l'administrateur
+    // Création d'une notification pour l'administrateur
+    Notification::create([
+        'user_id' => $adminId, // Remplacez par l'ID de l'admin
+        'message' => 'Une nouvelle demande de congé a été soumise par ' . $demandeConge->Id_Employe,
+        'is_read' => false,
+    ]);
 
-        // Redirection après la création
-        return redirect()->route('client.dashboard')->with('success', 'Demande de congé créée avec succès.');
-    }
+    // Redirection après la création
+    return redirect()->route('client.dashboard')->with('success', 'Demande de congé créée avec succès.');
+}
 
     /**
      * Calcul des jours ouvrables entre deux dates, en excluant les week-ends et les jours fériés.
@@ -112,6 +119,7 @@ public function valider(Request $request, $id)
     $solde_conge = $employe->SoldeConger;
     $somme = $solde_conge - $jours_ouvrables;
 
+    // Mettre à jour le solde de congé
     $employe->update(['SoldeConger' => $somme]);
 
     // Valider le congé
@@ -121,19 +129,20 @@ public function valider(Request $request, $id)
     $user = User::where('email', $employe->mail)->first();
 
     // Créer une notification si l'utilisateur est trouvé
-   if ($user) {
-    try {
-        Notification::create([
-            'user_id' => $user->id,
-            'message' => 'Votre demande de congé a été approuvée.',
-            'is_read' => false,
-        ]);
-    } catch (\Exception $e) {
-        dd('Erreur création notification : ', $e->getMessage());
+    if ($user) {
+        try {
+            Notification::create([
+                'user_id' => $user->id,
+                'message' => 'Votre demande de congé a été approuvée.',
+                'is_read' => false,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('Conger.pending')->with('error', 'Erreur lors de la création de la notification : ' . $e->getMessage());
+        }
+    } else {
+        return redirect()->route('Conger.pending')->with('error', 'Aucun utilisateur trouvé pour l\'email : ' . $employe->mail);
     }
-} else {
-    dd('Aucun utilisateur trouvé pour l\'email : ' . $employe->mail);
-}
+
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé approuvée avec succès.');
 }
 
@@ -148,15 +157,21 @@ public function refuser($id)
     $employe = Employer::findOrFail($conge->Id_Employe);
 
     // Récupérer l'utilisateur via l'email de l'employé
-    $user = User::where('email', $employe->email)->first();
+    $user = User::where('email', $employe->mail)->first();
 
     // Créer une notification si l'utilisateur est trouvé
     if ($user) {
-        Notification::create([
-            'user_id' => $user->id,
-            'message' => 'Votre demande de congé a été refusée.',
-            'is_read' => false,
-        ]);
+        try {
+            Notification::create([
+                'user_id' => $user->id,
+                'message' => 'Votre demande de congé a été refusée.',
+                'is_read' => false,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('Conger.pending')->with('error', 'Erreur lors de la création de la notification : ' . $e->getMessage());
+        }
+    } else {
+        return redirect()->route('Conger.pending')->with('error', 'Aucun utilisateur trouvé pour l\'email : ' . $employe->mail);
     }
 
     return redirect()->route('Conger.pending')->with('success', 'Demande de congé refusée avec succès.');

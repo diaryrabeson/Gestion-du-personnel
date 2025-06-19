@@ -8,7 +8,9 @@
     <div class="py-12">
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
+               <div class="p-6">
+                <h3 class="text-xl text-center font-bold w-50 bg-yellow-200 p-4 mb-4">Profile employé</h3>
+                
                     @if ($employer)
                         <p style="color: black"><strong>Nom de l'employé : </strong>{{ $employer->NomEmp }} {{ $employer->Prenom }}</p>
                         <form action="{{ route('Conger.store') }}" method="POST">

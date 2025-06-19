@@ -43,7 +43,7 @@
 
                         <div class="mb-4">
                             <label for="Id_Employe" class="block font-bold text-xl mt-4">Employé :</label>
-                            <select name="Id_Employe" id="Id_Employe" class="w-full p-2 border rounded" required>
+                            <select name="Id_Employe" id="Id_Employe" class="w-full p-2 border rounded" required >
                                 <option value="" disabled>-- Sélectionnez un employé --</option>
                                 @foreach($employes as $employe)
                                     <option value="{{ $employe->Id_Employe }}" 
@@ -57,7 +57,7 @@
                             <div class=" w-full">
                                 <label for="DateSys" class="block font-bold text-xl ">Date :</label>
                                 <input type="date" name="DateSys" id="DateSys" class="w-full p-2 border rounded" 
-                                    value="{{ old('DateSys', $supplementaire->DateSys) }}" required>
+                                    value="{{ old('DateSys', $supplementaire->DateSys) }}" required readonly>
                             </div>
     
                             <div class=" w-full ml-4">

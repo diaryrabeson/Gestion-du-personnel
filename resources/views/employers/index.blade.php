@@ -320,7 +320,7 @@
                     <!-- Modale de confirmation -->
                     <div id="confirmationModal" class="modal" style="display:none;">
                         <div class="modal-content">
-                            <h2>Confirmation de Suppression</h2>
+                            <h2>Demande de confirmation</h2>
                             <p>Voulez-vous vraiment supprimer cet employé ?</p>
                             <button id="confirmDelete" class="suppr">
                                 <i class="fa-solid fa-trash-can"></i> Supprimer

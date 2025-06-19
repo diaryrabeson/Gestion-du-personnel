@@ -118,7 +118,7 @@
         }
 
         .modal-content {
-            height: 23%;
+            height: 30%;
             border-radius: 1em;
             background-color: #fefefe;
             margin: 15% auto;
@@ -230,40 +230,34 @@
                                                     <td class=" text-sm font-medium flex justify-center">
                                                         <a href="{{ route('supplementaire.edit', $heure->id_supplementaire) }}"
                                                             class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color: blue"> <i class="fa-solid fa-pen-to-square"></i></a>
-                                                            <form id="deleteForm-{{ $heure->id_supplementaire }}"
-                                                                action="{{ route('supplementaire.destroy', $heure->id_supplementaire) }}"
-                                                                method="POST" class="inline">
-                                                              @csrf
-                                                              @method('DELETE')
-                                                              <button type="button"
-                                                                      onclick="openModal({{ $heure->id_supplementaire }})"
-                                                                      class="bg-red-300 text-black px-3 py-1 rounded"
-                                                                      style="color:crimson">
-                                                                  <i class="fa-solid fa-trash-can"></i>
-                                                              </button>
-                                                          </form>
+                                                            <form id="deleteForm-{{ $heure->id_supplementaire }}" action="{{ route('supplementaire.destroy', $heure->id_supplementaire) }}" method="POST" class="inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" onclick="openModal({{ $heure->id_supplementaire }})" class="bg-red-300 text-black px-3 py-1 rounded" style="color:crimson">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button>
+                                                            </form>
 
 
-                                                        <div id="confirmationModal" class="modal" style="display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4);">
-                                                            <div class="modal-content" >
-                                                            <h2 >Demande de confirmation</h2>
-                                                            <p>Voulez-vous vraiment supprimer cet enregistrement ?</p>
-                                                            <button onclick="closeModal()" class="retour" style="margin-left: 10px;">
-                                                                <i class="fa-solid fa-xmark"></i> Annuler
-                                                               </button>
-                                                            <button id="confirmDelete" class="suppr" style="background-color: crimson; color: white; padding: 8px 16px; margin-top: 10px;">
-                                                            <i class="fa-solid fa-trash-can"></i> Supprimer
-                                                            </button>
-                                                           
-                                                            </div>
-                                                        </div>
+                                                            
 
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
-
+                                    <div id="confirmationModal" class="modal" style="display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4);">
+                                        <div class="modal-content">
+                                            <h2>Demande de confirmation</h2>
+                                            <p>Voulez-vous vraiment supprimer cet enregistrement ?</p>
+                                            <button onclick="closeModal()" class="retour" style="margin-left: 10px;">
+                                                <i class="fa-solid fa-xmark"></i> Annuler
+                                            </button>
+                                            <button id="confirmDelete" class="suppr" style="background-color: crimson; color: white; padding: 8px 16px; margin-top: 10px;">
+                                                <i class="fa-solid fa-trash-can"></i> Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
                                    
                                 </div>
                             </div>

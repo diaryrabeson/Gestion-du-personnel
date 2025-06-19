@@ -286,7 +286,7 @@ div.dt-container div.dt-layout-row{
                 <!-- Modale de confirmation -->
                 <div id="confirmationModal" class="modal">
                     <div class="modal-content">
-                        <h2>Confirmation de Suppression</h2>
+                        <h2>Demande de confirmation</h2>
                         <p>Voulez-vous vraiment supprimer ce fonction ?</p>
                         <button onclick="submitForm()" class="suppr">
                             <i class="fa-solid fa-trash-can"></i> Supprimer

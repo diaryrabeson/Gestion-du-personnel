@@ -9,7 +9,7 @@
         <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Notifications récentes</h3>
 
         @forelse($notifications as $note)
-            <div class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 p-4 mb-3 rounded-lg shadow-sm">
+            <div class="{{ $note->is_read ? 'bg-gray-100 dark:bg-gray-700' : 'bg-blue-100 dark:bg-blue-900' }} text-blue-800 dark:text-blue-100 p-4 mb-3 rounded-lg shadow-sm">
                 <div class="flex items-start justify-between">
                     <p class="text-sm">{{ $note->message }}</p>
                     <span class="text-xs text-gray-500 dark:text-gray-300 whitespace-nowrap">
