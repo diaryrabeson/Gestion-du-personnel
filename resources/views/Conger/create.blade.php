@@ -9,10 +9,25 @@
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                <div class="p-6">
-                <h3 class="text-xl text-center font-bold w-50 bg-yellow-200 p-4 mb-4">Profile employé</h3>
+                <h3 class="text-xl text-center font-bold w-50 bg-yellow-200 p-4 mb-4">Demande de congé</h3>
                 
                     @if ($employer)
-                        <p style="color: black"><strong>Nom de l'employé : </strong>{{ $employer->NomEmp }} {{ $employer->Prenom }}</p>
+
+
+                    <div class="text-xl relative my-4 text-center font-bold">
+                        <div class="flex justify-center">
+                            <h1>Nom de l'employé :</h1><p class="ml-4">{{ $employer->NomEmp }} {{ $employer->Prenom }}</p>
+                        </div>
+                        <div class="flex justify-between absolute w-full" style="top:45%">
+                            <div class="titres">
+                                <h2></h2>
+                            </div>
+                            <div class="titres">
+                                <h2></h2>
+                            </div>
+                        </div>
+                    </div>
+
                         <form action="{{ route('Conger.store') }}" method="POST">
                             @csrf
                             <div class="mb-4">
@@ -39,8 +54,16 @@
                                 <label for="jours_ouvrables">Nombre de jours</label>
                                 <input type="text" id="jours_ouvrables" name="jours_ouvrables" class="custom-select" readonly> <!-- Affichage du nombre de jours -->
                             </div>
-
-                            <button type="submit" class="button">Soumettre</button>
+                            <div class="flex justify-end">
+                                <div class="retour">
+                                    <a href="http://127.0.0.1:8000/Conger/create" class="btn-cancel">Annuler</a>
+                                </div>
+                                <div>
+                                    <button type="submit" class="button">Soumettre</button>
+                                </div>
+                                
+                            </div>
+                            
                         </form>
                     @else
                         <p class="text-red-500 font-bold">Pas d'accès</p>
@@ -81,16 +104,39 @@
     </script>
 
     <style>
+.retour{
+        margin-right: 1em
+    }
+    .btn-cancel {
+        background-color: #f44336;
+        color: white;
+        padding: .8em 2em;
+        border-radius: 8px;
+        font-weight: bold;
+        display: block;
+     
+    }
+
         label {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
-}
-
+        }
+.titres {
+        content: '';
+        width: 35%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
 .custom-select {
     width: 100%;
-    max-width: 60em;  /* Ajuste la largeur */
     padding: 10px;
     font-size: 16px;
     border: 2px solid #8aaed3;  /* Bordure bleue */
@@ -126,57 +172,21 @@
 }
 
 .button {
- --color: #00A97F;
+ color: #ffffff !important;
  padding: 0.8em 1.7em;
- background-color: transparent;
+ background-color: rgb(22, 80, 167);
  border-radius: .3em;
  position: relative;
  overflow: hidden;
  cursor: pointer;
  transition: .5s;
  font-weight: 400;
- font-size: 17px;
- border: 1px solid;
+ font-size: 1em;
+ border: none;
  font-family: inherit;
- text-transform: uppercase;
- color: var(--color);
+ 
  z-index: 1;
 }
 
-.button::before, .button::after {
- content: '';
- display: block;
- width: 50px;
- height: 50px;
- transform: translate(-50%, -50%);
- position: absolute;
- border-radius: 50%;
- z-index: -1;
- background-color: var(--color);
- transition: 1s ease;
-}
-
-.button::before {
- top: -1em;
- left: -1em;
-}
-
-.button::after {
- left: calc(100% + 1em);
- top: calc(100% + 1em);
-}
-
-.button:hover::before, .button:hover::after {
- height: 410px;
- width: 410px;
-}
-
-.button:hover {
- color: rgb(10, 25, 30);
-}
-
-.button:active {
- filter: brightness(.8);
-}
     </style>
 </x-app-layout>

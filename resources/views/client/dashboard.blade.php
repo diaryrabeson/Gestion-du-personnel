@@ -7,18 +7,18 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden w-full shadow-sm sm:rounded-lg conten" >
+            <div class="bg-white dark:bg-gray-800 overflow-hidden w-full shadow-sm sm:rounded-lg conten">
                 <div class="p-6 text-gray-900 dark:text-gray-100" style="background: #9d999c1f;">
                     <div class="CardDash">
                         <p>TABLEAU DE BORD DE L'EMPLOYE </p>
 
                     </div>
 
-                    <div class="flex cards">
+                    <div class="flex ">
                         @if($employers)
-                                    <div class="card" style="width: 100%">
+                                    <div class="" style="width: 100%">
                                         <div class="card-body">
-                                            <div class="flex">
+                                            <div class="flex justify-between">
 
                                                 <div class="card-client">
                                                     <a href="{{ route('services.index') }}">
@@ -100,8 +100,8 @@
                                 </div>
                             </div>
                         @else
-                            <p class="text-danger">Aucune information disponible.</p>
-                        @endif
+                    <p class="text-danger">Aucune information disponible.</p>
+                @endif
             </div>
         </div>
     </div>
@@ -211,26 +211,32 @@
     }
 
     .fc-daygrid-day-frame {
-    max-height: 50px !important; /* Ajuste la hauteur selon ton besoin */
-    padding: 2px !important; /* Réduit l'espacement interne */
-}
+        max-height: 50px !important;
+        /* Ajuste la hauteur selon ton besoin */
+        padding: 2px !important;
+        /* Réduit l'espacement interne */
+    }
 
-.cards{
-    /* margin-left: -11px */
-}
-.fc-daygrid-event {
-    font-size: 12px !important; /* Réduit la taille du texte des événements */
-    padding: 2px 4px !important; /* Ajuste l'espace autour du texte */
-}
-/* .fc-daygrid-day .fc-day .fc-day-mon .fc-day-past .fc-day-other{
+    .cards {
+        /* margin-left: -11px */
+    }
+
+    .fc-daygrid-event {
+        font-size: 12px !important;
+        /* Réduit la taille du texte des événements */
+        padding: 2px 4px !important;
+        /* Ajuste l'espace autour du texte */
+    }
+
+    /* .fc-daygrid-day .fc-day .fc-day-mon .fc-day-past .fc-day-other{
     height: 4em !important;
 } */
 
-@media screen and (max-width: 760px){
-    .CardDash p{
-        font-size: 1.5em
+    @media screen and (max-width: 760px) {
+        .CardDash p {
+            font-size: 1.5em
+        }
     }
-}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>

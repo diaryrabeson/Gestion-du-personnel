@@ -10,61 +10,61 @@
         /* Affiche le menu lorsqu'il est actif */
     }
 
-    
 
-        .liens {
-            /* background-color: rgba(59, 130, 246, 0.7); Bleu avec une transparence */
-            transition: background-color 0.3s ease;
-            border-radius: 10px;
-            height: 73%;
-            width: 100%;
-        }
 
-        .men:hover {
-            background-color: rgba(59, 130, 246, 1);
-            /* Bleu moins transparent au survol */
-        }
+    .liens {
+        /* background-color: rgba(59, 130, 246, 0.7); Bleu avec une transparence */
+        transition: background-color 0.3s ease;
+        border-radius: 10px;
+        height: 73%;
+        width: 100%;
+    }
 
-        .men:active {
-            background-color: rgba(29, 78, 216, 1);
-            /* Un bleu plus foncé au clic */
-        }
+    .men:hover {
+        background-color: rgba(59, 130, 246, 1);
+        /* Bleu moins transparent au survol */
+    }
 
-        .navig {
-            display: inline-block;
-           
-            padding: 12px 24px;
-          
-            top: -.6em;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            background-color: #1a2035 !important;
-            /* Couleur de fond primaire */
-            /* background-image: linear-gradient(to right, #3b82f6, #0824a1, #013594), url('/resources/img/technologie.jpg'); Dégradé sur fond d'image */
-            background-size: cover;
-            background-position: center;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s, box-shadow 0.3s;
-            width: 19vw;
-            height: 100%;
-        }
+    .men:active {
+        background-color: rgba(29, 78, 216, 1);
+        /* Un bleu plus foncé au clic */
+    }
 
-        .burgu {
-            display: none;
-            color: black;
-            font-size: 3em;
-            position: absolute;
+    .navig {
+        display: inline-block;
 
-        }
+        padding: 12px 0;
 
-        .menu {
-            display: block;
-            /* Affiche le menu par défaut sur les écrans plus larges */
-        }
-    
+        top: -.6em;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #1a2035 !important;
+        /* Couleur de fond primaire */
+        /* background-image: linear-gradient(to right, #3b82f6, #0824a1, #013594), url('/resources/img/technologie.jpg'); Dégradé sur fond d'image */
+        background-size: cover;
+        background-position: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s, box-shadow 0.3s;
+        width: 19vw;
+        height: 100%;
+    }
+
+    .burgu {
+        display: none;
+        color: black;
+        font-size: 3em;
+        position: absolute;
+
+    }
+
+    .menu {
+        display: block;
+        /* Affiche le menu par défaut sur les écrans plus larges */
+    }
+
 
     @media screen and (max-width: 768px) {
 
@@ -77,14 +77,15 @@
             left: 90vw;
 
         }
+
         .mobile-menu {
             margin-left: 0 !important;
         }
 
         .menu.active {
             display: flex
-            /* height: 100px; */
-            /* Hauteur maximale lorsque le menu est actif (ajustez selon votre contenu) */
+                /* height: 100px; */
+                /* Hauteur maximale lorsque le menu est actif (ajustez selon votre contenu) */
         }
 
         .menu {
@@ -99,10 +100,12 @@
             position: absolute;
             justify-content: center;
         }
+
         .d_flex {
             display: flex;
             justify-content: center
         }
+
         .navig {
             display: inline-block;
             background-color: #1a2035c7 !important;
@@ -128,11 +131,12 @@
         display: flex;
         margin-top: 2em;
     }
-    .fonts{
-    line-height: 1.5em;
-    font-size: 24px;    
 
-}
+    .fonts {
+        line-height: 1.5em;
+        font-size: 24px;
+
+    }
 </style>
 
 
@@ -151,58 +155,70 @@
     class=" menu navig fixed mt-12 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
     <ul class="liens  pt-12 space-y-4">
         <div class="flex men">
-            <i class="fa-solid fa-circle-user men fonts"></i>
-            <li>
+            <li class="  w-full text-left">
                 <a href="{{ route('ProfileEmployer.profile') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white ">
-                    Profile employé
+                    <i class="fa-solid fa-circle-user men fonts"></i>
+                    <span class="ml-4"> Profile employé</span>
+
+
                 </a>
             </li>
         </div>
-       
-        
-        <div class="d_flex men">
-            <i class="fa-solid fa-address-card men fonts"></i>
-            <li>
+
+
+        <div class="flex men w-full">
+            <li class="w-full text-left">
                 <a href="{{ route('Conger.create') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Demande de Congé
+
+                    <i class="fa-solid fa-address-card men fonts"></i>
+                    <span class="ml-4">Demande de Congé</span>
+
                 </a>
             </li>
         </div>
 
         <div class="d_flex men">
-            <i class="fa-solid fa-pen-nib men fonts"></i>
-            <li>
+            <li class="w-full text-left">
                 <a href="{{ route('ficheDePaye.index') }}"
                     class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Fiche de paie
+                    <i class="fa-solid fa-pen-nib men fonts"></i>
+                    <span class="ml-4"> Fiche de paie</span>
                 </a>
             </li>
         </div>
 
         <div class="d_flex men">
+            <li class="w-full text-left">
+                <a href="{{ route('Messages.Listing') }}"
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">                  
             <i class="fa-solid fa-message men fonts"></i>
-            <li>
-                <a href="{{ route('Messages.Listing') }}" class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    Message
+            <span class="ml-4"> Message</span>
                 </a>
             </li>
         </div>
 
-        <div class="d_flex men">
+        <div class="flex men ml-2">
             <i class="fa-solid fa-right-from-bracket men fonts"></i>
             <li>
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" id="logout-form">
                     @csrf
-                    <button type="submit" class="men logouts">Déconnexion</button>
+                    <button type="button" class="men logouts ml-4" onclick="confirmLogout()">Déconnexion</button>
                 </form>
-                
             </li>
         </div>
+        
+       
     </ul>
 </div>
-
+<script>
+    function confirmLogout() {
+        if (confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+</script>
 <script>
     document.getElementById('menu-toggle').addEventListener('click', function () {
         const menu = document.querySelector('.menu');
@@ -211,16 +227,16 @@
 
 
 
-    
-    
 
-        // Pour les boutons de formulaire comme "Déconnexion"
-        const logoutBtn = document.querySelector('form button[type="submit"]');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function () {
-                overlay.style.display = 'flex';
-            });
-        }
+
+
+    // Pour les boutons de formulaire comme "Déconnexion"
+    const logoutBtn = document.querySelector('form button[type="submit"]');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            overlay.style.display = 'flex';
+        });
+    }
     });
 
 

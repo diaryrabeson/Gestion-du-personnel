@@ -34,7 +34,7 @@ class CongerController extends Controller
     return view('Conger.create', compact('typeConges', 'employer'));
 }
 
-    public function store(Request $request)
+   public function store(Request $request)
 {
     // Validation des données de la requête
     $request->validate([
@@ -62,11 +62,18 @@ class CongerController extends Controller
         'jours_ouvrables' => $joursOuvrables,
         'commentaire' => $request->commentaire ?? null, // Définit null si commentaire n'est pas fourni
     ]);
- $adminId = User::where('role', 'admin')->first()->id; // Récupération de l'ID de l'administrateur
+
+    // Récupérer l'employé pour obtenir le nom et le prénom
+    $employe = Employer::findOrFail($request->id_employe);
+    $nomPrenom = $employe->NomEmp . ' ' . $employe->Prenom; 
+
+    // Récupération de l'ID de l'administrateur
+    $adminId = User::where('role', 'admin')->first()->id;
+
     // Création d'une notification pour l'administrateur
     Notification::create([
         'user_id' => $adminId, // Remplacez par l'ID de l'admin
-        'message' => 'Une nouvelle demande de congé a été soumise par ' . $demandeConge->Id_Employe,
+        'message' => 'Une nouvelle demande de congé a été soumise par ' . $nomPrenom,
         'is_read' => false,
     ]);
 

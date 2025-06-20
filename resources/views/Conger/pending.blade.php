@@ -10,10 +10,13 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    <div class="alert alert-success flex items-center justify-between bg-green-500 text-white p-4 rounded-lg shadow-md relative">
+                        <span>{{ session('success') }}</span>
+                        <button class="close-btn absolute top-0 right-0 p-2" onclick="this.parentElement.style.display='none';">
+                            &times; <!-- Symbole de fermeture -->
+                        </button>
+                    </div>
+                @endif
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">Demandes de Congé en Attente</h3>
                     </div>

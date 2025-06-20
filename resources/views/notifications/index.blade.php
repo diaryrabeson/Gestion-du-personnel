@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6">
+    <div class="mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-12">
         <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Notifications récentes</h3>
 
         @forelse($notifications as $note)

@@ -243,14 +243,15 @@
             </li>
         </div>
        
-        <div class="flex w-full ">
-            
+        <div class="flex w-full">
             <li class="w-full text-left relative pl-4">
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" id="logout-form">
                     @csrf
-                    <button type="submit" class="men w-full text-left"><i class="fa-solid fa-right-from-bracket men fonts mr-4"></i><span>Déconnexion</span></button>
+                    <button type="button" class="men w-full text-left" onclick="confirmLogout()">
+                        <i class="fa-solid fa-right-from-bracket men fonts mr-4"></i>
+                        <span>Déconnexion</span>
+                    </button>
                 </form>
-
             </li>
         </div>
 
@@ -267,7 +268,17 @@
  
     </ul>
 </div>
-
+<script>
+    function confirmLogout() {
+        // Affiche une boîte de dialogue de confirmation
+        const confirmation = confirm("Êtes-vous sûr de vouloir vous déconnecter ?");
+        
+        if (confirmation) {
+            // Si l'utilisateur clique sur "OK", soumettez le formulaire
+            document.getElementById('logout-form').submit();
+        }
+    }
+</script>
 <script>
     document.getElementById('menu-toggle').addEventListener('click', function () {
         const menu = document.querySelector('.menu');
