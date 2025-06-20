@@ -224,7 +224,7 @@
         const logoutBtn = document.querySelector('form button[type="submit"]');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', function () {
-                overlay.style.display = 'flex';
+                overlay.style.display = 'bloc';
             });
         }
     });

@@ -57,7 +57,7 @@
                     </div>
                     <div class="flex items-center">
                         <h4 class="font-bold text-lg text-gray-700 dark:text-gray-300">Date de naissance :</h4>
-                        <p class="ml-2 text-lg text-gray-600 dark:text-gray-300">{{ $Profile['DateDeNaissance'] }}</p>
+                        <p class="ml-2 text-lg text-gray-600 dark:text-gray-300">{{ \Carbon\Carbon::parse($Profile['DateDeNaissance'])->format('d/m/Y') }}</p>
                     </div>
                     <div class="flex items-center">
                         <h4 class="font-bold text-lg text-gray-700 dark:text-gray-300">Genre :</h4>

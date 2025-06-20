@@ -46,8 +46,9 @@
                                             {{ $conge->employers->Prenom ?? '' }}
                                         </td>
                                         <td class="border px-4 py-2">{{ $conge->typeConge->typeConge ?? 'Inconnu' }}</td>
-                                        <td class="border px-4 py-2">{{ $conge->Date_debut }}</td>
-                                        <td class="border px-4 py-2">{{ $conge->Date_Fin }}</td>
+                                        <td class="border px-4 py-2"> {{ \Carbon\Carbon::parse( $conge->Date_debut)->format('d/m/Y') }}</td>
+                                        <td class="border px-4 py-2">{{ \Carbon\Carbon::parse( $conge->Date_fin)->format('d/m/Y') }}
+                                        </td>
                                         <td class="border px-4 py-2">{{ $conge->jours_ouvrables }}</td>
                                         <td class="border px-4 py-2 flex justify-center space-x-2">
                                             <form action="{{ route('Conger.valider', $conge->id_Conge) }}" method="POST"

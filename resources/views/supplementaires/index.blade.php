@@ -213,7 +213,7 @@
                                                         {{ $heure->Employer->NomEmp }} {{ $heure->Employer->Prenom }}
                                                     </td>
                                                     <td>
-                                                        {{ $heure->DateSys }}
+                                                        {{ \Carbon\Carbon::parse( $heure->DateSys)->format('d/m/Y') }}
                                                     </td>
                                                     <td>
                                                         {{ $heure->DebutDeSuppl }}
