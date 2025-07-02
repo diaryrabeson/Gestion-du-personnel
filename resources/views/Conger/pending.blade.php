@@ -10,24 +10,29 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if (session('success'))
-                    <div class="alert alert-success flex items-center justify-between bg-green-500 text-white p-4 rounded-lg shadow-md relative">
-                        <span>{{ session('success') }}</span>
-                        <button class="close-btn absolute top-0 right-0 p-2" onclick="this.parentElement.style.display='none';">
-                            &times; <!-- Symbole de fermeture -->
-                        </button>
-                    </div>
-                @endif
+                        <div
+                            class="alert alert-success mb-4 flex items-center justify-between bg-green-500 text-white p-4 rounded-lg shadow-md relative">
+                            <span>{{ session('success') }}</span>
+                            <button class="close-btn absolute top-0 right-0 p-2"
+                                onclick="this.parentElement.style.display='none';">
+                                &times; <!-- Symbole de fermeture -->
+                            </button>
+                        </div>
+                    @endif
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">Demandes de Congé en Attente</h3>
+                        <h3 class="text-xl text-center font-bold w-full bg-yellow-200 p-4 mb-4">Demandes de Congé en
+                            Attente</h3>
                     </div>
                     <!-- Inclure jQuery et DataTables -->
-                 
+
                     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
                     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.js"></script>
-                    
+                    <link rel="stylesheet"
+                        href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
+
+
                     @if ($congesEnAttente->count() > 0)
-                        <table id="congesTable"
-                            class="w-full min-w-full table-auto border-collapse border border-gray-300 display">
+                        <table id="congesTable" class="display ">
                             <thead class="bg-beige dark:bg-gray-700">
                                 <tr>
                                     <th class="border px-4 py-2">Employé</th>
@@ -46,11 +51,14 @@
                                             {{ $conge->employers->Prenom ?? '' }}
                                         </td>
                                         <td class="border px-4 py-2">{{ $conge->typeConge->typeConge ?? 'Inconnu' }}</td>
-                                        <td class="border px-4 py-2"> {{ \Carbon\Carbon::parse( $conge->Date_debut)->format('d/m/Y') }}</td>
-                                        <td class="border px-4 py-2">{{ \Carbon\Carbon::parse( $conge->Date_fin)->format('d/m/Y') }}
+                                        <td class="border px-4 py-2">
+                                            {{ \Carbon\Carbon::parse($conge->Date_debut)->format('d/m/Y') }}
+                                        </td>
+                                        <td class="border px-4 py-2">
+                                            {{ \Carbon\Carbon::parse($conge->Date_fin)->format('d/m/Y') }}
                                         </td>
                                         <td class="border px-4 py-2">{{ $conge->jours_ouvrables }}</td>
-                                        <td class="border px-4 py-2 flex justify-center space-x-2">
+                                        <td class="border validations px-4 py-2 flex justify-center space-x-2">
                                             <form action="{{ route('Conger.valider', $conge->id_Conge) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
@@ -80,6 +88,7 @@
                     <script>
                         $(document).ready(function () {
                             $('#congesTable').DataTable({
+                                responsive: true,
                                 language: {
                                     "sProcessing": "Traitement en cours...",
                                     "sSearch": "Rechercher&nbsp;:",
@@ -105,18 +114,20 @@
 </x-app-layout>
 
 <style>
-       /* Réduire la taille de la police des éléments de DataTables */
-       div.dt-container .dt-length,
-  div.dt-container .dt-search,
-  div.dt-container .dt-info,
-  div.dt-container .dt-processing,
-  div.dt-container .dt-paging {
-  font-size: .9em !important
-  }
+    /* Réduire la taille de la police des éléments de DataTables */
+    div.dt-container .dt-length,
+    div.dt-container .dt-search,
+    div.dt-container .dt-info,
+    div.dt-container .dt-processing,
+    div.dt-container .dt-paging {
+        font-size: .9em !important
+    }
+
     /* From Uiverse.io by cssbuttons-io */
     .bg-beige {
         background-color: #f5f5dc;
     }
+
     .btnGreen {
         position: relative;
         font-size: 11px;
@@ -214,5 +225,46 @@
     .btnred:hover::after {
         transform: scaleX(1.4) scaleY(1.6);
         opacity: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+        .validations {
+            flex-direction: column;
+            align-items: left;
+        }
+
+        .btnred {
+            position: relative;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1em .5em;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 6em;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            color: black;
+            background-color: hsl(0, 65%, 56%);
+        }
+
+        .btnGreen {
+            position: relative;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1em .5em;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 6em;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            color: black;
+            background-color: rgb(73, 173, 64);
+        }
     }
 </style>

@@ -14,7 +14,7 @@
                 </div>
 
 
-                <div class="flex justify-between">
+                <div class="flex cardResp justify-between">
 
                     <div class="card-client">
                         <a href="{{ route('employers.index') }}">
@@ -26,9 +26,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="name-client" >{{$totalEmployes }}</p>
-                                    <span>Employés enregistré</span>
-                                
+                                <p class="name-client">{{$totalEmployes }}</p>
+                                <span>Employés enregistré</span>
+
                             </div>
                             <div class="social-media">
                             </div>
@@ -83,32 +83,33 @@
 
                 <div class="statis">
 
-                    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                    <div class="centerResp max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                         <div class="titreStatis">
                             <h2>Employés par fonction</h2>
                         </div>
-                        <div class="d-flex">
+                      
                             <div> <canvas id="pieChart"></canvas></div>
 
-                        </div>
+                        
                     </div>
-                    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md" style="width: 50%">
+                    <div class="centerResp max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md"
+                        style="width: 50%">
                         <div class="titreStatis">
                             <h2>Taux d'absence et présence par fonction</h2>
                         </div>
                         <div class="ContStatAbsence"> <canvas id="presenceChart" class="StatAbsence"></canvas></div>
                     </div>
                 </div>
-                 
+
             </div>
 
 
-<div class="Contcalendar">
-                    <div class="titreStatis2">
-                        <h2>Affichage des congées en cours</h2>
-                    </div>
-                <div id="calendar"></div>
-            </div> 
+            <div class="w-full bg-white mt-4 px-4 py-4 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="titreStatis2">
+                    <h2>Affichage des congées en cours</h2>
+                </div>
+                <div id="calendar" class=""></div>
+            </div>
 
 
         </div>
@@ -133,11 +134,13 @@
         font-weight: normal;
         font-style: normal;
     }
-    .Contcalendar{
-        width: 77%;
-    z-index: -9999;
-    position: absolute;
+
+    .Contcalendar {
+        width: 100%;
+        z-index: -9999;
+        position: absolute;
     }
+
     .StatAbsence {
         padding: 1em;
         background: white;
@@ -156,6 +159,7 @@
         font-weight: bold;
         /* margin-top: 4em; */
     }
+
     .titreStatis2 {
         font-family: PoppinsExtraLight;
         text-align: center;
@@ -203,7 +207,7 @@
     }
 
     .CardDash {
-        background-color: #1a2035!important;    
+        background-color: #1a2035 !important;
         height: 5em;
         text-align: center;
         line-height: 5em;
@@ -353,6 +357,40 @@
         justify-content: space-between;
         height: auto;
         width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .cardResp {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-client {
+            width: 100%;
+            margin: .5em;
+        }
+
+        .CardDash p {
+            font-size: 100%;
+        }
+
+        .user-picture2 {
+            width: 14%;
+        }
+
+        .statis {
+            flex-direction: column;
+
+        }
+
+        .centerResp {
+            width: 100% !important;
+            margin: auto;
+            text-align: center
+        }
+        .Contcalendar{
+            width: 100%
+        }
     }
 </style>
 

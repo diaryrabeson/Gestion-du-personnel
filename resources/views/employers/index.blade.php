@@ -187,6 +187,17 @@
             clear: both;
             top: -2em
         }
+
+        @media screen and (max-width: 768px) {
+          .ajouteNo{
+            position: absolute;
+            left:77%;
+          }  
+         
+.blcs{
+    display: block !important;
+}
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -230,7 +241,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <div class="py-12">
-        <div class=" mx-auto sm:px-6 lg:px-8">
+        <div class=" ">
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <!-- Message de succès -->
@@ -260,35 +271,35 @@
                     </div>
 
 
-                    <div class="float-right relative z-50">
+                    <div class="float-right relative ajouteNo z-50">
                         <a href="{{ route('employers.create') }}" class="bg-blue-500  px-4 py-2 rounded">
                             <i class="fa-solid fa-plus"></i> Ajouter
                         </a>
                     </div>
                     <!-- Liste des employés -->
-                    <table class="min-w-full bg-white border border-gray-300 -top-8" id="employertables">
+                    <table class=" bg-white border border-gray-300 -top-8" id="employertables">
                         <thead class="beige">
-                            <tr class="beige">
-                                <th class="border px-4 py-2">Nom</th>
-                                <th class="border px-4 py-2">Prénom</th>
-                                <th class="border px-4 py-2">Téléphone</th>
-                                <th class="border px-4 py-2">Adresse</th>
-                                <th class="border px-4 py-2">E-mail</th>
-                                <th class="border px-4 py-2">Actions</th>
+                            <tr class="beige ">
+                                <th class="border ">Nom</th>
+                                <th class="border ">Prénom</th>
+                                <th class="border">Téléphone</th>
+                                <th class="border ">Adresse</th>
+                                <th class="border">E-mail</th>
+                                <th class="border ">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="">
                             @forelse($employeers as $employee)
-                                <tr class="border">
-                                    <td class="border px-4 py-2">{{ $employee->NomEmp }}</td>
-                                    <td class="border px-4 py-2">{{ $employee->Prenom }}</td>
-                                    <td class="border px-4 py-2">{{ $employee->Telephone }}</td>
-                                    <td class="border px-4 py-2">{{ $employee->Adresse }}</td>
-                                    <td class="border px-4 py-2">{{ $employee->mail }}</td>
-                                    <td class="border px-4 py-2 flex justify-center">
+                                <tr class="border ">
+                                    <td class="border ">{{ $employee->NomEmp }}</td>
+                                    <td class="border ">{{ $employee->Prenom }}</td>
+                                    <td class="border ">{{ $employee->Telephone }}</td>
+                                    <td class="border">{{ $employee->Adresse }}</td>
+                                    <td class="border ">{{ $employee->mail }}</td>
+                                    <td class="border   flex justify-center">
                                         <!-- Modifier -->
                                         <a href="{{ route('employers.edit', ['id_Employe' => $employee->Id_Employe]) }}"
-                                            class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color:blue">
+                                            class="bg-yellow-300 text-black px-3 py-1 rounded mr-2" style="color:rgb(255, 255, 255)">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
 
@@ -298,7 +309,7 @@
                                             method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" style="color: crimson;"
+                                            <button type="button" style="color: rgb(255, 255, 255);"
                                                 class="bg-red-300 text-black px-3 py-1 rounded"
                                                 onclick="openModal({{ $employee->Id_Employe }})">
                                                 <i class="fa-solid fa-trash-can"></i>

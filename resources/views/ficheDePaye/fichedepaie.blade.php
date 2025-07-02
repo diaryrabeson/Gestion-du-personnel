@@ -14,7 +14,20 @@
         .title { text-align: center; font-size: 18px; font-weight: bold; }
   
      
-
+        @media (max-width: 768px) {
+    .titres {
+        content: '';
+        width: 10%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
+}
     </style>
 </head>
 <body>

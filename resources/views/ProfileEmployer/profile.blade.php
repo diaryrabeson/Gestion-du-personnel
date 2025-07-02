@@ -20,13 +20,13 @@
                 </div>
             </div>
         </div>
-        <div class="flex items-center space-x-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+        <div class="flex profiless w-full items-center space-x-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
             <div>
                 <img src="{{ asset('storage/' . $Profile['Photo']) }}" class="w-24 h-24 rounded-full border-2 border-gray-300 dark:border-gray-600" alt="Photo de {{ $Profile['nom'] }}">
             </div>
-            <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg flex-1">
+            <div class="bg-gray-100  w-full dark:bg-gray-700 p-6 rounded-lg flex-1">
              
-                <div class="grid grid-cols-2 gap-4">
+                <div class="contenuProfil grid grid-cols-2 gap-4">
                     <div class="flex items-center">
                         <h4 class="font-bold text-lg text-gray-700 dark:text-gray-300">Nom :</h4>
                         <p class="ml-2 text-lg text-gray-600 dark:text-gray-300">{{ $Profile['nom'] }}</p>
@@ -98,6 +98,7 @@
     </div>
 </x-app-layout>
 <style>
+    
      .titres {
         content: '';
         width: 38%;
@@ -153,5 +154,29 @@
 .contents .flex h4{
     font-weight: bold;
     font-size: 17px
+}
+
+@media (max-width: 768px) {
+  .profiless{
+    display: flex;
+    flex-direction: column;
+  }
+  .contenuProfil{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .titres {
+        content: '';
+        width: 24%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
 }
 </style>

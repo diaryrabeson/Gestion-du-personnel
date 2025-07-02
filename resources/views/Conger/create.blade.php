@@ -108,7 +108,7 @@
         margin-right: 1em
     }
     .btn-cancel {
-        background-color: #f44336;
+        background-color: #8b0a0a;
         color: white;
         padding: .8em 2em;
         border-radius: 8px;
@@ -188,5 +188,19 @@
  z-index: 1;
 }
 
+@media (max-width: 768px) {
+    .titres {
+        content: '';
+        width: 10%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
+}
     </style>
 </x-app-layout>

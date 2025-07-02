@@ -1,4 +1,108 @@
 <!-- resources/views/layouts/menu.blade.php -->
+
+
+
+
+
+<!-- Menu Vertical à gauche -->
+
+<div
+    class=" menu navig fixed mt-12 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
+    <ul class="liens  pt-12 space-y-4">
+        <div class="flex men">
+            <li class="  w-full text-left">
+                <a href="{{ route('ProfileEmployer.profile') }}"
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white ">
+                    <i class="fa-solid fa-circle-user men fonts"></i>
+                    <span class="ml-4"> Profile employé</span>
+
+
+                </a>
+            </li>
+        </div>
+
+
+        <div class="flex men w-full">
+            <li class="w-full text-left">
+                <a href="{{ route('Conger.create') }}"
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+
+                    <i class="fa-solid fa-address-card men fonts"></i>
+                    <span class="ml-4">Demande de Congé</span>
+
+                </a>
+            </li>
+        </div>
+
+        <div class="d_flex men">
+            <li class="w-full text-left">
+                <a href="{{ route('ficheDePaye.index') }}"
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                    <i class="fa-solid fa-pen-nib men fonts"></i>
+                    <span class="ml-4"> Fiche de paie</span>
+                </a>
+            </li>
+        </div>
+
+        <div class="d_flex men">
+            <li class="w-full text-left">
+                <a href="{{ route('Messages.Listing') }}"
+                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">                  
+            <i class="fa-solid fa-message men fonts"></i>
+            <span class="ml-4"> Message</span>
+                </a>
+            </li>
+        </div>
+
+        <div class="flex men ml-2">
+            <i class="fa-solid fa-right-from-bracket men fonts"></i>
+            <li>
+                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                    @csrf
+                    <button type="button" class="men logouts ml-4" onclick="confirmLogout()">Déconnexion</button>
+                </form>
+            </li>
+        </div>
+        
+       
+    </ul>
+</div>
+<script>
+    function confirmLogout() {
+        if (confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+</script>
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('active'); // Ajoute ou enlève la classe active
+    });
+
+
+
+
+
+
+    // Pour les boutons de formulaire comme "Déconnexion"
+    const logoutBtn = document.querySelector('form button[type="submit"]');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            overlay.style.display = 'flex';
+        });
+    }
+    });
+
+
+    //pour le menu
+    const menuHamburger = document.querySelector(".menuHamburger")
+    const links = document.querySelector(".navig")
+
+    menuHamburger.addEventListener('click', () => {
+        links.classList.toggle('mobile-menu')
+    })
+</script>
 <style>
     .menu {
         display: none;
@@ -107,23 +211,22 @@
         }
 
         .navig {
-            display: inline-block;
+          
             background-color: #1a2035c7 !important;
             backdrop-filter: blur(7px);
-            margin-top: 4.5em;
-            /* padding: 12px 24px; */
+            padding: 1em 24px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
             text-decoration: none;
-            /* background-color: rgb(70, 66, 66); Couleur de fond primaire */
-            /* background-image: url('{{ asset('img/technologie4.jpg') }}'); Dégradé sur fond d'image */
             background-size: cover;
             background-position: center;
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.5s ease;
-            margin-left: -100%
+            width: 100%;
+            position:  absolute !important;
+            top: -3em;
         }
     }
 
@@ -138,113 +241,3 @@
 
     }
 </style>
-
-
-
-
-<!-- Bouton Hamburger -->
-<div class="fixed menuHamburger top-5 left-5 z-20">
-    <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
-        &#9776; <!-- Symbole hamburger -->
-    </button>
-</div>
-
-<!-- Menu Vertical à gauche -->
-
-<div
-    class=" menu navig fixed mt-12 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700 p-4 w-60 h-full">
-    <ul class="liens  pt-12 space-y-4">
-        <div class="flex men">
-            <li class="  w-full text-left">
-                <a href="{{ route('ProfileEmployer.profile') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white ">
-                    <i class="fa-solid fa-circle-user men fonts"></i>
-                    <span class="ml-4"> Profile employé</span>
-
-
-                </a>
-            </li>
-        </div>
-
-
-        <div class="flex men w-full">
-            <li class="w-full text-left">
-                <a href="{{ route('Conger.create') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-
-                    <i class="fa-solid fa-address-card men fonts"></i>
-                    <span class="ml-4">Demande de Congé</span>
-
-                </a>
-            </li>
-        </div>
-
-        <div class="d_flex men">
-            <li class="w-full text-left">
-                <a href="{{ route('ficheDePaye.index') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                    <i class="fa-solid fa-pen-nib men fonts"></i>
-                    <span class="ml-4"> Fiche de paie</span>
-                </a>
-            </li>
-        </div>
-
-        <div class="d_flex men">
-            <li class="w-full text-left">
-                <a href="{{ route('Messages.Listing') }}"
-                    class="men block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">                  
-            <i class="fa-solid fa-message men fonts"></i>
-            <span class="ml-4"> Message</span>
-                </a>
-            </li>
-        </div>
-
-        <div class="flex men ml-2">
-            <i class="fa-solid fa-right-from-bracket men fonts"></i>
-            <li>
-                <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                    @csrf
-                    <button type="button" class="men logouts ml-4" onclick="confirmLogout()">Déconnexion</button>
-                </form>
-            </li>
-        </div>
-        
-       
-    </ul>
-</div>
-<script>
-    function confirmLogout() {
-        if (confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
-            document.getElementById('logout-form').submit();
-        }
-    }
-</script>
-<script>
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-        const menu = document.querySelector('.menu');
-        menu.classList.toggle('active'); // Ajoute ou enlève la classe active
-    });
-
-
-
-
-
-
-    // Pour les boutons de formulaire comme "Déconnexion"
-    const logoutBtn = document.querySelector('form button[type="submit"]');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function () {
-            overlay.style.display = 'flex';
-        });
-    }
-    });
-
-
-    //pour le menu
-    const menuHamburger = document.querySelector(".menuHamburger")
-    const links = document.querySelector(".navig")
-
-    menuHamburger.addEventListener('click', () => {
-        links.classList.toggle('mobile-menu')
-    })
-</script>

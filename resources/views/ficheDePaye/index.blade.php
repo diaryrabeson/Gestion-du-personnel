@@ -216,7 +216,19 @@
         height: 7em;
     }
 
-
+    @media (max-width: 768px) {
+    .titres {
+        content: '';
+        width: 20%;
+        height: 2px;
+        /* Épaisseur de la ligne */
+        background: black;
+        /* Couleur de la ligne */
+        transform: translateY(50%);
+        /* Positionne la ligne légèrement sous le texte */
+        z-index: 1;
+        /* Met la ligne derrière le texte */
+    }
 
     /* From Uiverse.io by shah1345 */
    

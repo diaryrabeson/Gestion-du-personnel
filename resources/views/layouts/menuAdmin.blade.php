@@ -46,7 +46,7 @@
         .navig {
             display: inline-block;
             background-color: #1a2035 !important;
-            /* margin-top: -.2em; */
+            position: fixed;
             padding: 2em 5px;
             text-align: center;
             font-size: 16px;
@@ -91,14 +91,16 @@
 
         .burgu {
             display: inline;
-            color: black;
+            color: rgb(252, 0, 0);
             font-size: 2em;
             position: absolute;
             top: -2.2em;
             left: 90vw;
 
         }
-
+        .menuHamburger{
+            display: block
+        }
         .mobile-menu {
             margin-left: 0 !important;
         }
@@ -109,16 +111,7 @@
         }
 
         .menu {
-            display: flex;
-            width: 100%;
-            height: auto;
-            overflow: hidden;
-            /* Masquez le débordement */
-            transition: max-height 0.3s ease;
-            /* Animation fluide */
-            text-justify: center;
-            position: absolute;
-            justify-content: center;
+           
 
         }
 
@@ -128,23 +121,21 @@
         }
 
         .navig {
-            display: inline-block;
+          
             background-color: #1a2035c7 !important;
             backdrop-filter: blur(7px);
-            /* margin-top: -.2em; */
             padding: 2em 24px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
             text-decoration: none;
-            /* background-color: rgb(70, 66, 66); Couleur de fond primaire */
-            /* background-image: url('{{ asset('img/technologie4.jpg') }}'); Dégradé sur fond d'image */
             background-size: cover;
             background-position: center;
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.5s ease;
-            margin-left: -100%
+            width: 100%;
+            position:  absolute !important;
         }
 
     }
@@ -167,13 +158,9 @@
 
 
 <!-- Menu Vertical à gauche -->
-<div class=" menu navig fixed  left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700  w-60 h-full">
+<div class=" menu navig   left-0 bg-blue-800 text-white border-r border-gray-100 dark:border-gray-700  w-60 h-full">
     <ul class="liens ">
-        <div class="fixed menuHamburger top-5 left-5 z-20">
-            <button id="menu-toggle" class="burgu text-black bg-blue-800 p-2 rounded">
-                &#9776; <!-- Symbole hamburger -->
-            </button>
-        </div>
+       
        
 
 

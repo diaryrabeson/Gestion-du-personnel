@@ -45,21 +45,22 @@
     </div>
 
     <div class="afficherMenu fixed  " style="z-index: 9999;">
-        <i class="fa-solid fa-bars cursor-pointer font-bold">teste</i>
+        <i class="fa-solid fa-bars cursor-pointer font-bold"></i>
+    </div>
+    <div class="afficherMenuRespons fixed bg-red-200  " style="z-index: 9999;">
+        <i class="fa-solid fa-bars cursor-pointer font-bold"></i>
     </div>
 
-    <div id="loadingOverlay"
-         style="" class="laodingOver"
-                >
+    <div id="loadingOverlay" style="" class="laodingOver">
         <img src="{{ asset('img/Loading5.gif') }}" alt="Chargement..." style="width: auto; height: 13em;">
     </div>
 
     <div class="flex-grow bg-gray-100 dark:bg-gray-900">
         <!-- Page Content -->
-        
+
         <main class="contenn min-h-screen mx-auto">
-            <div class="flex justify-between contenues" style="transition: all 0.5s ease;">
-                <div class="navigations relative" style="margin-top: 2em;">
+            <div class="flex justify-between contenues " style="transition: all 0.5s ease;">
+                <div class="navigations relative contentResp" style="margin-top: 2em;">
                     <!-- Inclure le menu selon le rôle de l'utilisateur -->
                     @if (Auth::user()->role === 'admin')
                         @include('layouts.menuAdmin')
@@ -77,15 +78,19 @@
 <style>
     .afficherMenu {
         margin-left: 20%;
-       
+
         margin-top: 1em;
     }
+    .afficherMenuRespons {
+            display: none;
+        }
 
     @media screen and (max-width: 1580px) {
         .contenn {
             padding-top: 2em;
         }
 
+        
         .backf {
             background-color: #ffff;
         }
@@ -100,6 +105,68 @@
             max-width: 100%;
             margin-left: 0em;
         }
+        
+        .afficherMenu {
+            display: none;
+        }
+
+        .afficherMenuRespons {
+            position: fixed;
+            display: block;
+            top: 1em;
+            left: 8em;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .navigations {
+            position: absolute;
+            left: -100%;
+            transition: all 0.9s ease;
+        }
+
+        .contenuePage {
+            margin-top: 2%;
+            width: 100% !important;
+            transition: all 0.5s ease;
+        }
+
+        .mobile-menus .contenuePage {
+
+            position: relative;
+            width: 100% !important;
+            transition: all 0.9s ease;
+
+        }
+        .mobile-menues {
+        margin-left: 0% !important;
+        position: absolute;
+        width: 100% !important;
+        transition: all 0.9s ease;
+        width: 100%;
+        height: 100%;
+        left: 0em;
+        z-index: 999999;
+        display: block;
+
+    }
+    ..mobile-menues .navig{
+        margin-left: 0 !important;
+    }    
+
+    }
+
+    .mobile-menues {
+        margin-left: 0% !important;
+        position: fixed;
+        width: 100% !important;
+        transition: all 0.9s ease;
+        width: 100%;
+        height: 100%;
+        left: 0em;
+        z-index: 999999;
+        display: block;
+
     }
 
     .contenTitle {
@@ -132,7 +199,7 @@
     }
 
     .contenuePage {
-       margin-top: 2%;
+        margin-top: 2%;
         width: 80%;
         transition: all 0.5s ease;
     }
@@ -144,20 +211,33 @@
     .contenues .contenuePage .py-12 .bg-white .p-6 {
         transition: all 0.5s ease;
     }
-    .laodingOver{
-        display: none; 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%;        
-        background-color: rgba(0, 0, 0, 0.3); 
-        z-index: 9999; 
-        justify-content: center; align-items: center;
+
+    .laodingOver {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
     }
 </style>
+
 </html>
 <script>
+    //pour le responsive
+    const menuHamburger = document.querySelector(".afficherMenuRespons");
+    const links = document.querySelector(".contentResp")
+
+    menuHamburger.addEventListener('click', () => {
+        links.classList.toggle('mobile-menues')
+    });
+</script>
+<script>
+
     //pour le menu
     const menuHamburgers = document.querySelector(".afficherMenu");
     const linkss = document.querySelector(".contenues")
